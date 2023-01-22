@@ -1,0 +1,31 @@
+.header {
+    width: 100%;
+    background-color: #1C1C21;
+}
+
+.container {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.menu {
+    max-width: 383px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    max-width: 178px;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
