@@ -10,37 +10,37 @@ import AppHeaderStyles from './AppHeader.module.css'
 
 const Menu = ({ children }) => {
     return (
-        <nav className={AppHeaderStyles.menu}>
+        <ul className={AppHeaderStyles.menu}>
             {children}
-        </nav>
+        </ul>
     )
 };
 
 const MenuItem = ({ icon, text }) => {
     return (
-        <button className={AppHeaderStyles.button + ' ' + 'text text_type_main-default text_color_inactive'} type='button'>
+        <li className={AppHeaderStyles.menu__item
+            + ' ' + 'text text_type_main-default text_color_inactive'
+            + ' ' + 'pr-5 pl-5'} role='button'>
             {icon}
-            {text}
-        </button>
+            <span className='text text_type_main-default ml-2'>{text}</span>
+        </li>
     )
 };
 
 function AppHeader() {
     return (
-        <header className={AppHeaderStyles.header + ' ' + 'p-4'}>
-            <div className={AppHeaderStyles.container}>
+        <header className={AppHeaderStyles.header + ' ' + 'pt-4 pb-4'}>
+            <nav className={AppHeaderStyles.container}>
                 <Menu>
                     <MenuItem icon={<BurgerIcon type="primary" />}
                         text='Конструктор' />
                     <MenuItem icon={<ListIcon type="secondary" />}
                         text='Лента заказов' />
-                </Menu>
-                <Logo />
-                <Menu>
+                    <a className={AppHeaderStyles.logo} href="/"><Logo /></a>
                     <MenuItem icon={<ProfileIcon type="secondary" />}
                         text='Личный кабинет' />
                 </Menu>
-            </div>
+            </nav>
         </header>
     )
 }
