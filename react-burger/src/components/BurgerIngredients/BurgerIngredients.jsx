@@ -9,8 +9,6 @@ import { Box } from '@ya.praktikum/react-developer-burger-ui-components'
 const TabPalette = () => {
     const [current, setCurrent] = React.useState('one')
 
-
-
     return (
         <div style={{ display: 'flex' }}>
             <Tab value="one" active={current === 'one'} onClick={setCurrent}>
@@ -40,13 +38,15 @@ const BurgerIngredient = ({
     image_large,
     __v
 }) => {
+
+    console.log({ type })
     return (
         <li className={BurgerIngredientsStyles.list__item}>
             <Counter count={1} size="default" extraClass="m-1" />
             <div className={BurgerIngredientsStyles.item__container}>
                 <img src={image} alt={name} />
-                <div className={BurgerIngredientsStyles.currency__container}>
-                    <p className="text text_type_main-default">{price}</p>
+                <div className={BurgerIngredientsStyles.currency__container + ' ' + 'pt-1 pb-1'}>
+                    <p className="text text_type_digits-default">{price}</p>
                     <CurrencyIcon type="primary" />
                 </div>
                 <p className={BurgerIngredientsStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
@@ -58,9 +58,10 @@ const BurgerIngredient = ({
 function BurgerIngredients({ items }) {
     return (
         <section className={BurgerIngredientsStyles.container}>
-            <h1 className="text text_type_main-large">Соберите бургер</h1>
+            <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
             <TabPalette />
-            <ul className={BurgerIngredientsStyles.list}>
+            <h2 className="text text_type_main-medium pt-10 pb-6">Булки</h2>
+            <ul className={BurgerIngredientsStyles.list + ' ' + 'pl-4 pr-4'}>
                 {items.map((data) => (<BurgerIngredient key={data._id} {...data} />))}
             </ul>
         </section>

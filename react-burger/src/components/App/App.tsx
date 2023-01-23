@@ -2,7 +2,7 @@ import React from 'react'
 import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
-// import appStyles './App.module.css'
+// import AppStyles from './App.module.css'
 
 const config = {
   url: 'https://norma.nomoreparties.space/api/ingredients'
@@ -23,7 +23,7 @@ function App() {
   return (
     <div >
       <AppHeader />
-      <main >
+      <main style={{ display: 'flex', margin: '0 auto', maxWidth: '1280px', columnGap: '40px' }}>
         <BurgerIngredients items={ingredients} />
         <BurgerConstructor items={ingredients} />
       </main>

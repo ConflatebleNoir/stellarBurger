@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Icons } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components'
 
+const CurrentIngredient = ({ name, price, image }) => {
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+            <ConstructorElement
+                isLocked={false}
+                text={name}
+                price={price}
+                thumbnail={image}
+            />
+        </div>
+    )
+}
+
 const ConstructorList = ({
+    items,
     _id,
     name,
     type,
@@ -20,37 +34,57 @@ const ConstructorList = ({
     image_large,
     __v,
     isLocked }) => {
+    const [bun, setBun] = useState(true);
+
+
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <ConstructorElement
-                type="top"
-                isLocked={true}
-                text="Краторная булка N-200i (верх)"
-                price={price}
-                thumbnail={image}
-            />
-            <ConstructorElement
-                text={name}
-                price={price}
-                thumbnail={image}
-            />
-            <ConstructorElement
-                type="bottom"
-                isLocked={true}
-                text="Краторная булка N-200i (низ)"
-                price={price}
-                thumbnail={image}
-            />
+        <div>
+            {bun && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+                    <ConstructorElement onClick={() => setBun(false)}
+                        type="top"
+                        isLocked={true}
+                        text={name}
+                        price={price}
+                        thumbnail={image}
+                    />
+                    <CurrentIngredient />
+                    <ConstructorElement
+                        type="bottom"
+                        isLocked={true}
+                        text={name}
+                        price={price}
+                        thumbnail={image}
+                    />
+                </div>
+            )}
         </div>
+
+
     )
 }
 
-const BurgerConstructor = ({ items }) => {
+const SummaryConstructor = ({ price }) => {
     return (
-        <section className={BurgerConstructorStyle.container}>
+        <div className={BurgerConstructorStyle.order + ' ' + 'pt-10'}>
+            <div className={BurgerConstructorStyle.currency__wrapper + ' ' + 'mr-10'}>
+                <p className="text text_type_digits-medium">{price}</p>
+                <CurrencyIcon type="primary" />
+            </div>
+            <Button htmlType="button" type="primary" size="medium">
+                Оформить заказ
+            </Button>
+        </div>)
+}
+
+const BurgerConstructor = ({ items }) => {
+    console.log({ items })
+    return (
+        <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
             <ul className={BurgerConstructorStyle.list}>
                 {items.map((data) => (<ConstructorList key={data._id} {...data} />))}
             </ul>
+            <SummaryConstructor />
         </section>
     )
 }
