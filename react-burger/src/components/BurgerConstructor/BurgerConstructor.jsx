@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Typography } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Box } from '@ya.praktikum/react-developer-burger-ui-components'
+import {
+    ConstructorElement,
+    CurrencyIcon,
+    Button,
+    Typography,
+    Box
+} from '@ya.praktikum/react-developer-burger-ui-components'
 
 const CurrentIngredient = ({ name, price, image }) => {
     return (
@@ -16,51 +18,6 @@ const CurrentIngredient = ({ name, price, image }) => {
                 thumbnail={image}
             />
         </div>
-    )
-}
-
-const ConstructorList = ({
-    items,
-    _id,
-    name,
-    type,
-    proteins,
-    fat,
-    carbohydrates,
-    calories,
-    price,
-    image,
-    image_mobile,
-    image_large,
-    __v,
-    isLocked }) => {
-    const [bun, setBun] = useState(true);
-
-
-    return (
-        <div>
-            {bun && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-                    <ConstructorElement onClick={() => setBun(false)}
-                        type="top"
-                        isLocked={true}
-                        text={name}
-                        price={price}
-                        thumbnail={image}
-                    />
-                    <CurrentIngredient />
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked={true}
-                        text={name}
-                        price={price}
-                        thumbnail={image}
-                    />
-                </div>
-            )}
-        </div>
-
-
     )
 }
 
@@ -78,10 +35,31 @@ const SummaryConstructor = ({ price }) => {
 }
 
 const BurgerConstructor = ({ items }) => {
-    console.log({ items })
+    // console.log({ items })
     return (
         <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
             <ul className={BurgerConstructorStyle.list}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+                    <ConstructorElement
+                        type="top"
+                        isLocked={true}
+                        text="Краторная булка N-200i (верх)"
+                        price={200}
+                        thumbnail={img}
+                    />
+                    <ConstructorElement
+                        text="Краторная булка N-200i (верх)"
+                        price={50}
+                        thumbnail={img}
+                    />
+                    <ConstructorElement
+                        type="bottom"
+                        isLocked={true}
+                        text="Краторная булка N-200i (низ)"
+                        price={200}
+                        thumbnail={img}
+                    />
+                </div>
                 {items.map((data) => (<ConstructorList key={data._id} {...data} />))}
             </ul>
             <SummaryConstructor />

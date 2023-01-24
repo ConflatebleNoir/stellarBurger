@@ -1,10 +1,12 @@
 import React from 'react'
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
-import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Typography } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Box } from '@ya.praktikum/react-developer-burger-ui-components'
+import {
+    Logo,
+    BurgerIcon,
+    ListIcon,
+    ProfileIcon,
+    Typography,
+    Box
+} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import AppHeaderStyles from './AppHeader.module.css'
 
@@ -16,13 +18,12 @@ const Menu = ({ children }) => {
     )
 };
 
-const MenuItem = ({ icon, text }) => {
+const MenuItem = ({ icon, text, spanClass }) => {
     return (
         <li className={AppHeaderStyles.menu__item
-            + ' ' + 'text text_type_main-default text_color_inactive'
             + ' ' + 'pr-5 pl-5'} role='button'>
             {icon}
-            <span className='text text_type_main-default ml-2'>{text}</span>
+            <span className={spanClass}>{text}</span>
         </li>
     )
 };
@@ -33,12 +34,14 @@ function AppHeader() {
             <nav className={AppHeaderStyles.container}>
                 <Menu>
                     <MenuItem icon={<BurgerIcon type="primary" />}
-                        text='Конструктор' />
+                        text='Конструктор' spanClass={'text text_type_main-default ml-2'} />
                     <MenuItem icon={<ListIcon type="secondary" />}
-                        text='Лента заказов' />
-                    <a className={AppHeaderStyles.logo} href="/"><Logo /></a>
+                        text='Лента заказов' spanClass={'text text_type_main-default text_color_inactive ml-2'} />
+                    <li>
+                        <a className={AppHeaderStyles.logo} href="/"><Logo /></a>
+                    </li>
                     <MenuItem icon={<ProfileIcon type="secondary" />}
-                        text='Личный кабинет' />
+                        text='Личный кабинет' spanClass={'text text_type_main-default text_color_inactive ml-2'} />
                 </Menu>
             </nav>
         </header>

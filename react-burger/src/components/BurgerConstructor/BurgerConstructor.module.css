@@ -9,7 +9,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    max-height: 656px;
+    max-height: 55vh;
     overflow-y: scroll;
     box-sizing: border-box;
 }

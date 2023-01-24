@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 .container {
     max-width: 1280px;
     display: flex;
@@ -41,4 +40,9 @@
     cursor: pointer;
     color: #fff;
     box-sizing: border-box;
+}
+
+.menu__item_link {
+    text-decoration: none;
+    /* color: none; */
 }
