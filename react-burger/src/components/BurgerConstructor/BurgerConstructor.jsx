@@ -39,7 +39,7 @@ const BurgerConstructor = ({ items }) => {
     // console.log({ items })
     return (
         <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px', }}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}
@@ -58,8 +58,8 @@ const BurgerConstructor = ({ items }) => {
                     thumbnail={items.image}
                 />
             </div>
-            <SummaryConstructor />
-        </section>
+            <SummaryConstructor price={610} />
+        </section >
     )
 }
 

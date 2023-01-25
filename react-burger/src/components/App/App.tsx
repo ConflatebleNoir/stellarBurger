@@ -21,9 +21,9 @@ function App() {
   }, [])
 
   return (
-    <div >
+    <div style={{ maxWidth: '1920px' }} >
       <AppHeader />
-      <main style={{ display: 'flex', margin: '0 auto', maxWidth: '1280px', columnGap: '40px' }}>
+      <main style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', maxWidth: '1280px', columnGap: '40px', padding: '0' }}>
         <BurgerIngredients items={ingredients} />
         <BurgerConstructor items={ingredients} />
       </main>

@@ -10,6 +10,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin: 0 auto;
+    padding: 0;
 }
 
 .menu {
@@ -25,24 +26,17 @@
     column-gap: 8px;
 }
 
-.logo {
+.logo__wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .menu__item {
-    max-width: 178px;
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, -webkit-max-content);
     grid-template-columns: repeat(2, max-content);
     cursor: pointer;
     color: #fff;
     box-sizing: border-box;
-}
-
-.menu__item_link {
-    text-decoration: none;
-    /* color: none; */
 }

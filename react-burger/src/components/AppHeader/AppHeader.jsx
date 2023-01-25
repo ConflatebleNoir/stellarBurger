@@ -37,8 +37,8 @@ function AppHeader() {
                         text='Конструктор' spanClass={'text text_type_main-default ml-2'} />
                     <MenuItem icon={<ListIcon type="secondary" />}
                         text='Лента заказов' spanClass={'text text_type_main-default text_color_inactive ml-2'} />
-                    <li>
-                        <a className={AppHeaderStyles.logo} href="/"><Logo /></a>
+                    <li className={AppHeaderStyles.logo__wrapper}>
+                        <a href="/"><Logo /></a>
                     </li>
                     <MenuItem icon={<ProfileIcon type="secondary" />}
                         text='Личный кабинет' spanClass={'text text_type_main-default text_color_inactive ml-2'} />

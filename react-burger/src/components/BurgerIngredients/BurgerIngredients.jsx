@@ -23,8 +23,6 @@ const BurgerIngredient = ({
     image_large,
     __v
 }) => {
-    const [bun, isBun] = useState('bun');
-
     return (
         <li className={BurgerIngredientsStyles.list__item}>
             <Counter count={1} size="default" extraClass="m-1" />
@@ -41,14 +39,13 @@ const BurgerIngredient = ({
 }
 
 function BurgerIngredients({ items }) {
-    const [currentItem, setCurrentItem] = useState('bun');
+    const [currentItem, setCurrentItem] = useState('');
 
     const handleTabClick = (currentItem) => {
         setCurrentItem(currentItem)
-        document.querySelector().scrollIntoView({ block: "start", behavior: "smooth" })
+        console.log(`#${currentItem}`)
+        document.querySelector(`#${currentItem}`).scrollIntoView({ block: "start", behavior: "smooth" })
     }
-
-    console.log(items);
 
     return (
         <section className={BurgerIngredientsStyles.container}>
