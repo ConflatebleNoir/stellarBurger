@@ -1,11 +1,25 @@
 import React from 'react'
 import ModalStyles from './Modal.module.css';
 import { CloseIcon, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
+import ModalOverlay from '../ModalOverlay/ModalOverlay'
 
 
 const Modal = ({ handlePopupClose, children, title = '' }) => {
 
     const modalRoot = document.getElementById("react-modals");
+
+    useEffect(() => {
+        const handleEscapeClose = (evt) => {
+            if (evt.key === 'Escape') {
+                handlePopupClose()
+            }
+        };
+
+        document.addEventListener('keydown', handleEscapeClose);
+        return () => {
+            document.removeEventListener('keydown', handleEscapeClose);
+        };
+    }, [handlePopupClose])
 
     return createPortal(
         <>
@@ -18,6 +32,7 @@ const Modal = ({ handlePopupClose, children, title = '' }) => {
                 </header>
                 {children}
             </div>
+            <ModalOverlay handlePopupClose={handlePopupClose} />
         </>
         , modalRoot
     );
