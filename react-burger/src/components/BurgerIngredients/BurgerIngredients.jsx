@@ -39,11 +39,11 @@ const BurgerIngredient = ({
 }
 
 function BurgerIngredients({ items }) {
-    const [currentItem, setCurrentItem] = useState('');
+    const [currentItem, setCurrentItem] = useState('bun');
 
     const handleTabClick = (currentItem) => {
-        setCurrentItem(currentItem)
-        console.log(`#${currentItem}`)
+        setCurrentItem(currentItem);
+        console.log(currentItem)
         document.querySelector(`#${currentItem}`).scrollIntoView({ block: "start", behavior: "smooth" })
     }
 
