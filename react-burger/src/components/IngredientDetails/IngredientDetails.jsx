@@ -3,7 +3,9 @@ import IngredientDetailsStyles from './IngredientDetails.module.css'
 
 const IngredientDetails = () => {
     return (
-        
+        <>
+
+        </>
     )
 }
 
