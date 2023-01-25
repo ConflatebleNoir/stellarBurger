@@ -1,0 +1,15 @@
+.container {
+    background: #1C1C21;
+    max-width: 720px;
+    width: 100%;
+    border-radius: 40px;
+}
+
+.header {
+    max-width: 640px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

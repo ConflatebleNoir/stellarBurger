@@ -11,7 +11,7 @@ import {
 
 const CurrentIngredient = ({ name, price, image }) => {
     return (
-        <li className={BurgerConstructorStyle.list__item}>
+        <li className={BurgerConstructorStyle.list__item + ' ' + 'mr-2'}>
             <DragIcon type="primary" />
             <ConstructorElement
                 text={name}
@@ -39,7 +39,7 @@ const BurgerConstructor = ({ items }) => {
     // console.log({ items })
     return (
         <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px', }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', }}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}
