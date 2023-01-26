@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
@@ -9,9 +9,9 @@ const config = {
 };
 
 function App() {
-  const [ingredients, setIngredients] = React.useState([]);
+  const [ingredients, setIngredients] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch(`${config.url}`)
       .then(res => res.json())
       .then(res => setIngredients(res.data))

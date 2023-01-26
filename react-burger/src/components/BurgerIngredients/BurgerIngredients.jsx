@@ -7,6 +7,7 @@ import {
     Typography,
     Box
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import Modal from '../Modal/Modal'
 
 const BurgerIngredient = ({
     items,
@@ -23,6 +24,7 @@ const BurgerIngredient = ({
     image_large,
     __v
 }) => {
+    console.log({ image })
     return (
         <li className={BurgerIngredientsStyles.list__item}>
             <Counter count={1} size="default" extraClass="m-1" />
@@ -34,6 +36,7 @@ const BurgerIngredient = ({
                 </div>
                 <p className={BurgerIngredientsStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
             </div>
+
         </li>
     )
 }

@@ -1,41 +1,54 @@
-import React from 'react'
+import { useEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
 import ModalStyles from './Modal.module.css';
 import { CloseIcon, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
 
 
-const Modal = ({ handlePopupClose, children, title = '' }) => {
+const modalRoot = document.getElementById("modals");
 
-    const modalRoot = document.getElementById("react-modals");
+const Modal = ({ children, open, onClose, title = '' }) => {
+    const element = useMemo(() => document.createElement('div'), []);
 
     useEffect(() => {
-        const handleEscapeClose = (evt) => {
-            if (evt.key === 'Escape') {
-                handlePopupClose()
-            }
-        };
+        if (open) {
+            modalRoot.appendChild(element);
+            const handleEscapeKey = (evt) => {
+                if (evt.key === 'Escape') {
+                    onClose(false);
+                }
+            };
 
-        document.addEventListener('keydown', handleEscapeClose);
-        return () => {
-            document.removeEventListener('keydown', handleEscapeClose);
+            document.addEventListener('keydown', handleEscapeKey);
+            return () => {
+                document.removeEventListener('keydown', handleEscapeKey);
+                modalRoot.removeChild(element);
+            };
         };
-    }, [handlePopupClose])
+    });
 
-    return createPortal(
-        <>
-            <div className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
-                <header className={ModalStyles.header}>
-                    {title && (<h2 className='text text_type_main-large'>{title}</h2>)}
-                    <button onClick={handlePopupClose}>
-                        <CloseIcon type="primary" />
-                    </button>
-                </header>
-                {children}
-            </div>
-            <ModalOverlay handlePopupClose={handlePopupClose} />
-        </>
-        , modalRoot
-    );
+    if (open) {
+        return createPortal(
+            <>
+                <ModalOverlay
+                    onClick={onClose}
+                    handleEscapeKey={onClose} >
+                    <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
+                        <header className={ModalStyles.header}>
+                            {title && (<h2 className='text text_type_main-large'>{title}</h2>)}
+                            <button className={ModalStyles.button}>
+                                <CloseIcon type="primary" onClick={onClose} />
+                            </button>
+                        </header>
+                        {children}
+                    </div>
+                </ModalOverlay>
+            </>
+            , element
+        );
+    }
+
+    return null;
 }
 
 export default Modal;

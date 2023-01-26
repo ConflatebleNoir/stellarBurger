@@ -3,13 +3,31 @@
     max-width: 720px;
     width: 100%;
     border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .header {
     max-width: 640px;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+}
+
+.button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    transition: ease .2s;
+    padding: 0;
+    margin: 0;
+}
+
+.button:hover {
+    opacity: .5;
 }

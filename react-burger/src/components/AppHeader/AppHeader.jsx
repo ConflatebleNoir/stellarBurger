@@ -12,9 +12,11 @@ import AppHeaderStyles from './AppHeader.module.css'
 
 const Menu = ({ children }) => {
     return (
-        <ul className={AppHeaderStyles.menu}>
-            {children}
-        </ul>
+        <>
+            <ul className={AppHeaderStyles.menu}>
+                {children}
+            </ul>
+        </>
     )
 };
 

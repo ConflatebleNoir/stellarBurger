@@ -22,7 +22,7 @@
 .order__list {
     padding: 0;
     margin: 0;
-    max-height: 30vh;
+    max-height: 464px;
     overflow-y: scroll;
     box-sizing: border-box;
     display: flex;

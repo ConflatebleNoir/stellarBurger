@@ -1,10 +1,12 @@
 import React from 'react'
 import ModarOverlayStyles from './ModalOverlay.module.css'
 
-const ModalOverlay = () => {
+const ModalOverlay = ({ children, onClick }) => {
 
     return (
-        <div className={ModarOverlayStyles.overlay} onClick={handlePopupClose}></div>
+        <div onClick={onClick} className={ModarOverlayStyles.overlay}>
+            {children}
+        </div>
     )
 }
 
