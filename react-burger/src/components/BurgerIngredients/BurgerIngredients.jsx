@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import BurgerIngredientsStyles from './BurgerIngredients.module.css'
 import {
     Counter,
@@ -54,6 +55,16 @@ const BurgerIngredient = ({
     )
 }
 
+BurgerIngredient.propTypes = {
+    name: PropTypes.string.isRequired,
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
+    calories: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+}
+
 function BurgerIngredients({ items }) {
     const [currentItem, setCurrentItem] = useState('bun');
 
@@ -93,6 +104,10 @@ function BurgerIngredients({ items }) {
             </div>
         </section>
     )
+}
+
+BurgerIngredients.propTypes = {
+    items: PropTypes.array.isRequired
 }
 
 export default BurgerIngredients;

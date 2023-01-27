@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
     Logo,
     BurgerIcon,
@@ -20,6 +21,10 @@ const Menu = ({ children }) => {
     )
 };
 
+Menu.propTypes = {
+    children: PropTypes.element.isRequired
+}
+
 const MenuItem = ({ icon, text, spanClass }) => {
     return (
         <li className={AppHeaderStyles.menu__item
@@ -29,6 +34,12 @@ const MenuItem = ({ icon, text, spanClass }) => {
         </li>
     )
 };
+
+MenuItem.propTypes = {
+    icon: PropTypes.element.isRequired,
+    text: PropTypes.string.isRequired,
+    spanClass: PropTypes.string.isRequired
+}
 
 function AppHeader() {
     return (

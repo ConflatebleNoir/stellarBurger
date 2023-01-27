@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
 import {
     ConstructorElement,
@@ -23,6 +24,12 @@ const CurrentIngredient = ({ name, price, image }) => {
             />
         </li>
     )
+}
+
+CurrentIngredient.propTypes = {
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
 }
 
 const SummaryConstructor = ({ price }) => {
@@ -55,6 +62,10 @@ const SummaryConstructor = ({ price }) => {
     )
 }
 
+SummaryConstructor.propTypes = {
+    price: PropTypes.number.isRequired
+}
+
 const BurgerConstructor = ({ items }) => {
     return (
         <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
@@ -80,6 +91,10 @@ const BurgerConstructor = ({ items }) => {
             <SummaryConstructor price={610} />
         </section >
     )
+}
+
+BurgerConstructor.propTypes = {
+    items: PropTypes.array.isRequired
 }
 
 export default BurgerConstructor

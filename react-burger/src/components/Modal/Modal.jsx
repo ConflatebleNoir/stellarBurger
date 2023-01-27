@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
+import PropTypes from 'prop-types'
 import ModalStyles from './Modal.module.css';
 import { CloseIcon, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
@@ -58,6 +59,13 @@ const Modal = ({ children, open, onClose, title = '' }) => {
     }
 
     return null;
+}
+
+Modal.propTypes = {
+    children: PropTypes.element.isRequired,
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
 }
 
 export default Modal;
