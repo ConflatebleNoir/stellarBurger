@@ -22,8 +22,8 @@
 .order__list {
     padding: 0;
     margin: 0;
-    max-height: 28vh;
     overflow-y: scroll;
+    max-height: calc(100vh - 490px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
