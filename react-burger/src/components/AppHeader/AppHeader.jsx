@@ -22,7 +22,7 @@ const Menu = ({ children }) => {
 };
 
 Menu.propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.array.isRequired
 }
 
 const MenuItem = ({ icon, text, spanClass }) => {
