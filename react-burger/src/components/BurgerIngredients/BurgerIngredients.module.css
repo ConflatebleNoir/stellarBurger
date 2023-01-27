@@ -6,7 +6,7 @@
 
 .ingredient__container {
     overflow-y: scroll;
-    max-height: 756px;
+    height: 60vh;
     box-sizing: border-box;
 }
 

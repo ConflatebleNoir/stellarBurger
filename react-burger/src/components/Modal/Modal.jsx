@@ -34,7 +34,6 @@ const Modal = ({ children, open, onClose, title = '' }) => {
                     onClick={onClose}
                     handleEscapeKey={onClose} >
                     <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
-
                         {title ? (
                             <header className={ModalStyles.header__ingredient}>
                                 <h2 className='text text_type_main-large'>{title}</h2>

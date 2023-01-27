@@ -11,47 +11,46 @@ import Modal from '../Modal/Modal'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 
 const BurgerIngredient = ({
-    items,
-    _id,
     name,
-    type,
     proteins,
     fat,
     carbohydrates,
     calories,
     price,
     image,
-    image_mobile,
-    image_large,
-    __v
 }) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <li onClick={() => { setOpen(true) }} className={BurgerIngredientsStyles.list__item}>
-            <Counter count={1} size="default" extraClass="m-1" />
-            <div className={BurgerIngredientsStyles.item__container}>
-                <img src={image} alt={name} />
-                <div className={BurgerIngredientsStyles.currency__container + ' ' + 'pt-1 pb-1'}>
-                    <p className="text text_type_digits-default">{price}</p>
-                    <CurrencyIcon type="primary" />
+        <>
+            <li onClick={() => { setOpen(true) }} className={BurgerIngredientsStyles.list__item}>
+                <Counter count={1} size="default" extraClass="m-1" />
+                <div className={BurgerIngredientsStyles.item__container}>
+                    <img src={image} alt={name} />
+                    <div className={BurgerIngredientsStyles.currency__container + ' ' + 'pt-1 pb-1'}>
+                        <p className="text text_type_digits-default">{price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={BurgerIngredientsStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
                 </div>
-                <p className={BurgerIngredientsStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
-            </div>
-            <Modal
-                open={open}
-                onClose={() => { setOpen(false) }}
-                title={'Детали ингредиента'}
-                children={<IngredientDetails
-                    image={image}
-                    name={name}
-                    calories={calories}
-                    proteins={proteins}
-                    fat={fat}
-                    carbohydrates={carbohydrates}
-                />}
-            />
-        </li>
+            </li>
+            {open && (
+                <Modal
+                    open={open}
+                    onClose={() => { setOpen(false) }}
+                    title={'Детали ингредиента'}
+                    children={<IngredientDetails
+                        image={image}
+                        name={name}
+                        calories={calories}
+                        proteins={proteins}
+                        fat={fat}
+                        carbohydrates={carbohydrates}
+                    />}
+                />
+            )}
+        </>
+
     )
 }
 

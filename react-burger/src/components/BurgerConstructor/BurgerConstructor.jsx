@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
 import {
     ConstructorElement,
@@ -26,24 +26,33 @@ const CurrentIngredient = ({ name, price, image }) => {
 }
 
 const SummaryConstructor = ({ price }) => {
-    const [open, setOpen] = React.useState(false);
-
+    const [open, setOpen] = useState(false);
 
     return (
-        <div className={BurgerConstructorStyle.order__summary + ' ' + 'pt-10'}>
-            <div className={BurgerConstructorStyle.currency__wrapper + ' ' + 'mr-10'}>
-                <p className="text text_type_digits-medium">{price}</p>
-                <CurrencyIcon type="primary" />
+        <>
+            <div className={BurgerConstructorStyle.order__summary + ' ' + 'pt-10'}>
+                <div className={BurgerConstructorStyle.currency__wrapper + ' ' + 'mr-10'}>
+                    <p className="text text_type_digits-medium">{price}</p>
+                    <CurrencyIcon type="primary" />
+                </div>
+                <Button onClick={() => { setOpen(true) }} htmlType="button" type="primary" size="medium">
+                    Оформить заказ
+                </Button>
+                <Modal
+                    open={open}
+                    onClose={() => { setOpen(false) }}
+                    children={<OrderDetails />}
+                />
             </div>
-            <Button onClick={() => { setOpen(true) }} htmlType="button" type="primary" size="medium">
-                Оформить заказ
-            </Button>
-            <Modal
-                open={open}
-                onClose={() => { setOpen(false) }}
-                children={<OrderDetails />}
-            />
-        </div>)
+            {open && (
+                <Modal
+                    open={open}
+                    onClose={() => { setOpen(false) }}
+                    children={<OrderDetails />}
+                />
+            )}
+        </>
+    )
 }
 
 const BurgerConstructor = ({ items }) => {

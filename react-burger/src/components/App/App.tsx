@@ -3,6 +3,7 @@ import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import { getData } from '../../api/api'
+import PropTypes from 'prop-types';
 // import AppStyles from './App.module.css'
 
 const config = {
@@ -26,9 +27,9 @@ function App() {
     return <h1>Loading...</h1>
   } else {
     return (
-      <div style={{ maxWidth: '1920px' }} >
+      <div style={{ maxWidth: '100%' }} >
         <AppHeader />
-        <main style={{ display: 'flex', margin: '0 auto', maxWidth: '1280px', columnGap: '40px', padding: '0' }}>
+        <main style={{ display: 'flex', margin: '0 auto', maxWidth: '1280px', maxHeight: '100vh', columnGap: '40px', padding: '0' }}>
           <BurgerIngredients items={ingredients} />
           <BurgerConstructor items={ingredients} />
         </main>
