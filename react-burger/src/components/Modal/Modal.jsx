@@ -34,12 +34,22 @@ const Modal = ({ children, open, onClose, title = '' }) => {
                     onClick={onClose}
                     handleEscapeKey={onClose} >
                     <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
-                        <header className={ModalStyles.header}>
-                            {title && (<h2 className='text text_type_main-large'>{title}</h2>)}
-                            <button className={ModalStyles.button}>
-                                <CloseIcon type="primary" onClick={onClose} />
-                            </button>
-                        </header>
+
+                        {title ? (
+                            <header className={ModalStyles.header__ingredient}>
+                                <h2 className='text text_type_main-large'>{title}</h2>
+                                <button className={ModalStyles.button}>
+                                    <CloseIcon type="primary" onClick={onClose} />
+                                </button>
+                            </header>)
+                            : (
+                                <header className={ModalStyles.header__order}>
+                                    <button className={ModalStyles.button}>
+                                        <CloseIcon type="primary" onClick={onClose} />
+                                    </button>
+                                </header>
+                            )}
+
                         {children}
                     </div>
                 </ModalOverlay>

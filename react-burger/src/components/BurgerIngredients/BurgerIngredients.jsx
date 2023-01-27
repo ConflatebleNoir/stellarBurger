@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import BurgerIngredientsStyles from './BurgerIngredients.module.css'
 import {
     Counter,
@@ -8,6 +8,7 @@ import {
     Box
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../Modal/Modal'
+import IngredientDetails from '../IngredientDetails/IngredientDetails'
 
 const BurgerIngredient = ({
     items,
@@ -24,9 +25,10 @@ const BurgerIngredient = ({
     image_large,
     __v
 }) => {
-    console.log({ image })
+    const [open, setOpen] = useState(false);
+
     return (
-        <li className={BurgerIngredientsStyles.list__item}>
+        <li onClick={() => { setOpen(true) }} className={BurgerIngredientsStyles.list__item}>
             <Counter count={1} size="default" extraClass="m-1" />
             <div className={BurgerIngredientsStyles.item__container}>
                 <img src={image} alt={name} />
@@ -36,7 +38,19 @@ const BurgerIngredient = ({
                 </div>
                 <p className={BurgerIngredientsStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
             </div>
-
+            <Modal
+                open={open}
+                onClose={() => { setOpen(false) }}
+                title={'Детали ингредиента'}
+                children={<IngredientDetails
+                    image={image}
+                    name={name}
+                    calories={calories}
+                    proteins={proteins}
+                    fat={fat}
+                    carbohydrates={carbohydrates}
+                />}
+            />
         </li>
     )
 }
@@ -44,9 +58,9 @@ const BurgerIngredient = ({
 function BurgerIngredients({ items }) {
     const [currentItem, setCurrentItem] = useState('bun');
 
+
     const handleTabClick = (currentItem) => {
         setCurrentItem(currentItem);
-        console.log(currentItem)
         document.querySelector(`#${currentItem}`).scrollIntoView({ block: "start", behavior: "smooth" })
     }
 

@@ -10,6 +10,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../Modal/Modal'
 import OrderDetails from '../OrderDetails/OrderDetails'
+import bunImage from '../../images/bun.svg'
 
 const CurrentIngredient = ({ name, price, image }) => {
     return (
@@ -54,7 +55,7 @@ const BurgerConstructor = ({ items }) => {
                     isLocked={true}
                     text="Краторная булка N-200i (верх)"
                     price={1255}
-                    thumbnail={items.image}
+                    thumbnail={bunImage}
                 />
                 <ul className={BurgerConstructorStyle.order__list}>
                     {items.map((data) => (data.type !== 'bun' && <CurrentIngredient key={data._id} {...data} />))}
@@ -64,7 +65,7 @@ const BurgerConstructor = ({ items }) => {
                     isLocked={true}
                     text="Краторная булка N-200i (низ)"
                     price={1255}
-                    thumbnail={items.image}
+                    thumbnail={bunImage}
                 />
             </div>
             <SummaryConstructor price={610} />
