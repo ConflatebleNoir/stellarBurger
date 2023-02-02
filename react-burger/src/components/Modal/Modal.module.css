@@ -10,7 +10,7 @@
     box-sizing: border-box;
 }
 
-.header__ingredient {
+.header__title {
     max-width: 640px;
     width: 100%;
     display: flex;
@@ -19,7 +19,7 @@
     align-items: center;
 }
 
-.header__order {
+.header__empty {
     max-width: 640px;
     width: 100%;
     display: flex;

@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+.container__entrails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 .list {
     max-width: 568px;
     width: 100%;

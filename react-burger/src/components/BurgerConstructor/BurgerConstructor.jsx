@@ -69,7 +69,7 @@ SummaryConstructor.propTypes = {
 const BurgerConstructor = ({ items }) => {
     return (
         <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', }}>
+            <div className={BurgerConstructorStyle.container__entrails}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}

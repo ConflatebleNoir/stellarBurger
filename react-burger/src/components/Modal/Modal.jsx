@@ -26,34 +26,32 @@ const Modal = ({ children, open, onClose, title = '' }) => {
                 modalRoot.removeChild(element);
             };
         };
-    });
+    }, [open]);
 
     if (open) {
         return createPortal(
-            <>
-                <ModalOverlay
-                    onClick={onClose}
-                    handleEscapeKey={onClose} >
-                    <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
-                        {title ? (
-                            <header className={ModalStyles.header__ingredient}>
-                                <h2 className='text text_type_main-large'>{title}</h2>
+            <ModalOverlay
+                onClick={onClose}
+                handleEscapeKey={onClose} >
+                <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
+                    {title ? (
+                        <header className={ModalStyles.header__title}>
+                            <h2 className='text text_type_main-large'>{title}</h2>
+                            <button className={ModalStyles.button}>
+                                <CloseIcon type="primary" onClick={onClose} />
+                            </button>
+                        </header>)
+                        : (
+                            <header className={ModalStyles.header__empty}>
                                 <button className={ModalStyles.button}>
                                     <CloseIcon type="primary" onClick={onClose} />
                                 </button>
-                            </header>)
-                            : (
-                                <header className={ModalStyles.header__order}>
-                                    <button className={ModalStyles.button}>
-                                        <CloseIcon type="primary" onClick={onClose} />
-                                    </button>
-                                </header>
-                            )}
+                            </header>
+                        )}
 
-                        {children}
-                    </div>
-                </ModalOverlay>
-            </>
+                    {children}
+                </div>
+            </ModalOverlay>
             , element
         );
     }
