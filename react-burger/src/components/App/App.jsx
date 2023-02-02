@@ -1,0 +1,40 @@
+import { useState, useEffect } from 'react'
+import AppHeader from '../AppHeader/AppHeader'
+import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
+import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
+import { getData } from '../../api/api'
+import AppStyles from './App.module.css'
+
+const config = {
+  url: 'https://norma.nomoreparties.space/api/ingredients'
+};
+
+function App() {
+  const [ingredients, setIngredients] = useState(null);
+
+  useEffect(() => {
+    getData(config)
+      .then(res => {
+        setIngredients(res.data)
+      })
+      .catch(error => {
+        console.log('Ошибка', error)
+      })
+  }, []);
+
+  if (ingredients === null) {
+    return <h1>Loading...</h1>
+  } else {
+    return (
+      <div className={AppStyles.container} >
+        <AppHeader />
+        <main className={AppStyles.main}>
+          <BurgerIngredients items={ingredients} />
+          <BurgerConstructor items={ingredients} />
+        </main>
+      </div>
+    );
+  }
+};
+
+export default App;
