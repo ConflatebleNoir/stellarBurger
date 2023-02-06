@@ -1,40 +1,32 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
-import { getData } from '../../api/api'
 import AppStyles from './App.module.css'
-
-const config = {
-  url: 'https://norma.nomoreparties.space/api/ingredients'
-};
+import { useDispatch, useSelector } from 'react-redux'
+import { getIngredients } from '../../services/actions/ingredients.js'
 
 function App() {
-  const [ingredients, setIngredients] = useState(null);
+  const dispatch = useDispatch();
+  const ingredientsReqest = useSelector(state => state.ingredientsData.ingredientsReqest);
 
   useEffect(() => {
-    getData(config)
-      .then(res => {
-        setIngredients(res.data)
-      })
-      .catch(error => {
-        console.log('Ошибка', error)
-      })
-  }, []);
+    dispatch(getIngredients());
+  }, [dispatch]);
 
-  if (ingredients === null) {
-    return <h1>Loading...</h1>
-  } else {
-    return (
-      <div className={AppStyles.container} >
-        <AppHeader />
-        <main className={AppStyles.main}>
-          <BurgerIngredients items={ingredients} />
-          <BurgerConstructor items={ingredients} />
-        </main>
-      </div>
-    );
-  }
+  return (
+    <div className={AppStyles.container} >
+      {ingredientsReqest ? <h1>Loading...</h1>
+        : <>
+          <AppHeader />
+          <main className={AppStyles.main}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </main>
+        </>
+      }
+    </div>
+  );
 };
 
 export default App;

@@ -12,8 +12,12 @@ import {
 import Modal from '../Modal/Modal'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import bunImage from '../../images/bun.svg'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CurrentIngredient = ({ name, price, image }) => {
+    const dispatch = useDispatch();
+    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
+
     return (
         <li className={BurgerConstructorStyle.list__item + ' ' + 'mr-2'}>
             <DragIcon type="primary" />
@@ -66,7 +70,9 @@ SummaryConstructor.propTypes = {
     price: PropTypes.number.isRequired
 }
 
-const BurgerConstructor = ({ items }) => {
+const BurgerConstructor = () => {
+    const dispatch = useDispatch();
+    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients)
     return (
         <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
             <div className={BurgerConstructorStyle.container__entrails}>
@@ -78,7 +84,7 @@ const BurgerConstructor = ({ items }) => {
                     thumbnail={bunImage}
                 />
                 <ul className={BurgerConstructorStyle.order__list}>
-                    {items.map((data) => (data.type !== 'bun' && <CurrentIngredient key={data._id} {...data} />))}
+                    {currentIngredients.map((data) => (data.type !== 'bun' && <CurrentIngredient key={data._id} {...data} />))}
                 </ul>
                 <ConstructorElement
                     type="bottom"
@@ -91,10 +97,6 @@ const BurgerConstructor = ({ items }) => {
             <SummaryConstructor price={610} />
         </section >
     )
-}
-
-BurgerConstructor.propTypes = {
-    items: PropTypes.array.isRequired
 }
 
 export default BurgerConstructor

@@ -1,4 +1,4 @@
-export const getData = (config) => {
+export const getIngredientsData = (config) => {
     return fetch(`${config.url}`)
         .then(res => {
             if (res.ok) {
