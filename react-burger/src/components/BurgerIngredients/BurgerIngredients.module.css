@@ -47,6 +47,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: ease .3s;
+}
+
+.list__item:hover {
+    scale: 1.05;
 }
 
 .item__container {
@@ -71,4 +76,8 @@
 
 .text__align {
     text-align: center;
+}
+
+.dragging {
+    filter: grayscale(.5);
 }

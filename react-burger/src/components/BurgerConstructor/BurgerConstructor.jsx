@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
+import { getSnapshotBeforeUpdate } from 'react'
 import PropTypes from 'prop-types'
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
 import {
@@ -9,22 +10,87 @@ import {
     Typography,
     Box
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import Modal from '../Modal/Modal'
-import OrderDetails from '../OrderDetails/OrderDetails'
-import bunImage from '../../images/bun.svg'
 import { useDispatch, useSelector } from 'react-redux'
+import { DndProvider, useDrag, useDrop } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { removeIngredient, sortIngredients } from '../../services/actions/ingredients'
+import { getOrder } from '../../services/actions/order'
+import { switchOrderModalState } from '../../services/actions/modal'
 
-const CurrentIngredient = ({ name, price, image }) => {
+const CurrentIngredient = ({ name, price, image, id, index, shiftElement }) => {
+    const ref = useRef(null);
     const dispatch = useDispatch();
     const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
 
+    const [{ isDrag }, drag] = useDrag({
+        type: 'currentIngredient',
+        item: () => {
+            return { id, index };
+        },
+        collect: (monitor) => ({
+            isDrag: monitor.isDragging(),
+        }),
+    });
+
+    const [{ handlerId }, drop] = useDrop({
+        accept: "currentIngredient",
+        collect(monitor) {
+            return {
+                handlerId: monitor.getHandlerId()
+            };
+        },
+        drop(item, monitor) {
+            if (!ref.current) {
+                return;
+            }
+
+            const dragItemIndex = item.index;
+            const hoverIndex = index;
+
+            if (dragItemIndex === hoverIndex) {
+                return;
+            }
+
+            const hoverBoundering = ref.current?.getBoundingClientRect();
+            const hoverCenterY = (hoverBoundering.bottom - hoverBoundering.top) / 2;
+            const clientOffset = monitor.getClientOffset();
+            const hoverClientY = clientOffset.y - clientOffset.top;
+
+            if (dragItemIndex < hoverIndex && hoverClientY < hoverCenterY) {
+                return;
+            }
+
+            if (dragItemIndex > hoverIndex && hoverClientY > hoverCenterY) {
+                return;
+            }
+
+            shiftElement(dragItemIndex - 1, hoverIndex - 1);
+
+            item.index = hoverIndex;
+        },
+    });
+
+    drag(drop(ref));
+
+    const handleRemoveElement = (element) => () => {
+        const currentIngredientsCopy = currentIngredients.slice();
+        const takenElementIndex = currentIngredients.indexOf(element);
+        currentIngredientsCopy.splice(takenElementIndex, 1);
+        dispatch(removeIngredient(currentIngredientsCopy));
+    }
+
     return (
-        <li className={BurgerConstructorStyle.list__item + ' ' + 'mr-2'}>
+        <li
+            ref={ref}
+            data-handler-id={handlerId}
+            className={BurgerConstructorStyle.list__item + ' ' + 'mr-2'}
+        >
             <DragIcon type="primary" />
             <ConstructorElement
                 text={name}
                 price={price}
                 thumbnail={image}
+                handleClose={handleRemoveElement({ name, price, image })}
             />
         </li>
     )
@@ -36,67 +102,97 @@ CurrentIngredient.propTypes = {
     image: PropTypes.string.isRequired,
 }
 
-const SummaryConstructor = ({ price }) => {
-    const [open, setOpen] = useState(false);
-
-    return (
-        <>
-            <div className={BurgerConstructorStyle.order__summary + ' ' + 'pt-10'}>
-                <div className={BurgerConstructorStyle.currency__wrapper + ' ' + 'mr-10'}>
-                    <p className="text text_type_digits-medium">{price}</p>
-                    <CurrencyIcon type="primary" />
-                </div>
-                <Button onClick={() => { setOpen(true) }} htmlType="button" type="primary" size="medium">
-                    Оформить заказ
-                </Button>
-                <Modal
-                    open={open}
-                    onClose={() => { setOpen(false) }}
-                    children={<OrderDetails />}
-                />
-            </div>
-            {open && (
-                <Modal
-                    open={open}
-                    onClose={() => { setOpen(false) }}
-                    children={<OrderDetails />}
-                />
-            )}
-        </>
-    )
-}
-
-SummaryConstructor.propTypes = {
-    price: PropTypes.number.isRequired
-}
-
-const BurgerConstructor = () => {
+const SummaryConstructor = () => {
     const dispatch = useDispatch();
-    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients)
+    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
+
+    const summaryPrice = useMemo(() => currentIngredients.reduce((acc, cur) => cur.type === 'bun' ? acc + (cur.price * 2) : acc + cur.price, 0), [currentIngredients]);
+
+    const handleOrderByClick = () => {
+        const elemId = currentIngredients.map(element => element._id);
+        dispatch(getOrder(elemId));
+        dispatch(switchOrderModalState(true));
+    };
+
     return (
-        <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
-            <div className={BurgerConstructorStyle.container__entrails}>
-                <ConstructorElement
-                    type="top"
-                    isLocked={true}
-                    text="Краторная булка N-200i (верх)"
-                    price={1255}
-                    thumbnail={bunImage}
-                />
-                <ul className={BurgerConstructorStyle.order__list}>
-                    {currentIngredients.map((data) => (data.type !== 'bun' && <CurrentIngredient key={data._id} {...data} />))}
-                </ul>
-                <ConstructorElement
-                    type="bottom"
-                    isLocked={true}
-                    text="Краторная булка N-200i (низ)"
-                    price={1255}
-                    thumbnail={bunImage}
-                />
+        <div className={BurgerConstructorStyle.order__summary + ' ' + 'pt-10'}>
+            <div className={BurgerConstructorStyle.currency__wrapper + ' ' + 'mr-10'}>
+                <p className="text text_type_digits-medium">{summaryPrice}</p>
+                <CurrencyIcon type="primary" />
             </div>
-            <SummaryConstructor price={610} />
-        </section >
+            <Button
+                onClick={handleOrderByClick}
+                disabled={currentIngredients.length > 0 ? false : true}
+                htmlType="button"
+                type="primary"
+                size="medium"
+            >
+                Оформить заказ
+            </Button>
+        </div>
     )
 }
+
+const BurgerConstructor = ({ onDropHandler }) => {
+    const dispatch = useDispatch();
+    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
+    const bunHighlighter = (currentIngredients, boolValueTrue, boolValueFalse, prop) => currentIngredients.find(ingredientsList => ingredientsList.type === 'bun') ? `${(currentIngredients.find(ingredientsList => ingredientsList.type === 'bun'))[prop]} ${boolValueTrue}` : boolValueFalse;
+
+    const [{ isHover }, ingredientsContainer] = useDrop({
+        accept: 'ingredient',
+        drop(elementId) {
+            onDropHandler(elementId);
+        },
+        collect: monitor => ({
+            isHover: monitor.isOver(),
+        })
+    });
+
+    const shiftElement = useCallback((hoverIndex, dragIndex) => {
+        const elementTypeBun = currentIngredients.filter(element => element.type === 'bun');
+        const elementNonBun = currentIngredients.filter(element => element.type !== 'bun');
+        const sortedBase = getSnapshotBeforeUpdate(elementNonBun, {
+            $splice: [
+                [dragIndex, 1],
+                [hoverIndex, 0, elementNonBun[dragIndex]],
+            ],
+        }, [elementNonBun])
+        const sortedElementsBun = [...elementTypeBun, sortedBase];
+        dispatch(sortIngredients([...sortedElementsBun]));
+    }, [currentIngredients, dispatch]);
+
+    return (
+        <DndProvider backend={HTML5Backend}>
+            <section ref={ingredientsContainer} className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
+                <div className={BurgerConstructorStyle.container__entrails}>
+                    {
+                        currentIngredients.length < 0 ? <ConstructorElement
+                            type="top"
+                            isLocked={true}
+                            text={bunHighlighter(currentIngredients, '(верх)', 'Добавьте что-нибудь', 'name')}
+                            price={bunHighlighter(currentIngredients, '', '0', 'price')}
+                            thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
+                        /> : <p>Добавьте что-нибудь</p>
+                    }
+                    <ul className={BurgerConstructorStyle.order__list}>
+                        {currentIngredients.map((item, itemIndex) =>
+                        (item.type !== 'bun'
+                            && <CurrentIngredient key={item._id} index={itemIndex} {...item} id={`${item._id}${itemIndex}`} shiftElement={shiftElement} />))}
+                    </ul>
+                    {
+                        currentIngredients.length < 0 && <ConstructorElement
+                            type="bottom"
+                            isLocked={true}
+                            text={bunHighlighter(currentIngredients, '(низ)', 'Добавьте что-нибудь', 'name')}
+                            price={bunHighlighter(currentIngredients, '', '0', 'price')}
+                            thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
+                        />
+                    }
+                </div>
+                <SummaryConstructor />
+            </section >
+        </DndProvider>
+    );
+};
 
 export default BurgerConstructor

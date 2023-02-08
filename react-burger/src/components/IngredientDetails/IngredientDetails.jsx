@@ -1,29 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import IngredientDetailsStyles from './IngredientDetails.module.css'
 
-const IngredientDetails = ({ image, name, calories, proteins, fat, carbohydrates }) => {
+const IngredientDetails = () => {
+    const modalIngredient = useSelector(state => state.ingredientsData.modalIngredient);
+
     return (
         <>
-            <img className={IngredientDetailsStyles.image} src={image} alt={name} />
-            <h3 className='text text_type_main-medium mt-4'>{name}</h3>
+            <img className={IngredientDetailsStyles.image} src={modalIngredient && modalIngredient.image} alt={modalIngredient.name} />
+            <h3 className='text text_type_main-medium mt-4'>{modalIngredient && modalIngredient.name}</h3>
             <ul className={IngredientDetailsStyles.list + ' ' + 'mt-8'}>
-                < li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Калории,ккал {calories}</li>
-                <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Белки, г {proteins}</li>
-                <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Жиры, г {fat}</li>
-                <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Углеводы, г {carbohydrates}</li>
+                < li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Калории,ккал {modalIngredient.calories}</li>
+                <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Белки, г {modalIngredient.proteins}</li>
+                <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Жиры, г {modalIngredient.fat}</li>
+                <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Углеводы, г {modalIngredient.carbohydrates}</li>
             </ul>
         </>
     )
-}
-
-IngredientDetails.propTypes = {
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
 }
 
 export default IngredientDetails;
