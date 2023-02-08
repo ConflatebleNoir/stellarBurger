@@ -10,7 +10,7 @@ const IngredientDetails = () => {
             <img className={IngredientDetailsStyles.image} src={modalIngredient && modalIngredient.image} alt={modalIngredient.name} />
             <h3 className='text text_type_main-medium mt-4'>{modalIngredient && modalIngredient.name}</h3>
             <ul className={IngredientDetailsStyles.list + ' ' + 'mt-8'}>
-                < li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Калории,ккал {modalIngredient.calories}</li>
+                <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Калории,ккал {modalIngredient.calories}</li>
                 <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Белки, г {modalIngredient.proteins}</li>
                 <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Жиры, г {modalIngredient.fat}</li>
                 <li className={IngredientDetailsStyles.list__item + ' ' + 'text text_type_main-default text_color_inactive'}>Углеводы, г {modalIngredient.carbohydrates}</li>

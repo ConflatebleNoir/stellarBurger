@@ -59,7 +59,7 @@ function App() {
           </DndProvider>
           {isIngredientModalOpen && (
             <Modal title={'Детали ингредиента'} handleModalClose={handleModalClose}>
-              {orderData && <IngredientDetails />}
+              <IngredientDetails />
             </Modal>
           )}
           {isOrderModalOpen && (

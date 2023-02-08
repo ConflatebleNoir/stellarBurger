@@ -41,12 +41,11 @@ const Modal = ({ children, handleModalClose, title = '' }) => {
                     </header>)
                     : (
                         <header className={ModalStyles.header__empty}>
-                            <button className={ModalStyles.button}>
-                                <CloseIcon type="primary" onClick={handleModalClose} />
+                            <button onClick={handleModalClose} className={ModalStyles.button}>
+                                <CloseIcon type="primary" />
                             </button>
                         </header>
                     )}
-
                 {children}
             </div>
         </ModalOverlay>
