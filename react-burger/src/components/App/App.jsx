@@ -16,11 +16,11 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 function App() {
   const dispatch = useDispatch();
   const ingredientsReqest = useSelector(state => state.ingredientsData.ingredientsReqest);
+  const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
+  const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
   const orderData = useSelector(state => state.orderData.orderData);
   const isOrderModalOpen = useSelector(state => state.modalData.isOrderModalOpen);
   const isIngredientModalOpen = useSelector(state => state.modalData.isIngredientModalOpen);
-  const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
-  const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
 
   useEffect(() => {
     dispatch(getIngredients());

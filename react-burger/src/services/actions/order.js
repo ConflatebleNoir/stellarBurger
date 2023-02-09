@@ -1,5 +1,5 @@
 import { postOrder } from '../../utils/api';
-import { config } from '../../utils/constants';
+import { config } from '../../utils/config';
 
 export const GET_ORDER_DATA = 'GET_ORDER_DATA';
 export const GET_ORDER_DATA_SUCCESS = 'GET_ORDER_DATA_SUCCESS';

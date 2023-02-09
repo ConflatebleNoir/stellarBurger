@@ -1,5 +1,5 @@
 import { getIngredientsData } from '../../utils/api';
-import { config } from '../../utils/constants';
+import { config } from '../../utils/config';
 
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';

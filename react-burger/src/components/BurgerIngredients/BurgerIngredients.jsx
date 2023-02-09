@@ -15,6 +15,7 @@ import {
 } from '../../services/actions/ingredients'
 import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
+import { checkCoordinates } from '../../utils/checkCoordinates'
 
 const BurgerIngredient = ({
     _id,
@@ -99,6 +100,12 @@ function BurgerIngredients() {
     const handleTabClick = (currentItem) => {
         setCurrentItem(currentItem);
         document.querySelector(`#${currentItem}`).scrollIntoView({ block: "start", behavior: "smooth" })
+    };
+
+    const handleScroll = (evt) => {
+        evt.target.addEventListener('scroll', () => {
+            setCurrentItem(checkCoordinates(BurgerIngredientsStyles.container));
+        });
     }
 
     return (
@@ -115,7 +122,7 @@ function BurgerIngredients() {
                     Начинки
                 </Tab>
             </div>
-            <div className={BurgerIngredientsStyles.ingredient__container}>
+            <div onScroll={handleScroll} className={BurgerIngredientsStyles.ingredient__container}>
                 <h2 id='bun' className="text text_type_main-medium mt-10">Булки</h2>
                 <ul className={BurgerIngredientsStyles.list + ' ' + 'mt-6 pl-4 pr-4'}>
                     {initIngredients.map((data) => (data.type === 'bun' && <BurgerIngredient key={data._id} {...data} />))}
