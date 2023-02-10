@@ -12,7 +12,6 @@ export const postOrder = (config, ingredientsId) => {
     const orderData = {
         'ingredients': ingredientsId,
     };
-    console.log(orderData)
 
     return fetch(`${config.url}/orders/`, {
         method: 'POST',

@@ -52,7 +52,7 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
                 return;
             }
 
-            const hoverBoundering = ref.current?.getBoundingClientRect();
+            const hoverBoundering = ref.current.getBoundingClientRect();
             const hoverCenterY = (hoverBoundering.bottom - hoverBoundering.top) / 2;
             const clientOffset = monitor.getClientOffset();
             const hoverClientY = clientOffset.y - clientOffset.top;
@@ -100,11 +100,30 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
     )
 }
 
-// CurrentIngredient.propTypes = {
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     image: PropTypes.string.isRequired,
-// }
+CurrentIngredient.propTypes = {
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+}
+
+CurrentIngredient.propTypes = {
+    item: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired,
+        image_large: PropTypes.string.isRequired,
+        image_mobile: PropTypes.string.isRequired,
+        calories: PropTypes.number.isRequired,
+        carbohydrates: PropTypes.number.isRequired,
+        fat: PropTypes.number.isRequired,
+        proteins: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
+    }),
+    id: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    shiftElement: PropTypes.func.isRequired,
+}
 
 const SummaryConstructor = () => {
     const dispatch = useDispatch();
@@ -176,22 +195,28 @@ const BurgerConstructor = ({ onDropHandler }) => {
                             ? <ConstructorElement
                                 type="top"
                                 isLocked={true}
-                                text={bunHighlighter(currentIngredients, '(верх)', 'Добавьте что-нибудь', 'name')}
+                                text={bunHighlighter(currentIngredients, '(верх)', 'Переместите сюда', 'name')}
                                 price={bunHighlighter(currentIngredients, '', '0', 'price')}
                                 thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
                             />
-                            : <p>Добавьте что-нибудь</p>
+                            : <p>Переместите сюда</p>
                     }
                     <ul className={BurgerConstructorStyle.order__list}>
                         {currentIngredients.map((item, itemIndex) =>
                         (item.type !== 'bun'
-                            && <CurrentIngredient key={item._id} index={itemIndex} item={item} id={`${item._id}${itemIndex}`} shiftElement={shiftElement} />))}
+                            && <CurrentIngredient
+                                key={item.pseudoUuid}
+                                index={itemIndex}
+                                item={item}
+                                id={`${item._id}${itemIndex}`}
+                                shiftElement={shiftElement}
+                            />))}
                     </ul>
                     {
                         currentIngredients.length > 0 && <ConstructorElement
                             type="bottom"
                             isLocked={true}
-                            text={bunHighlighter(currentIngredients, '(низ)', 'Добавьте что-нибудь', 'name')}
+                            text={bunHighlighter(currentIngredients, '(низ)', 'Переместите сюда', 'name')}
                             price={bunHighlighter(currentIngredients, '', '0', 'price')}
                             thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
                         />

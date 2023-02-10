@@ -32,7 +32,6 @@ export function getOrder(itemId) {
             .then(data => {
                 if (data.success) {
                     dispatch(getOrderDataSuccess(data))
-                    console.log(dispatch(getOrderDataSuccess(data)))
                 }
             })
             .catch(() => dispatch(getOrderDataFailed()))
