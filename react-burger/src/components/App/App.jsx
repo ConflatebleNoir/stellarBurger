@@ -18,7 +18,7 @@ function App() {
   const ingredientsReqest = useSelector(state => state.ingredientsData.ingredientsReqest);
   const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
   const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
-  const orderData = useSelector(state => state.orderData.orderData);
+  const orderData = useSelector(state => state.orderData.orderDetails);
   const isOrderModalOpen = useSelector(state => state.modalData.isOrderModalOpen);
   const isIngredientModalOpen = useSelector(state => state.modalData.isIngredientModalOpen);
 

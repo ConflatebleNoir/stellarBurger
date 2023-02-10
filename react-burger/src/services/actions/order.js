@@ -30,8 +30,9 @@ export function getOrder(itemId) {
 
         postOrder(config, itemId)
             .then(data => {
-                if (data) {
+                if (data.success) {
                     dispatch(getOrderDataSuccess(data))
+                    console.log(dispatch(getOrderDataSuccess(data)))
                 }
             })
             .catch(() => dispatch(getOrderDataFailed()))

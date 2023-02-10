@@ -170,7 +170,7 @@ const BurgerConstructor = ({ onDropHandler }) => {
     return (
         <DndProvider backend={HTML5Backend}>
             <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
-                <div className={BurgerConstructorStyle.container__entrails} ref={ingredientsContainer} style={{ containerBorder }}>
+                <div className={BurgerConstructorStyle.container__entrails} ref={ingredientsContainer} style={{ borderColor: containerBorder }}>
                     {
                         currentIngredients.length > 0
                             ? <ConstructorElement

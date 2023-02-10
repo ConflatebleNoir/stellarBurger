@@ -10,20 +10,20 @@ export const getIngredientsData = (config) => {
 
 export const postOrder = (config, ingredientsId) => {
     const orderData = {
-        id: ingredientsId,
+        'ingredients': ingredientsId,
     };
+    console.log(orderData)
 
-    return fetch(`${config.url}/orders`, {
+    return fetch(`${config.url}/orders/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
         },
-        body: JSON.stringify(orderData.id)
+        body: JSON.stringify(orderData)
     })
         .then(res => {
             if (res.ok) {
                 return res.json();
-            }
-            return Promise.reject(`Ошибка ${res.status}`);
+            } return Promise.reject(`Ошибка ${res.status}`);
         });
 }

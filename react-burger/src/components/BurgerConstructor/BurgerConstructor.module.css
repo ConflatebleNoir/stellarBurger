@@ -10,7 +10,7 @@
     align-items: center;
     gap: 10px;
     border: 1px dashed transparent;
-    transition: ease 1s;
+    transition: ease .3s;
 }
 
 .list {
