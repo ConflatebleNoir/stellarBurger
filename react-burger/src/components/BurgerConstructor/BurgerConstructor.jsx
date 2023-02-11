@@ -180,51 +180,49 @@ const BurgerConstructor = ({ onDropHandler }) => {
                 [hoverIndex, 0, elementNonBun[dragIndex]],
             ],
         }, [elementNonBun]);
-        const sortedElementsBun = [...elementTypeBun, sortedBase];
+        const sortedElementsBun = [...elementTypeBun, ...sortedBase];
         dispatch(sortIngredients([...sortedElementsBun]));
     }, [currentIngredients, dispatch]);
 
     const containerBorder = isHover ? '#801ab3' : 'transparent';
 
     return (
-        <DndProvider backend={HTML5Backend}>
-            <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
-                <div className={BurgerConstructorStyle.container__entrails} ref={ingredientsContainer} style={{ borderColor: containerBorder }}>
-                    {
-                        currentIngredients.length > 0
-                            ? <ConstructorElement
-                                type="top"
-                                isLocked={true}
-                                text={bunHighlighter(currentIngredients, '(верх)', 'Переместите сюда', 'name')}
-                                price={bunHighlighter(currentIngredients, '', '0', 'price')}
-                                thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
-                            />
-                            : <p>Переместите сюда</p>
-                    }
-                    <ul className={BurgerConstructorStyle.order__list}>
-                        {currentIngredients.map((item, itemIndex) =>
-                        (item.type !== 'bun'
-                            && <CurrentIngredient
-                                key={item.pseudoUuid}
-                                index={itemIndex}
-                                item={item}
-                                id={`${item._id}${itemIndex}`}
-                                shiftElement={shiftElement}
-                            />))}
-                    </ul>
-                    {
-                        currentIngredients.length > 0 && <ConstructorElement
-                            type="bottom"
+        <section className={BurgerConstructorStyle.container + ' ' + 'pt-25'}>
+            <div className={BurgerConstructorStyle.container__entrails} ref={ingredientsContainer} style={{ borderColor: containerBorder }}>
+                {
+                    currentIngredients.length > 0
+                        ? <ConstructorElement
+                            type="top"
                             isLocked={true}
-                            text={bunHighlighter(currentIngredients, '(низ)', 'Переместите сюда', 'name')}
+                            text={bunHighlighter(currentIngredients, '(верх)', 'Переместите сюда', 'name')}
                             price={bunHighlighter(currentIngredients, '', '0', 'price')}
                             thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
                         />
-                    }
-                </div>
-                <SummaryConstructor />
-            </section >
-        </DndProvider>
+                        : <p>Переместите сюда</p>
+                }
+                <ul className={BurgerConstructorStyle.order__list}>
+                    {currentIngredients.map((item, itemIndex) =>
+                    (item.type !== 'bun'
+                        && <CurrentIngredient
+                            key={item.pseudoUuid}
+                            index={itemIndex}
+                            item={item}
+                            id={`${item._id}${itemIndex}`}
+                            shiftElement={shiftElement}
+                        />))}
+                </ul>
+                {
+                    currentIngredients.length > 0 && <ConstructorElement
+                        type="bottom"
+                        isLocked={true}
+                        text={bunHighlighter(currentIngredients, '(низ)', 'Переместите сюда', 'name')}
+                        price={bunHighlighter(currentIngredients, '', '0', 'price')}
+                        thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
+                    />
+                }
+            </div>
+            <SummaryConstructor />
+        </section >
     );
 };
 
