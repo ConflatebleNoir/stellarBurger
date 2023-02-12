@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 import BurgerIngredientsStyles from './BurgerIngredients.module.css'
 import {
     Counter,
@@ -16,6 +15,7 @@ import {
 import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
 import { checkCoordinates } from '../../utils/checkCoordinates'
+import { numberType, stringType } from '../../utils/types'
 
 const BurgerIngredient = ({
     _id,
@@ -87,10 +87,10 @@ const BurgerIngredient = ({
 }
 
 BurgerIngredient.propTypes = {
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+    _id: stringType.isRequired,
+    name: stringType.isRequired,
+    price: numberType.isRequired,
+    image: stringType.isRequired,
 }
 
 function BurgerIngredients() {
@@ -111,7 +111,7 @@ function BurgerIngredients() {
     return (
         <section className={BurgerIngredientsStyles.container}>
             <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
-            <div style={{ display: 'flex' }}>
+            <div className={BurgerIngredientsStyles.tabs}>
                 <Tab value="bun" active={currentItem === 'bun'} onClick={handleTabClick}>
                     Булки
                 </Tab>

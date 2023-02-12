@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ModarOverlayStyles from './ModalOverlay.module.css'
+import { elementType, funcType } from '../../utils/types'
 
 const ModalOverlay = ({ children, handleModalClose }) => {
 
@@ -12,8 +12,8 @@ const ModalOverlay = ({ children, handleModalClose }) => {
 }
 
 ModalOverlay.propTypes = {
-    children: PropTypes.element.isRequired,
-    onClick: PropTypes.func,
+    children: elementType.isRequired,
+    onClick: funcType,
 }
 
 export default ModalOverlay

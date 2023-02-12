@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useRef } from 'react'
 import update from 'immutability-helper';
-import PropTypes from 'prop-types'
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
 import {
     ConstructorElement,
@@ -11,11 +10,11 @@ import {
     Box
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { DndProvider, useDrag, useDrop } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useDrag, useDrop } from 'react-dnd'
 import { removeIngredient, sortIngredients } from '../../services/actions/ingredients'
 import { getOrder } from '../../services/actions/order'
 import { switchOrderModalState } from '../../services/actions/modal'
+import { stringType, numberType, funcType, shapeType } from '../../utils/types'
 
 const CurrentIngredient = ({ item, id, index, shiftElement }) => {
     const ref = useRef(null);
@@ -101,28 +100,22 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
 }
 
 CurrentIngredient.propTypes = {
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-}
-
-CurrentIngredient.propTypes = {
-    item: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        calories: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        proteins: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
+    item: shapeType({
+        name: stringType.isRequired,
+        price: numberType.isRequired,
+        image: stringType.isRequired,
+        image_large: stringType.isRequired,
+        image_mobile: stringType.isRequired,
+        calories: numberType.isRequired,
+        carbohydrates: numberType.isRequired,
+        fat: numberType.isRequired,
+        proteins: numberType.isRequired,
+        type: stringType.isRequired,
+        _id: stringType.isRequired,
     }),
-    id: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    shiftElement: PropTypes.func.isRequired,
+    id: stringType.isRequired,
+    index: numberType.isRequired,
+    shiftElement: funcType.isRequired,
 }
 
 const SummaryConstructor = () => {
@@ -227,7 +220,7 @@ const BurgerConstructor = ({ onDropHandler }) => {
 };
 
 BurgerConstructor.propTypes = {
-    onDropHandler: PropTypes.func.isRequired,
+    onDropHandler: funcType.isRequired,
 };
 
 export default BurgerConstructor

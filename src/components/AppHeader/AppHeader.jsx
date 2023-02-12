@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
     Logo,
     BurgerIcon,
@@ -10,6 +9,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import AppHeaderStyles from './AppHeader.module.css'
+import { arrayType, elementType, stringType } from '../../utils/types';
 
 const Menu = ({ children }) => {
     return (
@@ -22,7 +22,7 @@ const Menu = ({ children }) => {
 };
 
 Menu.propTypes = {
-    children: PropTypes.array.isRequired
+    children: arrayType.isRequired
 }
 
 const MenuItem = ({ icon, text, spanClass }) => {
@@ -36,9 +36,9 @@ const MenuItem = ({ icon, text, spanClass }) => {
 };
 
 MenuItem.propTypes = {
-    icon: PropTypes.element.isRequired,
-    text: PropTypes.string.isRequired,
-    spanClass: PropTypes.string.isRequired
+    icon: elementType.isRequired,
+    text: stringType.isRequired,
+    spanClass: stringType.isRequired
 }
 
 function AppHeader() {

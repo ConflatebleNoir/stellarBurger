@@ -1,5 +1,5 @@
 import { getIngredientsData } from '../../utils/api';
-import { config, getRandom } from '../../utils/config';
+import { config } from '../../utils/config';
 
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
@@ -37,6 +37,9 @@ export function getIngredients() {
 };
 
 export const addIngredient = (newArr) => {
+  function getRandom() {
+    return Math.random();
+  };
   const updatedIngredientList = newArr.map((item) => {
     const ingredientCopy = Object.assign({}, item);
     ingredientCopy.pseudoUuid = getRandom();

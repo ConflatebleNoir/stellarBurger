@@ -1,11 +1,8 @@
+import { checkResponse } from "./utils";
+
 export const getIngredientsData = (config) => {
     return fetch(`${config.url}/ingredients`)
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка ${res.status}`);
-        });
+        .then(checkResponse)
 }
 
 export const postOrder = (config, ingredientsId) => {
@@ -20,9 +17,5 @@ export const postOrder = (config, ingredientsId) => {
         },
         body: JSON.stringify(orderData)
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            } return Promise.reject(`Ошибка ${res.status}`);
-        });
+        .then(checkResponse)
 }

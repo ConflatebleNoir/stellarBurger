@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
-import PropTypes from 'prop-types'
 import ModalStyles from './Modal.module.css';
 import { CloseIcon, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
+import { elementType, funcType, stringType } from "../../utils/types";
 
 
 const modalRoot = document.getElementById("modals");
@@ -32,20 +32,12 @@ const Modal = ({ children, handleModalClose, title = '' }) => {
             handleEscapeKey={handleModalClose}
         >
             <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
-                {title ? (
-                    <header className={ModalStyles.header__title}>
-                        <h2 className='text text_type_main-large'>{title}</h2>
-                        <button onClick={handleModalClose} className={ModalStyles.button}>
-                            <CloseIcon type="primary" onClick={handleModalClose} />
-                        </button>
-                    </header>)
-                    : (
-                        <header className={ModalStyles.header__empty}>
-                            <button onClick={handleModalClose} className={ModalStyles.button}>
-                                <CloseIcon type="primary" />
-                            </button>
-                        </header>
-                    )}
+                <header className={title ? ModalStyles.header__title : ModalStyles.header__empty}>
+                    {title ? <h2 className='text text_type_main-large'>{title}</h2> : null}
+                    <button onClick={handleModalClose} className={ModalStyles.button}>
+                        <CloseIcon type="primary" onClick={handleModalClose} />
+                    </button>
+                </header>
                 {children}
             </div>
         </ModalOverlay>
@@ -54,9 +46,9 @@ const Modal = ({ children, handleModalClose, title = '' }) => {
 }
 
 Modal.propTypes = {
-    children: PropTypes.element.isRequired,
-    handleModalClose: PropTypes.func.isRequired,
-    title: PropTypes.string,
+    children: elementType.isRequired,
+    handleModalClose: funcType.isRequired,
+    title: stringType,
 }
 
 export default Modal;
