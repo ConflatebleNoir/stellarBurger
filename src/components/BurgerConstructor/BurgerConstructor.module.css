@@ -20,14 +20,6 @@
     padding: 0;
 }
 
-.list__item {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-    cursor: grab;
-}
-
 .order__list {
     padding: 0;
     margin: 0;
@@ -55,20 +47,4 @@
 
 .order__container {
     max-height: 70vh;
-}
-
-.order__summary {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.currency__wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    column-gap: 9px;
 }
