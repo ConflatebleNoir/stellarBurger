@@ -19,3 +19,17 @@ export const postOrder = (config, ingredientsId) => {
     })
         .then(checkResponse)
 }
+
+export const postLogin = (email, password, config) => {
+    return fetch(`${config.url}/auth/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+            password,
+        }),
+    })
+        .then(checkResponse);
+}

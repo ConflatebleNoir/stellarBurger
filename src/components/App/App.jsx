@@ -1,49 +1,32 @@
-import { useEffect } from 'react'
 import AppHeader from '../AppHeader/AppHeader'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import AppStyles from './App.module.css'
 import Modal from '../Modal/Modal'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import { useDispatch, useSelector } from 'react-redux'
-import { addIngredient, getIngredients, removeModalIngredient } from '../../services/actions/ingredients.js'
+import { removeModalIngredient } from '../../services/actions/ingredients.js'
 import { switchIngredientsModalState, switchOrderModalState } from '../../services/actions/modal'
 import { removeOrder } from '../../services/actions/order'
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import Login from '../../pages/Login/Login'
+import { useLocation, Routes, Route, useNavigate } from "react-router-dom";
+import Base from '../Base/Base'
+
 
 function App() {
   const dispatch = useDispatch();
   const ingredientsReqest = useSelector(state => state.ingredientsData.ingredientsReqest);
-  const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
-  const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
   const orderData = useSelector(state => state.orderData.orderDetails);
   const isOrderModalOpen = useSelector(state => state.modalData.isOrderModalOpen);
   const isIngredientModalOpen = useSelector(state => state.modalData.isIngredientModalOpen);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const background = location.state && location.state.background;
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
 
   const handleModalClose = () => {
     isOrderModalOpen ? dispatch(switchOrderModalState(false)) : dispatch(switchIngredientsModalState(false));
     isOrderModalOpen ? dispatch(removeOrder()) : dispatch(removeModalIngredient());
   };
-
-  const handleDrop = (itemId) => {
-    const currentItem = initIngredients.find(item => item._id === itemId._id);
-    const currentBun = currentIngredients.find(item => item.type === 'bun');
-    const currentBunIndex = currentIngredients.indexOf(currentBun);
-
-    if (currentItem.type === 'bun' && currentBun) {
-      const currentItemCopy = currentIngredients.slice();
-      currentItemCopy.splice(currentBunIndex, 1, currentItem);
-      dispatch(addIngredient(currentItemCopy));
-    } else {
-      dispatch(addIngredient([...currentIngredients, currentItem]));
-    }
-  }
 
   return (
     <div className={AppStyles.container} >
@@ -51,12 +34,25 @@ function App() {
         ? <h1>Loading...</h1>
         : <>
           <AppHeader />
-          <DndProvider backend={HTML5Backend}>
-            <main className={AppStyles.main}>
-              <BurgerIngredients />
-              <BurgerConstructor onDropHandler={handleDrop} />
-            </main>
-          </DndProvider>
+          <Routes location={background || location}>
+            <Route exact path='/' element={<Base />}></Route>
+            <Route exact path='/login' element={<Login />}></Route>
+            {/* <Route exact path='/register'>
+                  <Register />
+                </Route>
+                <Route exact path='/forgot-password'>
+                  <ForgotPassword />
+                </Route>
+                <Route exact path='/reset-password'>
+                  <ResetPassword />
+                </Route>
+                <Route exact path='/profile'>
+                  <Profile />
+                </Route>
+                <Route exact path='/ingredients/:id'>
+                  <IngredientDetails />?????????
+                </Route> */}
+          </Routes>
           {isIngredientModalOpen && (
             <Modal title={'Детали ингредиента'} handleModalClose={handleModalClose}>
               <IngredientDetails />
