@@ -65,7 +65,7 @@ const Register = () => {
                     name={"password"}
                     extraClass='mt-6'
                 />
-                <Button type="primary" size="medium" extraClass='mt-6'>
+                <Button htmlType='submit' type="primary" size="medium" extraClass='mt-6'>
                     Зарегистрироваться
                 </Button>
             </form>

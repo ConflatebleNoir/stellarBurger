@@ -30,8 +30,7 @@ export const postLogin = (email, password, config) => {
             email,
             password,
         }),
-    })
-        .then(checkResponse);
+    }).then(checkResponse);
 }
 
 export const postRegister = (email, password, name, config) => {
@@ -45,8 +44,7 @@ export const postRegister = (email, password, name, config) => {
             password,
             name,
         }),
-    })
-        .then(checkResponse);
+    }).then(checkResponse);
 }
 
 export const findEmail = (email, config) => {
@@ -58,6 +56,18 @@ export const findEmail = (email, config) => {
         body: JSON.stringify({
             email,
         }),
-    })
-        .then(checkResponse);
+    }).then(checkResponse);
+}
+
+export const postNewPassword = (passValue, codeValue, config) => {
+    return fetch(`${config.url}/password-reset/reset`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            password: passValue,
+            token: codeValue,
+        }),
+    }).then(checkResponse);
 }

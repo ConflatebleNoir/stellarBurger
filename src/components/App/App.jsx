@@ -12,6 +12,7 @@ import Login from '../../pages/Login/Login'
 import Base from '../Base/Base'
 import Register from '../../pages/Register/Register'
 import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword'
+import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 
 
 function App() {
@@ -41,10 +42,8 @@ function App() {
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/forgot-password' element={<ForgotPassword />} />
-            {/* <Route exact path='/reset-password'>
-              <ResetPassword />
-            </Route>
-            <Route exact path='/profile'>
+            <Route exact path='/reset-password' element={<ResetPassword />} />
+            {/* <Route exact path='/profile'>
               <Profile />
             </Route>
             <Route exact path='/ingredients/:id'>

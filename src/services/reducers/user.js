@@ -9,6 +9,9 @@ import {
     FORGOT_PASSWORD_SUCCESS,
     FORGOT_PASSWORD_FAILED,
     FORGOT_PASSWORD_STATE,
+    RESET_PASSWORD,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAILED,
 } from '../actions/user'
 
 const defaultState = {
@@ -21,6 +24,8 @@ const defaultState = {
     forgotPasswordRequest: false,
     forgotPasswordRequestFailed: false,
     isPassForgot: false,
+    resetPasswordRequest: false,
+    resetPasswordRequestFailed: false,
 }
 
 export const userReducer = (state = defaultState, action) => {
@@ -86,12 +91,32 @@ export const userReducer = (state = defaultState, action) => {
                 ...state,
                 forgotPasswordRequest: false,
                 forgotPasswordRequestFailed: true,
-            }
+            };
         }
         case FORGOT_PASSWORD_STATE: {
             return {
                 ...state,
                 isPassForgot: action.payload,
+            };
+        }
+        case RESET_PASSWORD: {
+            return {
+                ...state,
+                resetPasswordRequest: true,
+                resetPasswordRequestFailed: false,
+            };
+        }
+        case RESET_PASSWORD_SUCCESS: {
+            return {
+                ...state,
+                resetPasswordRequest: false,
+            };
+        }
+        case RESET_PASSWORD_FAILED: {
+            return {
+                ...state,
+                resetPasswordRequest: false,
+                resetPasswordRequestFailed: true,
             }
         }
         default: {

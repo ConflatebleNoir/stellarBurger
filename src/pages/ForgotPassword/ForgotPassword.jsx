@@ -30,7 +30,7 @@ const ForgotPassword = () => {
                 <h1 className='text text_type_main-medium'>Восстановление пароля</h1>
                 <Input
                     type={"text"}
-                    placeholder={"E-mail"}
+                    placeholder={"Укажите e-mail"}
                     value={emailValue}
                     onChange={(evt) => setEmailValue(evt.target.value)}
                     name={"e-mail"}
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
                     size={"default"}
                     extraClass='mt-6'
                 />
-                <Button type="primary" size="medium" extraClass='mt-6'>
+                <Button htmlType='submit' type="primary" size="medium" extraClass='mt-6'>
                     Восстановить
                 </Button>
             </form>

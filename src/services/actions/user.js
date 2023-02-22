@@ -1,4 +1,4 @@
-import { findEmail, postLogin, postRegister } from "../../utils/api";
+import { findEmail, postLogin, postNewPassword, postRegister } from "../../utils/api";
 import { config } from "../../utils/config";
 
 export const USER_LOGIN = 'USER_LOGIN';
@@ -15,6 +15,10 @@ export const FORGOT_PASSWORD_FAILED = 'FORGOT_PASSWORD_FAILED';
 
 export const FORGOT_PASSWORD_STATE = 'FORGOT_PASSWORD_STATE';
 
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
+
 
 export const setUserLoginLoading = () => ({ type: USER_LOGIN });
 export const setUserLoginLoadingSuccess = (token) => ({ type: USER_LOGIN_SUCCESS, payload: token });
@@ -29,6 +33,11 @@ export const setForgotPasswordSuccessLoading = () => ({ type: FORGOT_PASSWORD_SU
 export const setForgotPasswordFailedLoading = () => ({ type: FORGOT_PASSWORD_FAILED });
 
 export const setForgotPasswordState = (state) => ({ type: FORGOT_PASSWORD_STATE, payload: state, })
+
+
+export const setResetPasswordLoading = () => ({ type: RESET_PASSWORD });
+export const setResetPasswordSuccessLoading = () => ({ type: RESET_PASSWORD_SUCCESS });
+export const setResetPasswordFailedLoading = () => ({ type: RESET_PASSWORD_FAILED });
 
 export const signIn = (email, pass) => {
     return function (dispatch) {
@@ -72,6 +81,21 @@ export const forgotPassword = (email) => {
             })
             .catch(error => {
                 dispatch(setForgotPasswordFailedLoading())
+                console.log(`Ошибка: ${error}`)
+            })
+    }
+}
+
+export const resetPassword = (passValue, codeValue) => {
+    return function (dispatch) {
+        dispatch(setResetPasswordLoading());
+
+        postNewPassword(passValue, codeValue, config)
+            .then(() => {
+                setResetPasswordSuccessLoading()
+            })
+            .catch(error => {
+                dispatch(setResetPasswordFailedLoading())
                 console.log(`Ошибка: ${error}`)
             })
     }
