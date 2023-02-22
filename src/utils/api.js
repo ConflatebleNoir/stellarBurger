@@ -33,3 +33,18 @@ export const postLogin = (email, password, config) => {
     })
         .then(checkResponse);
 }
+
+export const postRegister = (email, password, name, config) => {
+    return fetch(`${config.url}/auth/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email,
+            password,
+            name,
+        }),
+    })
+        .then(checkResponse);
+}

@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeModalIngredient } from '../../services/actions/ingredients.js'
 import { switchIngredientsModalState, switchOrderModalState } from '../../services/actions/modal'
 import { removeOrder } from '../../services/actions/order'
-import Login from '../../pages/Login/Login'
 import { useLocation, Routes, Route, useNavigate } from "react-router-dom";
+import Login from '../../pages/Login/Login'
 import Base from '../Base/Base'
+import Register from '../../pages/Register/Register'
 
 
 function App() {
@@ -35,23 +36,21 @@ function App() {
         : <>
           <AppHeader />
           <Routes location={background || location}>
-            <Route exact path='/' element={<Base />}></Route>
-            <Route exact path='/login' element={<Login />}></Route>
-            {/* <Route exact path='/register'>
-                  <Register />
-                </Route>
-                <Route exact path='/forgot-password'>
-                  <ForgotPassword />
-                </Route>
-                <Route exact path='/reset-password'>
-                  <ResetPassword />
-                </Route>
-                <Route exact path='/profile'>
-                  <Profile />
-                </Route>
-                <Route exact path='/ingredients/:id'>
-                  <IngredientDetails />?????????
-                </Route> */}
+            <Route exact path='/' element={<Base />} />
+            <Route exact path='/login' element={<Login />} />
+            <Route exact path='/register' element={<Register />} />
+            {/* <Route exact path='/forgot-password'>
+              <ForgotPassword />
+            </Route>
+            <Route exact path='/reset-password'>
+              <ResetPassword />
+            </Route>
+            <Route exact path='/profile'>
+              <Profile />
+            </Route>
+            <Route exact path='/ingredients/:id'>
+              <IngredientDetails />?????????
+            </Route> */}
           </Routes>
           {isIngredientModalOpen && (
             <Modal title={'Детали ингредиента'} handleModalClose={handleModalClose}>

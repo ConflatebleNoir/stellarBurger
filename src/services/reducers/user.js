@@ -2,6 +2,9 @@ import {
     USER_LOGIN,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAILED,
+    USER_REGISTRATION,
+    USER_REGISTRATION_SUCCESS,
+    USER_REGISTRATION_FAILED,
 } from '../actions/user'
 
 const defaultState = {
@@ -9,6 +12,8 @@ const defaultState = {
     accessToken: null,
     loginRequest: false,
     loginRequestFailed: false,
+    registrationRequest: false,
+    registrationRequestFailed: false,
 }
 
 export const userReducer = (state = defaultState, action) => {
@@ -33,6 +38,27 @@ export const userReducer = (state = defaultState, action) => {
                 ...state,
                 loginRequest: false,
                 loginRequestFailed: true,
+            }
+        }
+        case USER_REGISTRATION: {
+            return {
+                ...state,
+                registrationRequest: true,
+                registrationRequestFailed: false,
+            };
+        }
+        case USER_REGISTRATION_SUCCESS: {
+            return {
+                ...state,
+                registrationRequest: false,
+                accessToken: action.payload,
+            };
+        }
+        case USER_REGISTRATION_FAILED: {
+            return {
+                ...state,
+                registrationRequest: false,
+                registrationRequestFailed: false
             }
         }
         default: {

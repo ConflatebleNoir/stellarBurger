@@ -14,16 +14,16 @@ const Login = () => {
     const inputRef = useRef(null);
     const userData = useSelector((state) => state.userData.userData);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
         if (!emailValue || !passValue) {
             return;
         }
         dispatch(signIn(emailValue, passValue))
     };
 
-    const onPasswordChange = e => {
-        setPassValue(e.target.value)
+    const handlePassChange = evt => {
+        setPassValue(evt.target.value)
     }
 
     useEffect(() => {
@@ -35,8 +35,8 @@ const Login = () => {
     }, [userData, location, navigate]);
 
     return (
-        <section className={`${LoginStyles.container} mb-20`}>
-            <form onSubmit={handleSubmit} className={LoginStyles.form}>
+        <section className={`${LoginStyles.container}`}>
+            <form onSubmit={handlePassChange} className={LoginStyles.form}>
                 <h1 className='text text_type_main-medium'>Вход</h1>
                 <Input
                     type={"text"}
@@ -51,7 +51,7 @@ const Login = () => {
                     extraClass='mt-6'
                 />
                 <PasswordInput
-                    onChange={onPasswordChange}
+                    onChange={handlePassChange}
                     value={passValue}
                     name={"password"}
                     extraClass='mt-6'
