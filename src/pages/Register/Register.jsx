@@ -33,13 +33,13 @@ const Register = () => {
 
     return (
         <section className={RegisterStyles.container}>
-            <form className={RegisterStyles.form}>
-                <h1>Регистрация</h1>
+            <form onSubmit={handleSubmitForm} className={RegisterStyles.form}>
+                <h1 className='text text_type_main-medium'>Регистрация</h1>
                 <Input
                     type={"text"}
                     placeholder={"Name"}
                     value={nameValue}
-                    onChange={(e) => setNameValue(e.target.value)}
+                    onChange={(evt) => setNameValue(evt.target.value)}
                     name={"name"}
                     error={false}
                     ref={inputRef}
@@ -51,7 +51,7 @@ const Register = () => {
                     type={"text"}
                     placeholder={"E-mail"}
                     value={emailValue}
-                    onChange={(e) => setEmailValue(e.target.value)}
+                    onChange={(evt) => setEmailValue(evt.target.value)}
                     name={"e-mail"}
                     error={false}
                     ref={inputRef}

@@ -36,13 +36,13 @@ const Login = () => {
 
     return (
         <section className={`${LoginStyles.container}`}>
-            <form onSubmit={handlePassChange} className={LoginStyles.form}>
+            <form onSubmit={handleSubmit} className={LoginStyles.form}>
                 <h1 className='text text_type_main-medium'>Вход</h1>
                 <Input
                     type={"text"}
                     placeholder={"E-mail"}
                     value={emailValue}
-                    onChange={(e) => setEmailValue(e.target.value)}
+                    onChange={(evt) => setEmailValue(evt.target.value)}
                     name={"e-mail"}
                     error={false}
                     ref={inputRef}

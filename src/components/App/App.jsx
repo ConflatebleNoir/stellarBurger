@@ -11,6 +11,7 @@ import { useLocation, Routes, Route, useNavigate } from "react-router-dom";
 import Login from '../../pages/Login/Login'
 import Base from '../Base/Base'
 import Register from '../../pages/Register/Register'
+import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword'
 
 
 function App() {
@@ -39,10 +40,8 @@ function App() {
             <Route exact path='/' element={<Base />} />
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/register' element={<Register />} />
-            {/* <Route exact path='/forgot-password'>
-              <ForgotPassword />
-            </Route>
-            <Route exact path='/reset-password'>
+            <Route exact path='/forgot-password' element={<ForgotPassword />} />
+            {/* <Route exact path='/reset-password'>
               <ResetPassword />
             </Route>
             <Route exact path='/profile'>
