@@ -95,3 +95,27 @@ export const postRefreshToken = (refreshToken, config) => {
         }),
     }).then(checkResponse);
 }
+
+export const getUserData = (token, config) => {
+    return fetch(`${config.url}/auth/user`, {
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "authorization": token,
+        },
+    }).then(checkResponse);
+};
+
+export const patchUserInfo = (name, email, password, token, config) => {
+    return fetch(`${config.url}/auth/user`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "authorization": token,
+        },
+        body: JSON.stringify({
+            "name": name,
+            "email": email,
+            "password": password,
+        }),
+    }).then(checkResponse);
+};

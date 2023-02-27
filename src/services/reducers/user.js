@@ -12,6 +12,18 @@ import {
     RESET_PASSWORD,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAILED,
+    LOGOUT,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAILED,
+    REFRESH_TOKEN,
+    REFRESH_TOKEN_SUCCESS,
+    REFRESH_TOKEN_FAILED,
+    GET_USER_DATA,
+    GET_USER_DATA_SUCCESS,
+    GET_USER_DATA_FAILED,
+    PATCH_USER_DATA,
+    PATCH_USER_DATA_SUCCESS,
+    PATCH_USER_DATA_FAILED,
 } from '../actions/user'
 
 const defaultState = {
@@ -26,6 +38,14 @@ const defaultState = {
     isPassForgot: false,
     resetPasswordRequest: false,
     resetPasswordRequestFailed: false,
+    logoutRequest: false,
+    logoutRequestFailed: false,
+    refreshTokenRequest: false,
+    refreshTokenRequestFailed: false,
+    getUserDataRequest: false,
+    getUserDataRequestFailed: false,
+    patchUserDataRequest: false,
+    patchUserDataRequestFailed: false,
 }
 
 export const userReducer = (state = defaultState, action) => {
@@ -117,6 +137,91 @@ export const userReducer = (state = defaultState, action) => {
                 ...state,
                 resetPasswordRequest: false,
                 resetPasswordRequestFailed: true,
+            }
+        }
+        case LOGOUT: {
+            return {
+                ...state,
+                logoutRequest: true,
+                logoutRequestFailed: false,
+            };
+        }
+        case LOGOUT_SUCCESS: {
+            return {
+                ...state,
+                logoutRequest: false,
+                userData: null,
+                accessToken: null,
+            };
+        }
+        case LOGOUT_FAILED: {
+            return {
+                ...state,
+                logoutRequest: false,
+                logoutRequestFailed: true,
+            };
+        }
+        case REFRESH_TOKEN: {
+            return {
+                ...state,
+                refreshTokenRequest: true,
+                refreshTokenRequestFailed: false,
+            };
+        }
+        case REFRESH_TOKEN_SUCCESS: {
+            return {
+                ...state,
+                refreshTokenRequest: false,
+                accessToken: action.payload,
+            };
+        }
+        case REFRESH_TOKEN_FAILED: {
+            return {
+                ...state,
+                refreshTokenRequest: false,
+                refreshTokenRequestFailed: true,
+            };
+        }
+        case GET_USER_DATA: {
+            return {
+                ...state,
+                getUserDataRequest: true,
+                getUserDataRequestFailed: false,
+            };
+        }
+        case GET_USER_DATA_SUCCESS: {
+            return {
+                ...state,
+                getUserDataRequest: false,
+                userData: action.payload,
+            };
+        }
+        case GET_USER_DATA_FAILED: {
+            return {
+                ...state,
+                getUserDataRequest: false,
+                getUserDataRequestFailed: true,
+            }
+        }
+        case PATCH_USER_DATA: {
+            return {
+                ...state,
+                patchUserDataRequest: true,
+                patchUserDataRequestFailed: false,
+            };
+        }
+        case PATCH_USER_DATA_SUCCESS: {
+            return {
+                ...state,
+                patchUserDataRequest: false,
+                userData: action.payload,
+            };
+        }
+        case PATCH_USER_DATA_FAILED: {
+            return {
+                ...state,
+                patchUserDataRequest: false,
+                patchUserDataRequestFailed: true,
             }
         }
         default: {

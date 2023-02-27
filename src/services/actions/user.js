@@ -1,4 +1,4 @@
-import { findEmail, postLogin, postNewPassword, postRegister, postLogout, postRefreshToken } from "../../utils/api";
+import { findEmail, postLogin, postNewPassword, postRegister, postLogout, postRefreshToken, getUserData, patchUserInfo } from "../../utils/api";
 import { config } from "../../utils/config";
 
 export const USER_LOGIN = 'USER_LOGIN';
@@ -27,6 +27,14 @@ export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS';
 export const REFRESH_TOKEN_FAILED = 'REFRESH_TOKEN_FAILED';
 
+export const GET_USER_DATA = 'GET_USER_DATA';
+export const GET_USER_DATA_SUCCESS = 'GET_USER_DATA_SUCCESS';
+export const GET_USER_DATA_FAILED = 'GET_USER_DATA_FAILED';
+
+export const PATCH_USER_DATA = 'PATCH_USER_DATA';
+export const PATCH_USER_DATA_SUCCESS = 'PATCH_USER_DATA_SUCCESS';
+export const PATCH_USER_DATA_FAILED = 'PATCH_USER_DATA_FAILED';
+
 export const setUserLoginLoading = () => ({ type: USER_LOGIN });
 export const setUserLoginLoadingSuccess = (token) => ({ type: USER_LOGIN_SUCCESS, payload: token });
 export const setUserLoginLoadingFailed = () => ({ type: USER_LOGIN_FAILED });
@@ -54,6 +62,14 @@ export const setRefreshTokenLoading = () => ({ type: REFRESH_TOKEN });
 export const setRefreshTokenSuccessLoading = (token) => ({ type: REFRESH_TOKEN_SUCCESS, payload: token, });
 export const setRefreshTokenFailedLoading = () => ({ type: REFRESH_TOKEN_FAILED });
 
+export const setGetUserDataLoading = () => ({ type: GET_USER_DATA });
+export const setGetUserDataSuccessLoading = () => ({ type: GET_USER_DATA_SUCCESS, payload: userData });
+export const setGetUserDataFailedLoading = () => ({ type: GET_USER_DATA_FAILED });
+
+export const setPatchUserDataLoading = () => ({ type: PATCH_USER_DATA });
+export const setPatchUserDataSuccessLoading = () => ({ type: PATCH_USER_DATA_SUCCESS, payload: userData });
+export const setPatchUserDataFailedLoading = () => ({ type: PATCH_USER_DATA_FAILED });
+
 export const signIn = (email, pass) => {
     return function (dispatch) {
         dispatch(setUserLoginLoading())
@@ -78,7 +94,7 @@ export const signUp = (email, pass, name) => {
         postRegister(email, pass, name, config)
             .then(res => {
                 console.log(res)
-                dispatch(setUserRegistrationSuccessLoading(res))
+                dispatch(setUserRegistrationSuccessLoading(res.accessToken))
                 localStorage.setItem('refreshToken', res.refreshToken)
             })
             .catch(error => {
@@ -128,7 +144,7 @@ const refreshToken = (refreshToken) => {
             .then((res) => {
                 console.log(res)
                 localStorage.setItem('refreshToken', res.refreshToken);
-                dispatch(setRefreshTokenSuccessLoading(res.refreshToken));
+                dispatch(setRefreshTokenSuccessLoading(res.accessToken));
             })
             .catch(error => {
                 dispatch(setRefreshTokenFailedLoading());
@@ -149,6 +165,44 @@ export const logout = () => {
             })
             .catch(error => {
                 dispatch(setLogoutFailedLoading());
+                console.log(`Ошибка: ${error}`);
+            })
+    }
+};
+
+export const reachUserData = (accessToken) => {
+    return function (dispatch) {
+        dispatch(setGetUserDataLoading())
+
+        getUserData(accessToken, config)
+            .then((res) => {
+                console.log(res);
+                dispatch(setGetUserDataSuccessLoading(res.user))
+            })
+            .catch(error => {
+                dispatch(setGetUserDataFailedLoading());
+                if (error.status === '403' || error.status === '401') {
+                    dispatch(refreshToken(localStorage.getItem('refreshToken'), 'reachUserData'))
+                }
+                console.log(`Ошибка: ${error}`);
+            })
+    }
+};
+
+export const updateUserData = (name, email, password, accessToken) => {
+    return function (dispatch) {
+        dispatch(setPatchUserDataLoading())
+
+        patchUserInfo(name, email, password, accessToken, config)
+            .then((res) => {
+                console.log(res);
+                dispatch(setPatchUserDataSuccessLoading(res.user));
+            })
+            .catch(error => {
+                dispatch(setPatchUserDataFailedLoading());
+                if (error.status === '403' || error.status === '401') {
+                    dispatch(refreshToken(localStorage.getItem('refreshToken')))
+                }
                 console.log(`Ошибка: ${error}`);
             })
     }
