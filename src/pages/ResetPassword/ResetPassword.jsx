@@ -35,9 +35,9 @@ const ResetPassword = () => {
 
     useEffect(() => {
         if (userData) {
-            (location.state && location.state.previousLocation) ? navigate.push(location.state.previousLocation.pathname) : navigate.push('/');
+            (location.state && location.state.previousLocation) ? navigate(location.state.previousLocation.pathname) : navigate('/');
         } else {
-            !isPasswordForgot && navigate.push('/forgot-password');
+            !isPasswordForgot && navigate('/forgot-password');
         }
     }, [userData, isPasswordForgot, navigate, location]);
 

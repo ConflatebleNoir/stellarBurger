@@ -21,7 +21,7 @@ const ForgotPassword = () => {
         dispatch(forgotPassword(emailValue));
         dispatch(setForgotPasswordState(true));
         setEmailValue('');
-        navigate.push('/reset-password');
+        navigate('/reset-password', { replace: true });
     };
 
     return (

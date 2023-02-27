@@ -75,8 +75,9 @@ export const forgotPassword = (email) => {
     return function (dispatch) {
         dispatch(setForgotPasswordLoading());
 
-        findEmail(email)
-            .then(() => {
+        findEmail(email, config)
+            .then((res) => {
+                console.log(res)
                 setForgotPasswordSuccessLoading()
             })
             .catch(error => {
