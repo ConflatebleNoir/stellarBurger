@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileStyles from './Profile.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { logout, updateUserData } from "../../services/actions/user";
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -11,23 +12,53 @@ const Profile = () => {
     const [passValue, setPassValue] = useState('');
     const nameRef = useRef(null);
     const emailRef = useRef(null);
+    const passRef = useRef(null);
+    const userData = useSelector(state => state.userData.userData);
+    const accessToken = useSelector(state => state.userData.accessToken);
+    const [isInfoChanged, setInInfoChanged] = useState(false);
 
     const onNameInputClick = () => nameRef.current.focus();
     const onEmailInputClick = () => emailRef.current.focus();
 
     const onNameValueChange = (evt) => {
-        const value = evt.target.value;
-        setNameValue(value);
-    }
+        setNameValue(evt.target.value);
+        evt.target.value === userData.name ? setInInfoChanged(false) : setInInfoChanged(true);
+    };
 
     const onEmailValueChange = (evt) => {
-        const value = evt.target.value;
-        setEmailValue(value);
-    }
+        setEmailValue(evt.target.value);
+        evt.target.value === userData.email ? setInInfoChanged(false) : setInInfoChanged(true);
+    };
 
     const onPasswordValueChange = (evt) => {
         setPassValue(evt.target.value);
+        evt.target.value === passValue ? setInInfoChanged(false) : setInInfoChanged(true);
+    };
+
+    const cancelEdit = (evt) => {
+        evt.preventDefault();
+        setNameValue(userData.name);
+        setEmailValue(userData.email);
+        setPassValue('');
+    };
+
+    const onSubmitEdit = (evt) => {
+        evt.preventDefault();
+        dispatch(updateUserData(nameValue, emailValue, passValue, accessToken))
+    };
+
+    const onLogout = () => {
+        const updateToken = localStorage.getItem('refreshToken');
+        dispatch(logout(updateToken));
     }
+
+    useEffect(() => {
+        if (userData) {
+            setNameValue(userData.name);
+            setEmailValue(userData.email);
+            setPassValue('');
+        }
+    }, [userData]);
 
     return (
         <section className={ProfileStyles.container}>
@@ -48,6 +79,7 @@ const Profile = () => {
                     <NavLink
                         className={({ isActive }) => isActive ? `${ProfileStyles.active} text text_type_main-medium` : 'text text_type_main-medium text_color_inactive'}
                         to='/login'
+                        onClick={onLogout}
                     >
                         Выход
                     </NavLink>
@@ -57,7 +89,7 @@ const Profile = () => {
                     изменить свои персональные данные
                 </p>
             </div>
-            <form className={ProfileStyles.form}>
+            <form className={ProfileStyles.form} onSubmit={onSubmitEdit}>
                 <Input
                     type={"text"}
                     placeholder={"Имя"}
@@ -91,6 +123,23 @@ const Profile = () => {
                     name={"password"}
                     extraClass='mt-6'
                 />
+                <div className={`${ProfileStyles.buttons_wrapper} mt-4`}>
+                    <Button
+                        type="secondary"
+                        size="large"
+                        htmlType="button"
+                        onClick={cancelEdit}
+                    >
+                        Отменить
+                    </Button>
+                    <Button
+                        type="primary"
+                        size="large"
+                        htmlType="submit"
+                    >
+                        Сохранить
+                    </Button>
+                </div>
             </form>
         </section>
     )

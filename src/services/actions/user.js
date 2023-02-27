@@ -63,11 +63,11 @@ export const setRefreshTokenSuccessLoading = (token) => ({ type: REFRESH_TOKEN_S
 export const setRefreshTokenFailedLoading = () => ({ type: REFRESH_TOKEN_FAILED });
 
 export const setGetUserDataLoading = () => ({ type: GET_USER_DATA });
-export const setGetUserDataSuccessLoading = () => ({ type: GET_USER_DATA_SUCCESS, payload: userData });
+export const setGetUserDataSuccessLoading = (userData) => ({ type: GET_USER_DATA_SUCCESS, payload: userData });
 export const setGetUserDataFailedLoading = () => ({ type: GET_USER_DATA_FAILED });
 
 export const setPatchUserDataLoading = () => ({ type: PATCH_USER_DATA });
-export const setPatchUserDataSuccessLoading = () => ({ type: PATCH_USER_DATA_SUCCESS, payload: userData });
+export const setPatchUserDataSuccessLoading = (userData) => ({ type: PATCH_USER_DATA_SUCCESS, payload: userData });
 export const setPatchUserDataFailedLoading = () => ({ type: PATCH_USER_DATA_FAILED });
 
 export const signIn = (email, pass) => {
@@ -153,7 +153,7 @@ const refreshToken = (refreshToken) => {
     }
 };
 
-export const logout = () => {
+export const logout = (refreshToken) => {
     return function (dispatch) {
         dispatch(setLogoutLoading())
 
