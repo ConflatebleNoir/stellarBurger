@@ -35,7 +35,7 @@ const Login = () => {
     }, [userData, location, navigate]);
 
     return (
-        <section className={`${LoginStyles.container}`}>
+        <section className={LoginStyles.container}>
             <form onSubmit={handleSubmit} className={LoginStyles.form}>
                 <h1 className='text text_type_main-medium'>Вход</h1>
                 <Input

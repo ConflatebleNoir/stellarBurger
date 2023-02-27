@@ -9,7 +9,7 @@ const ResetPassword = () => {
     const [passValue, setPassValue] = useState('');
     const [codeValue, setCodeValue] = useState('');
     const userData = useSelector((state) => state.userData.userData);
-    const isPasswordForgot = useSelector((state) => state.userData.isPasswordForgot);
+    const isPasswordForgot = useSelector((state) => state.userData.isPassForgot);
     const inputRef = useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const ResetPassword = () => {
         setPassValue('');
         setCodeValue('');
         dispatch(setForgotPasswordState(false));
-        navigate.push('/');
+        navigate('/');
     }
 
     const handlePassChange = (evt) => {

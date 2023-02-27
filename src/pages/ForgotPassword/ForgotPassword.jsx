@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import { forgotPassword, setForgotPasswordState } from "../../services/actions/user";
 import ForgotPasswordStyles from './ForgotPassword.module.css';
 import { useDispatch } from "react-redux";
-import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const ForgotPassword = () => {
     const [emailValue, setEmailValue] = useState('');
