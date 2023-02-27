@@ -9,7 +9,7 @@ const Register = () => {
     const [emailValue, setEmailValue] = useState('');
     const [passValue, setPassValue] = useState('');
     const [nameValue, setNameValue] = useState('');
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const inputRef = useRef(null);
     const userData = useSelector((state) => state.userData.userData);
@@ -28,7 +28,7 @@ const Register = () => {
     };
 
     useEffect(() => {
-        userData && navigate.push('/')
+        userData && navigate('/')
     }, [userData, navigate]);
 
     return (

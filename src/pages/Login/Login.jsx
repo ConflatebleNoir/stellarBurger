@@ -29,8 +29,8 @@ const Login = () => {
     useEffect(() => {
         if (userData) {
             (location.state && location.state.previousLocation)
-                ? navigate.push(location.state.previousLocation.pathname)
-                : navigate.push('/');
+                ? navigate(location.state.previousLocation.pathname)
+                : navigate('/');
         };
     }, [userData, location, navigate]);
 

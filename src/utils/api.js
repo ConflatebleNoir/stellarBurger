@@ -71,3 +71,27 @@ export const postNewPassword = (passValue, codeValue, config) => {
         }),
     }).then(checkResponse);
 }
+
+export const postLogout = (refreshToken, config) => {
+    return fetch(`${config.url}/auth/logout`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "token": refreshToken
+        }),
+    }).then(checkResponse);
+}
+
+export const postRefreshToken = (refreshToken, config) => {
+    return fetch(`${config.url}/auth/token`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "token": refreshToken
+        }),
+    }).then(checkResponse);
+}

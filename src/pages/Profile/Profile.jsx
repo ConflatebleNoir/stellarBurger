@@ -26,8 +26,7 @@ const Profile = () => {
     }
 
     const onPasswordValueChange = (evt) => {
-        const value = evt.target.value;
-        setPassValue(value);
+        setPassValue(evt.target.value);
     }
 
     return (
