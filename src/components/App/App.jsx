@@ -14,6 +14,7 @@ import Register from '../../pages/Register/Register'
 import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword'
 import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 import Profile from '../../pages/Profile/Profile'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 
 function App() {
@@ -44,7 +45,11 @@ function App() {
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/forgot-password' element={<ForgotPassword />} />
             <Route exact path='/reset-password' element={<ResetPassword />} />
-            <Route exact path='/profile' element={<Profile />} />
+            <Route exact path='/profile' element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>}
+            />
             {/* <Route exact path='/ingredients/:id'>
               <IngredientDetails />?????????
             </Route> */}
