@@ -22,7 +22,6 @@ function App() {
   const ingredientsReqest = useSelector(state => state.ingredientsData.ingredientsReqest);
   const orderData = useSelector(state => state.orderData.orderDetails);
   const isOrderModalOpen = useSelector(state => state.modalData.isOrderModalOpen);
-  const isIngredientModalOpen = useSelector(state => state.modalData.isIngredientModalOpen);
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
@@ -31,6 +30,7 @@ function App() {
   const handleModalClose = () => {
     isOrderModalOpen ? dispatch(switchOrderModalState(false)) : dispatch(switchIngredientsModalState(false));
     isOrderModalOpen ? dispatch(removeOrder()) : dispatch(removeModalIngredient());
+    background && navigate(-1);
   };
 
   return (
@@ -48,16 +48,16 @@ function App() {
             <Route exact path='/profile' element={
               <ProtectedRoute>
                 <Profile />
-              </ProtectedRoute>}
-            />
-            {/* <Route exact path='/ingredients/:id'>
-              <IngredientDetails />?????????
-            </Route> */}
+              </ProtectedRoute>
+            } />
+            <Route exact path='/ingredients/:id' element={<IngredientDetails heading="Детали ингредиента" />} />
           </Routes>
-          {isIngredientModalOpen && (
-            <Modal title={'Детали ингредиента'} handleModalClose={handleModalClose}>
-              <IngredientDetails />
-            </Modal>
+          {background && (
+            <Route exact path='/ingredients/:id' children={
+              <Modal title={'Детали ингредиента'} handleModalClose={handleModalClose}>
+                <IngredientDetails />
+              </Modal>
+            } />
           )}
           {isOrderModalOpen && (
             <Modal handleModalClose={handleModalClose}>

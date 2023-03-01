@@ -12,7 +12,6 @@ const Profile = () => {
     const [passValue, setPassValue] = useState('');
     const nameRef = useRef(null);
     const emailRef = useRef(null);
-    const passRef = useRef(null);
     const userData = useSelector(state => state.userData.userData);
     const accessToken = useSelector(state => state.userData.accessToken);
     const [isInfoChanged, setInInfoChanged] = useState(false);
@@ -80,6 +79,7 @@ const Profile = () => {
                         className={({ isActive }) => isActive ? `${ProfileStyles.active} text text_type_main-medium` : 'text text_type_main-medium text_color_inactive'}
                         to='/login'
                         onClick={onLogout}
+                        replace
                     >
                         Выход
                     </NavLink>

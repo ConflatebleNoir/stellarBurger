@@ -9,6 +9,7 @@ import {
 import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
 import { numberType, stringType } from '../../utils/types'
+import { useLocation, NavLink } from 'react-router-dom'
 
 const BurgerIngredient = ({
     _id,
@@ -19,6 +20,7 @@ const BurgerIngredient = ({
     const dispatch = useDispatch();
     const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
     const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
+    const location = useLocation();
 
     const [{ isDrag }, dragRef] = useDrag({
         type: "ingredient",
@@ -66,15 +68,22 @@ const BurgerIngredient = ({
             onClick={handleModalIngredient}
             onContextMenu={handleSelectElement}
             className={`${BurgerIngredientStyles.list__item} ${isDrag && BurgerIngredientStyles.dragging}`}>
-            {ingredientCounter === 0 ? (<Counter count={0} size="default" extraClass="m-1" />) : ((<Counter count={ingredientCounter} size="default" extraClass="m-1" />))}
-            <div className={BurgerIngredientStyles.item__container}>
-                <img src={image} alt={name} />
-                <div className={BurgerIngredientStyles.currency__container + ' ' + 'pt-1 pb-1'}>
-                    <p className="text text_type_digits-default">{price}</p>
-                    <CurrencyIcon type="primary" />
+            <NavLink
+                to={{
+                    pathname: `/ingredients/${_id}`, state: { location }
+
+                }}
+                className={BurgerIngredientStyles.link}>
+                {ingredientCounter === 0 ? (<Counter count={0} size="default" extraClass="m-1" />) : ((<Counter count={ingredientCounter} size="default" extraClass="m-1" />))}
+                <div className={BurgerIngredientStyles.item__container}>
+                    <img src={image} alt={name} />
+                    <div className={BurgerIngredientStyles.currency__container + ' ' + 'pt-1 pb-1'}>
+                        <p className="text text_type_digits-default">{price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={BurgerIngredientStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
                 </div>
-                <p className={BurgerIngredientStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
-            </div>
+            </NavLink>
         </li>
     )
 }
