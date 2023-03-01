@@ -16,7 +16,6 @@ import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword'
 import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 import Profile from '../../pages/Profile/Profile'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-import { reachUserData } from '../../services/actions/user'
 import NotFound from '../../pages/NotFound/NotFound'
 
 
@@ -28,7 +27,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
-  const accessToken = useSelector(state => state.userData.accessToken);
 
 
   const handleModalClose = () => {
@@ -39,8 +37,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
-    dispatch(reachUserData(accessToken));
-  }, [dispatch, accessToken]);
+  }, [dispatch]);
 
   return (
     <div className={AppStyles.container} >

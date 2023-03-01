@@ -160,8 +160,8 @@ export const logout = (refreshToken) => {
         postLogout(refreshToken, config)
             .then((res) => {
                 console.log(res)
-                localStorage.removeItem('refreshToken');
                 dispatch(setLogoutSuccessLoading());
+                localStorage.removeItem('refreshToken');
             })
             .catch(error => {
                 dispatch(setLogoutFailedLoading());

@@ -1,4 +1,4 @@
-import { NavLink, Routes, Route } from "react-router-dom";
+import { NavLink, Routes, Route, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import ProfileStyles from './Profile.module.css';
 import { logout } from "../../services/actions/user";
@@ -7,10 +7,13 @@ import ProfileForm from "../../components/ProfileForm/ProfileForm";
 
 const Profile = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onLogout = () => {
         const updateToken = localStorage.getItem('refreshToken');
-        dispatch(logout(updateToken));
+        dispatch(logout(updateToken).then(() => {
+            navigate("/login", { replace: true });
+        }));
     }
 
     return (
@@ -30,7 +33,7 @@ const Profile = () => {
                         История заказов
                     </NavLink>
                     <NavLink
-                        className={({ isActive }) => isActive ? `${ProfileStyles.active} text text_type_main-medium` : 'text text_type_main-medium text_color_inactive'}
+                        className={'text text_type_main-medium text_color_inactive'}
                         to='/login'
                         onClick={onLogout}
                     >
