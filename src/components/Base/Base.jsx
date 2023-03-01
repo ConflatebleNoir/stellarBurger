@@ -12,9 +12,9 @@ const Base = () => {
     const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
     const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
 
-    useEffect(() => {
-        dispatch(getIngredients());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getIngredients());
+    // }, [dispatch]);
 
     const handleDrop = (itemId) => {
         const currentItem = initIngredients.find(item => item._id === itemId._id);

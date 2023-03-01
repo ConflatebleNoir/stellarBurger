@@ -48,9 +48,12 @@
     transition: ease .2s;
 }
 
+.menu__item>a:hover {
+    scale: 1.1;
+}
+
 .active {
     color: #F2F2F3;
-    transition: ease .2s;
 }
 
 .active>svg {

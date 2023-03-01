@@ -7,17 +7,25 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions/order'
 import { switchOrderModalState } from '../../services/actions/modal'
+import { useNavigate } from 'react-router-dom'
 
 const SummaryConstructor = () => {
     const dispatch = useDispatch();
     const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
+    const userData = useSelector(state => state.userData.userData);
+    const navigate = useNavigate();
 
     const summaryPrice = useMemo(() => currentIngredients.reduce((acc, cur) => cur.type === 'bun' ? acc + (cur.price * 2) : acc + cur.price, 0), [currentIngredients]);
 
     const handleOrderByClick = () => {
         const elemId = currentIngredients.map(element => element._id);
-        dispatch(getOrder(elemId));
-        dispatch(switchOrderModalState(true));
+        if (userData) {
+            dispatch(getOrder(elemId));
+            dispatch(switchOrderModalState(true));
+        } else {
+            navigate('/login')
+        }
+
     };
 
     return (

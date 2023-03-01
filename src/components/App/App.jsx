@@ -1,10 +1,11 @@
+import { useEffect } from 'react'
 import AppHeader from '../AppHeader/AppHeader'
 import AppStyles from './App.module.css'
 import Modal from '../Modal/Modal'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeModalIngredient } from '../../services/actions/ingredients.js'
+import { getIngredients, removeModalIngredient } from '../../services/actions/ingredients.js'
 import { switchIngredientsModalState, switchOrderModalState } from '../../services/actions/modal'
 import { removeOrder } from '../../services/actions/order'
 import { useLocation, Routes, Route, useNavigate } from "react-router-dom";
@@ -15,6 +16,8 @@ import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword'
 import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 import Profile from '../../pages/Profile/Profile'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import { reachUserData } from '../../services/actions/user'
+import NotFound from '../../pages/NotFound/NotFound'
 
 
 function App() {
@@ -25,6 +28,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
+  const accessToken = useSelector(state => state.userData.accessToken);
 
 
   const handleModalClose = () => {
@@ -33,32 +37,38 @@ function App() {
     background && navigate(-1);
   };
 
+  useEffect(() => {
+    dispatch(getIngredients());
+    dispatch(reachUserData(accessToken));
+  }, [dispatch, accessToken]);
+
   return (
     <div className={AppStyles.container} >
       {ingredientsReqest
         ? <h1>Loading...</h1>
         : <>
           <AppHeader />
-          <Routes location={background || location}>
+          <Routes>
             <Route exact path='/' element={<Base />} />
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/forgot-password' element={<ForgotPassword />} />
             <Route exact path='/reset-password' element={<ResetPassword />} />
-            <Route exact path='/profile' element={
+            <Route exact path='/profile/*' element={
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
             } />
+            <Route path='*' element={<NotFound />} />
             <Route exact path='/ingredients/:id' element={<IngredientDetails heading="Детали ингредиента" />} />
           </Routes>
-          {background && (
+          {/* {background && (
             <Route exact path='/ingredients/:id' children={
               <Modal title={'Детали ингредиента'} handleModalClose={handleModalClose}>
                 <IngredientDetails />
               </Modal>
             } />
-          )}
+          )} */}
           {isOrderModalOpen && (
             <Modal handleModalClose={handleModalClose}>
               {orderData ? <OrderDetails /> : <p>Loading...</p>}

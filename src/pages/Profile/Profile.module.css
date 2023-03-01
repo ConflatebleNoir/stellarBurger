@@ -33,25 +33,10 @@
     scale: 1.1;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-height: 320px;
-}
-
 .description {
     max-width: 320px;
 }
 
 .active {
     color: #fff;
-}
-
-.buttons_wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
 }
