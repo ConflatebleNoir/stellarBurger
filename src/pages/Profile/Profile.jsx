@@ -9,7 +9,7 @@ const Profile = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const onLogout = () => {
+    const onLogout = (evt) => {
         const updateToken = localStorage.getItem('refreshToken');
         dispatch(logout(updateToken).then(() => {
             navigate("/login", { replace: true });

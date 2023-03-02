@@ -26,13 +26,14 @@ function App() {
   const isOrderModalOpen = useSelector(state => state.modalData.isOrderModalOpen);
   const navigate = useNavigate();
   const location = useLocation();
-  const background = location.state && location.state.background;
+  const state = location.state;
+  console.log(state);
 
 
   const handleModalClose = () => {
     isOrderModalOpen ? dispatch(switchOrderModalState(false)) : dispatch(switchIngredientsModalState(false));
     isOrderModalOpen ? dispatch(removeOrder()) : dispatch(removeModalIngredient());
-    background && navigate(-1);
+    state && navigate(-1);
   };
 
   useEffect(() => {
@@ -45,27 +46,32 @@ function App() {
         ? <h1>Loading...</h1>
         : <>
           <AppHeader />
-          <Routes>
-            <Route exact path='/' element={<Base />} />
-            <Route exact path='/login' element={<Login />} />
-            <Route exact path='/register' element={<Register />} />
-            <Route exact path='/forgot-password' element={<ForgotPassword />} />
-            <Route exact path='/reset-password' element={<ResetPassword />} />
-            <Route exact path='/profile/*' element={
+          <Routes location={state?.background || location}>
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Base />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
+            <Route path='/profile/*' element={
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
             } />
             <Route path='*' element={<NotFound />} />
-            <Route exact path='/ingredients/:id' element={<IngredientDetails heading="Детали ингредиента" />} />
+            <Route path='/ingredients/:id' element={<IngredientDetails heading="Детали ингредиента" />} />
           </Routes>
-          {/* {background && (
-            <Route exact path='/ingredients/:id' children={
-              <Modal title={'Детали ингредиента'} handleModalClose={handleModalClose}>
-                <IngredientDetails />
-              </Modal>
-            } />
-          )} */}
+          {state?.background && (
+            <Routes>
+              <Route path='/ingredients/:id' element={
+                <Modal
+                  title={'Детали ингредиента'}
+                  handleModalClose={handleModalClose}
+                >
+                  <IngredientDetails />
+                </Modal>
+              } />
+            </Routes>
+          )}
           {isOrderModalOpen && (
             <Modal handleModalClose={handleModalClose}>
               {orderData ? <OrderDetails /> : <p>Loading...</p>}

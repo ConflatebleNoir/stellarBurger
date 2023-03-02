@@ -9,7 +9,7 @@ import {
 import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
 import { numberType, stringType } from '../../utils/types'
-import { useLocation, NavLink } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 const BurgerIngredient = ({
     _id,
@@ -68,11 +68,9 @@ const BurgerIngredient = ({
             onClick={handleModalIngredient}
             onContextMenu={handleSelectElement}
             className={`${BurgerIngredientStyles.list__item} ${isDrag && BurgerIngredientStyles.dragging}`}>
-            <NavLink
-                to={{
-                    pathname: `/ingredients/${_id}`, state: { location }
-
-                }}
+            <Link
+                to={`/ingredients/${_id}`}
+                state={{ background: location }}
                 className={BurgerIngredientStyles.link}>
                 {ingredientCounter === 0 ? (<Counter count={0} size="default" extraClass="m-1" />) : ((<Counter count={ingredientCounter} size="default" extraClass="m-1" />))}
                 <div className={BurgerIngredientStyles.item__container}>
@@ -83,7 +81,7 @@ const BurgerIngredient = ({
                     </div>
                     <p className={BurgerIngredientStyles.text__align + ' ' + "text text_type_main-default"}>{name}</p>
                 </div>
-            </NavLink>
+            </Link>
         </li>
     )
 }
