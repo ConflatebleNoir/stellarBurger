@@ -29,7 +29,6 @@ const Modal = ({ children, handleModalClose, title = '' }) => {
     return createPortal(
         <ModalOverlay
             handleModalClose={handleModalClose}
-            handleEscapeKey={handleModalClose}
         >
             <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
                 <header className={title ? ModalStyles.header__title : ModalStyles.header__empty}>

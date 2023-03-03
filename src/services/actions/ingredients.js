@@ -13,13 +13,17 @@ export const REMOVE_MODAL_INGREDIENT = 'REMOVE_MODAL_INGREDIENT';
 
 export const SORT_INGREDIENTS = 'SORT_INGREDIENTS';
 
+export const REMOVE_ORDER_LIST = 'REMOVE_ORDER_LIST';
+
+export const removeOrderList = () => ({ type: REMOVE_ORDER_LIST });
+
 export function getIngredients() {
   return function (dispatch) {
     dispatch({
       type: GET_INGREDIENTS,
     });
 
-    getIngredientsData(config)
+    getIngredientsData()
       .then((ingredientsData) => {
         if (ingredientsData) {
           dispatch({
@@ -28,7 +32,7 @@ export function getIngredients() {
           });
         }
       })
-      .catch(error => {
+      .catch(() => {
         dispatch({
           type: GET_INGREDIENTS_FAILED,
         })

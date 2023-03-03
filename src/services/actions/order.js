@@ -1,5 +1,4 @@
 import { postOrder } from '../../utils/api';
-import { config } from '../../utils/config';
 
 export const GET_ORDER_DATA = 'GET_ORDER_DATA';
 export const GET_ORDER_DATA_SUCCESS = 'GET_ORDER_DATA_SUCCESS';
@@ -28,11 +27,9 @@ export function getOrder(itemId) {
     return function (dispatch) {
         dispatch(getOrderData())
 
-        postOrder(config, itemId)
+        postOrder(itemId)
             .then(data => {
-                if (data.success) {
-                    dispatch(getOrderDataSuccess(data))
-                }
+                dispatch(getOrderDataSuccess(data))
             })
             .catch(() => dispatch(getOrderDataFailed()))
     }

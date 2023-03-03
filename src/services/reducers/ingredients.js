@@ -7,6 +7,7 @@ import {
     MODAL_INGREDIENT,
     REMOVE_MODAL_INGREDIENT,
     SORT_INGREDIENTS,
+    REMOVE_ORDER_LIST,
 } from '../actions/ingredients';
 
 const defaultState = {
@@ -68,6 +69,12 @@ export const ingredientsReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 currentIngredients: action.payload,
+            }
+        }
+        case REMOVE_ORDER_LIST: {
+            return {
+                ...state,
+                currentIngredients: [],
             }
         }
         default: {
