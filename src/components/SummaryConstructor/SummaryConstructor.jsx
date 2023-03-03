@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions/order'
 import { switchOrderModalState } from '../../services/actions/modal'
 import { useNavigate } from 'react-router-dom'
+import { removeOrderList } from '../../services/actions/ingredients'
 
 const SummaryConstructor = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const SummaryConstructor = () => {
         if (userData) {
             dispatch(getOrder(elemId));
             dispatch(switchOrderModalState(true));
+            dispatch(removeOrderList());
         } else {
             navigate('/login')
         }

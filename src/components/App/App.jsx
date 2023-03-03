@@ -27,14 +27,17 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
-  console.log(state);
 
-
-  const handleModalClose = () => {
-    isOrderModalOpen ? dispatch(switchOrderModalState(false)) : dispatch(switchIngredientsModalState(false));
-    isOrderModalOpen ? dispatch(removeOrder()) : dispatch(removeModalIngredient());
+  const handleIngredientModalClose = () => {
+    dispatch(switchIngredientsModalState(false));
+    dispatch(removeModalIngredient());
     state && navigate(-1);
-  };
+  }
+
+  const handleOrderDetailsClose = () => {
+    dispatch(switchOrderModalState(false));
+    dispatch(removeOrder());
+  }
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -65,7 +68,7 @@ function App() {
               <Route path='/ingredients/:id' element={
                 <Modal
                   title={'Детали ингредиента'}
-                  handleModalClose={handleModalClose}
+                  handleModalClose={handleIngredientModalClose}
                 >
                   <IngredientDetails />
                 </Modal>
@@ -73,7 +76,7 @@ function App() {
             </Routes>
           )}
           {isOrderModalOpen && (
-            <Modal handleModalClose={handleModalClose}>
+            <Modal handleModalClose={handleOrderDetailsClose}>
               {orderData ? <OrderDetails /> : <p>Loading...</p>}
             </Modal>
           )}

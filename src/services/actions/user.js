@@ -1,5 +1,13 @@
-import { findEmail, postLogin, postNewPassword, postRegister, postLogout, postRefreshToken, getUserData, patchUserInfo } from "../../utils/api";
-import { config } from "../../utils/config";
+import {
+    findEmail,
+    postLogin,
+    postNewPassword,
+    postRegister,
+    postLogout,
+    postRefreshToken,
+    getUserData,
+    patchUserInfo,
+} from "../../utils/api";
 
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -74,9 +82,8 @@ export const signIn = (email, pass) => {
     return function (dispatch) {
         dispatch(setUserLoginLoading())
 
-        postLogin(email, pass, config)
+        postLogin(email, pass)
             .then(res => {
-                console.log(res)
                 dispatch(setUserLoginLoadingSuccess(res))
                 localStorage.setItem('refreshToken', res.refreshToken)
             })
@@ -91,9 +98,8 @@ export const signUp = (email, pass, name) => {
     return function (dispatch) {
         dispatch(setUserRegistrationLoading())
 
-        postRegister(email, pass, name, config)
+        postRegister(email, pass, name)
             .then(res => {
-                console.log(res)
                 dispatch(setUserRegistrationSuccessLoading(res.accessToken))
                 localStorage.setItem('refreshToken', res.refreshToken)
             })
@@ -108,9 +114,8 @@ export const forgotPassword = (email) => {
     return function (dispatch) {
         dispatch(setForgotPasswordLoading());
 
-        findEmail(email, config)
-            .then((res) => {
-                console.log(res)
+        findEmail(email)
+            .then(() => {
                 setForgotPasswordSuccessLoading()
             })
             .catch(error => {
@@ -124,9 +129,8 @@ export const resetPassword = (passValue, codeValue) => {
     return function (dispatch) {
         dispatch(setResetPasswordLoading());
 
-        postNewPassword(passValue, codeValue, config)
-            .then((res) => {
-                console.log(res)
+        postNewPassword(passValue, codeValue)
+            .then(() => {
                 setResetPasswordSuccessLoading()
             })
             .catch(error => {
@@ -140,9 +144,8 @@ const refreshToken = (refreshToken) => {
     return function (dispatch) {
         dispatch(setRefreshTokenLoading())
 
-        postRefreshToken(refreshToken, config)
+        postRefreshToken(refreshToken)
             .then((res) => {
-                console.log(res)
                 localStorage.setItem('refreshToken', res.refreshToken);
                 dispatch(setRefreshTokenSuccessLoading(res.accessToken));
             })
@@ -157,9 +160,8 @@ export const logout = (refreshToken) => {
     return function (dispatch) {
         dispatch(setLogoutLoading())
 
-        postLogout(refreshToken, config)
+        postLogout(refreshToken)
             .then((res) => {
-                console.log(res)
                 dispatch(setLogoutSuccessLoading());
                 localStorage.removeItem('refreshToken');
             })
@@ -174,9 +176,8 @@ export const reachUserData = (accessToken) => {
     return function (dispatch) {
         dispatch(setGetUserDataLoading())
 
-        getUserData(accessToken, config)
+        getUserData(accessToken)
             .then((res) => {
-                console.log(res);
                 dispatch(setGetUserDataSuccessLoading(res.user))
             })
             .catch(error => {
@@ -193,9 +194,8 @@ export const updateUserData = (name, email, password, accessToken) => {
     return function (dispatch) {
         dispatch(setPatchUserDataLoading())
 
-        patchUserInfo(name, email, password, accessToken, config)
+        patchUserInfo(name, email, password, accessToken)
             .then((res) => {
-                console.log(res);
                 dispatch(setPatchUserDataSuccessLoading(res.user));
             })
             .catch(error => {
