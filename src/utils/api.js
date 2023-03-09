@@ -6,7 +6,7 @@ export const postOrder = (ingredientsId) => {
     const orderData = {
         'ingredients': ingredientsId
     }
-    request('orders', {
+    return request('orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
