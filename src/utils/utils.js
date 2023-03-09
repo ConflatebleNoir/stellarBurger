@@ -1,4 +1,4 @@
-import { config } from "./config";
+import { config } from "./config.ts";
 
 const checkResponse = (res) => {
     console.log(res)

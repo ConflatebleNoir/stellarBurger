@@ -3,15 +3,10 @@ import CurrentIngredientStyle from './CurrentIngredient.module.css'
 import {
     ConstructorElement,
     DragIcon,
-    CurrencyIcon,
-    Button,
-    Typography,
-    Box
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrag, useDrop } from 'react-dnd'
 import { removeIngredient } from '../../services/actions/ingredients'
-import { stringType, numberType, funcType, shapeType } from '../../utils/types'
 
 const CurrentIngredient = ({ item, id, index, shiftElement }) => {
     const ref = useRef(null);
@@ -96,23 +91,23 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
     )
 }
 
-CurrentIngredient.propTypes = {
-    item: shapeType({
-        name: stringType.isRequired,
-        price: numberType.isRequired,
-        image: stringType.isRequired,
-        image_large: stringType.isRequired,
-        image_mobile: stringType.isRequired,
-        calories: numberType.isRequired,
-        carbohydrates: numberType.isRequired,
-        fat: numberType.isRequired,
-        proteins: numberType.isRequired,
-        type: stringType.isRequired,
-        _id: stringType.isRequired,
-    }),
-    id: stringType.isRequired,
-    index: numberType.isRequired,
-    shiftElement: funcType.isRequired,
-}
+// CurrentIngredient.propTypes = {
+//     item: shapeType({
+//         name: stringType.isRequired,
+//         price: numberType.isRequired,
+//         image: stringType.isRequired,
+//         image_large: stringType.isRequired,
+//         image_mobile: stringType.isRequired,
+//         calories: numberType.isRequired,
+//         carbohydrates: numberType.isRequired,
+//         fat: numberType.isRequired,
+//         proteins: numberType.isRequired,
+//         type: stringType.isRequired,
+//         _id: stringType.isRequired,
+//     }),
+//     id: stringType.isRequired,
+//     index: numberType.isRequired,
+//     shiftElement: funcType.isRequired,
+// }
 
 export default CurrentIngredient

@@ -5,7 +5,6 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { sortIngredients } from '../../services/actions/ingredients'
-import { funcType } from '../../utils/types'
 import CurrentIngredient from '../CurrentIngredient/CurrentIngredient'
 import SummaryConstructor from '../SummaryConstructor/SummaryConstructor'
 
@@ -77,10 +76,6 @@ const BurgerConstructor = ({ onDropHandler }) => {
             <SummaryConstructor />
         </section >
     );
-};
-
-BurgerConstructor.propTypes = {
-    onDropHandler: funcType.isRequired,
 };
 
 export default BurgerConstructor

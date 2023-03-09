@@ -8,7 +8,6 @@ import {
 } from '../../services/actions/ingredients'
 import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
-import { numberType, stringType } from '../../utils/types'
 import { useLocation, Link } from 'react-router-dom'
 
 const BurgerIngredient = ({
@@ -84,13 +83,6 @@ const BurgerIngredient = ({
             </Link>
         </li>
     )
-}
-
-BurgerIngredient.propTypes = {
-    _id: stringType.isRequired,
-    name: stringType.isRequired,
-    price: numberType.isRequired,
-    image: stringType.isRequired,
 }
 
 export default BurgerIngredient

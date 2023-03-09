@@ -1,6 +1,5 @@
 import React from 'react'
 import ModarOverlayStyles from './ModalOverlay.module.css'
-import { elementType, funcType } from '../../utils/types'
 
 const ModalOverlay = ({ children, handleModalClose }) => {
 
@@ -9,11 +8,6 @@ const ModalOverlay = ({ children, handleModalClose }) => {
             {children}
         </div>
     )
-}
-
-ModalOverlay.propTypes = {
-    children: elementType.isRequired,
-    onClick: funcType,
 }
 
 export default ModalOverlay
