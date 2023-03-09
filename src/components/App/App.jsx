@@ -17,6 +17,7 @@ import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 import Profile from '../../pages/Profile/Profile'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import NotFound from '../../pages/NotFound/NotFound'
+import Loader from '../Loader/Loader'
 
 
 function App() {
@@ -27,7 +28,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
-  const accessToken = useSelector(state => state.userData.accessToken)
 
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));
@@ -47,7 +47,7 @@ function App() {
   return (
     <div className={AppStyles.container} >
       {ingredientsReqest
-        ? <h1>Loading...</h1>
+        ? <Loader />
         : <>
           <AppHeader />
           <Routes location={state?.background || location}>
@@ -78,7 +78,7 @@ function App() {
           )}
           {isOrderModalOpen && (
             <Modal handleModalClose={handleOrderDetailsClose}>
-              {orderData ? <OrderDetails /> : <p>Loading...</p>}
+              {orderData ? <OrderDetails /> : <Loader />}
             </Modal>
           )}
         </>
