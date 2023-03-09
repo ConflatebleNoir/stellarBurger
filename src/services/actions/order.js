@@ -1,4 +1,4 @@
-import { postOrder } from '../../utils/api';
+import { postOrder } from '../../utils/api.ts';
 import { removeOrderList } from './ingredients';
 
 export const GET_ORDER_DATA = 'GET_ORDER_DATA';
