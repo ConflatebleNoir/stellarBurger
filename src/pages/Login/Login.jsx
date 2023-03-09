@@ -20,6 +20,8 @@ const Login = () => {
             return;
         }
         dispatch(signIn(emailValue, passValue))
+        localStorage.setItem('email', emailValue);
+        localStorage.setItem('password', passValue);
     };
 
     const handlePassChange = evt => {
@@ -27,6 +29,13 @@ const Login = () => {
     }
 
     useEffect(() => {
+        const localEmail = localStorage.getItem('email');
+        const localPassword = localStorage.getItem('password');
+        if (localEmail && localPassword) {
+            setEmailValue(localEmail);
+            setPassValue(localPassword);
+            dispatch(signIn(localEmail, localPassword));
+        };
         if (userData) {
             (location.state && location.state.previousLocation)
                 ? navigate(location.state.previousLocation.pathname)

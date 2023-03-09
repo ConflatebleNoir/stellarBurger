@@ -27,6 +27,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
+  const accessToken = useSelector(state => state.userData.accessToken)
 
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));

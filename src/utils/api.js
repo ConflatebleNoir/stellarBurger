@@ -11,7 +11,7 @@ export const postOrder = (ingredientsId) => {
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify(orderData),
     })
 };
 

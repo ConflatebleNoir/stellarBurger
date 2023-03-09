@@ -11,9 +11,12 @@ const Profile = () => {
 
     const onLogout = (evt) => {
         const updateToken = localStorage.getItem('refreshToken');
-        dispatch(logout(updateToken).then(() => {
-            navigate("/login", { replace: true });
-        }));
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+        dispatch(logout(updateToken)
+            .then(() => {
+                navigate("/login", { replace: true });
+            }));
     }
 
     return (

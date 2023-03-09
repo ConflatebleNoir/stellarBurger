@@ -1,4 +1,5 @@
 import { postOrder } from '../../utils/api';
+import { removeOrderList } from './ingredients';
 
 export const GET_ORDER_DATA = 'GET_ORDER_DATA';
 export const GET_ORDER_DATA_SUCCESS = 'GET_ORDER_DATA_SUCCESS';
@@ -25,11 +26,14 @@ export const removeOrder = () => ({
 
 export function getOrder(itemId) {
     return function (dispatch) {
-        dispatch(getOrderData())
-
+        dispatch(getOrderData());
+        console.log(postOrder(itemId));
         postOrder(itemId)
             .then(data => {
                 dispatch(getOrderDataSuccess(data))
+            })
+            .then(() => {
+                dispatch(removeOrderList())
             })
             .catch(() => dispatch(getOrderDataFailed()))
     }
