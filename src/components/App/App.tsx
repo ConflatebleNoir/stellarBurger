@@ -41,6 +41,7 @@ const App: FC = () => {
   }
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(getIngredients());
   }, [dispatch]);
 

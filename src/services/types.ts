@@ -48,12 +48,17 @@ export interface IIngredientDetailsProps {
 };
 
 export interface IModalProps {
-    children: React.ReactChild | React.ReactNode,
+    children: React.ReactElement | React.ReactNode,
     handleModalClose: () => void,
     title?: string,
 };
 
 export interface IModalOverlayProp {
-    children: React.ReactChild | React.ReactNode,
+    children: React.ReactElement | React.ReactNode,
     handleModalClose: () => void,
+}
+
+export interface IProtectedRouteProps {
+    children: React.ReactElement | React.ReactNode,
+    anonymous: boolean,
 }

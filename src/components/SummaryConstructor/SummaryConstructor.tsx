@@ -21,6 +21,7 @@ const SummaryConstructor: FC = () => {
     const handleOrderByClick = () => {
         const elemId = currentIngredients.map((element: IIngredient) => element._id);
         if (userData) {
+            //@ts-ignore
             dispatch(getOrder(elemId));
             dispatch(switchOrderModalState(true));
         } else {
