@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, FC, FormEvent, ChangeEvent } from 'react';
 import LoginStyles from './Login.module.css';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -12,19 +12,20 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const inputRef = useRef(null);
-    const userData = useSelector((state) => state.userData.userData);
+    const userData = useSelector((state: Array<object> | any) => state.userData.userData);
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         if (!emailValue || !passValue) {
             return;
         }
+        //@ts-ignore
         dispatch(signIn(emailValue, passValue))
         localStorage.setItem('email', emailValue);
         localStorage.setItem('password', passValue);
     };
 
-    const handlePassChange = evt => {
+    const handlePassChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setPassValue(evt.target.value)
     }
 
@@ -34,6 +35,7 @@ const Login = () => {
         if (localEmail && localPassword) {
             setEmailValue(localEmail);
             setPassValue(localPassword);
+            //@ts-ignore
             dispatch(signIn(localEmail, localPassword));
         };
         if (userData) {

@@ -8,7 +8,7 @@ const defaultState = {
     isIngredientModalOpen: false,
 }
 
-export const modalReducer = (state = defaultState, action) => {
+export const modalReducer = (state = defaultState, action: any) => {
     switch (action.type) {
         case SWITCH_ORDER_MODAL_STATE: {
             return {
