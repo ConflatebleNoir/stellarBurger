@@ -48,7 +48,7 @@ const defaultState = {
     patchUserDataRequestFailed: false,
 }
 
-export const userReducer = (state = defaultState, action) => {
+export const userReducer = (state = defaultState, action: any) => {
     switch (action.type) {
         case USER_LOGIN: {
             return {

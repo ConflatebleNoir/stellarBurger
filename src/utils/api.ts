@@ -1,6 +1,6 @@
 import { request } from "./utils";
 
-export const getIngredientsData = () => request('ingredients', undefined);
+export const getIngredientsData = () => request('ingredients');
 
 export const postOrder = (ingredientsId: Array<string>) => {
     const orderData = {

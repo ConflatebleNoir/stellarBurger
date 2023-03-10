@@ -10,7 +10,8 @@ import {
     REMOVE_ORDER_LIST,
 } from '../actions/ingredients';
 
-const defaultState = {
+
+const defaultState: ISummaryCount = {
     ingredientsRequest: false,
     ingredientsFailed: false,
     ingredientsList: [],
@@ -18,7 +19,15 @@ const defaultState = {
     currentIngredients: [],
 }
 
-export const ingredientsReducer = (state = defaultState, action) => {
+interface ISummaryCount {
+    ingredientsRequest: boolean,
+    ingredientsFailed: boolean,
+    ingredientsList: Array<object>,
+    modalIngredient: object | null,
+    currentIngredients: Array<object>,
+}
+
+export const ingredientsReducer = (state = defaultState, action: any): ISummaryCount => {
     switch (action.type) {
         case GET_INGREDIENTS_SUCCESS: {
             return {

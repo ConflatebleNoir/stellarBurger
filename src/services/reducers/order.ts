@@ -11,7 +11,7 @@ const defaultState = {
     orderDetails: null,
 };
 
-export const orderReducer = (state = defaultState, action) => {
+export const orderReducer = (state = defaultState, action: any) => {
     switch (action.type) {
         case GET_ORDER_DATA_SUCCESS: {
             return {

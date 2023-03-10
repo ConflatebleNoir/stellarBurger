@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, FC } from 'react'
 import AppHeader from '../AppHeader/AppHeader'
 import AppStyles from './App.module.css'
 import Modal from '../Modal/Modal'
@@ -16,15 +16,15 @@ import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword'
 import ResetPassword from '../../pages/ResetPassword/ResetPassword'
 import Profile from '../../pages/Profile/Profile'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-import NotFound from '../../pages/NotFound/NotFound.tsx'
-import Loader from '../Loader/Loader.tsx'
+import NotFound from '../../pages/NotFound/NotFound'
+import Loader from '../Loader/Loader'
 
 
-function App() {
+const App: FC = () => {
   const dispatch = useDispatch();
-  const ingredientsReqest = useSelector(state => state.ingredientsData.ingredientsReqest);
-  const orderData = useSelector(state => state.orderData.orderDetails);
-  const isOrderModalOpen = useSelector(state => state.modalData.isOrderModalOpen);
+  const ingredientsReqest = useSelector((state: boolean | any) => state.ingredientsData.ingredientsReqest);
+  const orderData = useSelector((state: object | any) => state.orderData.orderDetails);
+  const isOrderModalOpen = useSelector((state: boolean | any) => state.modalData.isOrderModalOpen);
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;

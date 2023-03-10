@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, FC } from 'react'
 import CurrentIngredientStyle from './CurrentIngredient.module.css'
 import {
     ConstructorElement,
@@ -7,11 +7,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrag, useDrop } from 'react-dnd'
 import { removeIngredient } from '../../services/actions/ingredients'
+import { ICurrentIngredientProps, IIngredient } from '../../services/types'
 
-const CurrentIngredient = ({ item, id, index, shiftElement }) => {
-    const ref = useRef(null);
+const CurrentIngredient: FC<ICurrentIngredientProps> = ({ item, id, index, shiftElement }) => {
+    const ref = useRef<HTMLLIElement>(null);
     const dispatch = useDispatch();
-    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
+    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
     const { image, price, name } = item;
 
     const [{ isDrag }, drag] = useDrag({
@@ -35,7 +36,7 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
             if (!ref.current) {
                 return;
             }
-
+            // @ts-ignore
             const dragItemIndex = item.index;
             const hoverIndex = index;
 
@@ -46,6 +47,7 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
             const hoverBoundering = ref.current.getBoundingClientRect();
             const hoverCenterY = (hoverBoundering.bottom - hoverBoundering.top) / 2;
             const clientOffset = monitor.getClientOffset();
+            // @ts-ignore
             const hoverClientY = clientOffset.y - clientOffset.top;
 
             if (dragItemIndex < hoverIndex && hoverClientY < hoverCenterY) {
@@ -57,7 +59,7 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
             }
 
             shiftElement(dragItemIndex - 1, hoverIndex - 1);
-
+            // @ts-ignore
             item.index = hoverIndex;
         },
     });
@@ -66,7 +68,7 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
 
     const opacity = isDrag ? 0 : 1;
 
-    const handleRemoveElement = (element) => () => {
+    const handleRemoveElement = (element: IIngredient) => () => {
         const takenElementIndex = currentIngredients.indexOf(element);
         const currentIngredientsCopy = currentIngredients.slice();
         currentIngredientsCopy.splice(takenElementIndex, 1);
@@ -90,24 +92,5 @@ const CurrentIngredient = ({ item, id, index, shiftElement }) => {
         </li>
     )
 }
-
-// CurrentIngredient.propTypes = {
-//     item: shapeType({
-//         name: stringType.isRequired,
-//         price: numberType.isRequired,
-//         image: stringType.isRequired,
-//         image_large: stringType.isRequired,
-//         image_mobile: stringType.isRequired,
-//         calories: numberType.isRequired,
-//         carbohydrates: numberType.isRequired,
-//         fat: numberType.isRequired,
-//         proteins: numberType.isRequired,
-//         type: stringType.isRequired,
-//         _id: stringType.isRequired,
-//     }),
-//     id: stringType.isRequired,
-//     index: numberType.isRequired,
-//     shiftElement: funcType.isRequired,
-// }
 
 export default CurrentIngredient

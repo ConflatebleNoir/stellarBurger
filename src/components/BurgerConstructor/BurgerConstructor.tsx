@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, FC } from 'react'
 import update from 'immutability-helper';
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -7,15 +7,24 @@ import { useDrop } from 'react-dnd'
 import { sortIngredients } from '../../services/actions/ingredients'
 import CurrentIngredient from '../CurrentIngredient/CurrentIngredient'
 import SummaryConstructor from '../SummaryConstructor/SummaryConstructor'
+import { IBurgerConstructorProps, IIngredient, TIngredientTypes } from '../../services/types';
 
-const BurgerConstructor = ({ onDropHandler }) => {
+const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onDropHandler }) => {
     const dispatch = useDispatch();
-    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
-    const bunHighlighter = (currentIngredients, boolValueTrue, boolValueFalse, prop) => currentIngredients.find(item => item.type === 'bun') ? `${(currentIngredients.find(item => item.type === 'bun'))[prop]} ${boolValueTrue}` : boolValueFalse;
+    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
+    const bunHighlighter = (
+        currentIngredients: IIngredient[],
+        boolValueTrue: string,
+        boolValueFalse: string,
+        prop: string,
+    ) => currentIngredients.find((item: IIngredient) => item.type === 'bun')
+            // @ts-ignore
+            ? `${(currentIngredients.find((item: IIngredient) => item.type === 'bun'))[prop]} ${boolValueTrue}`
+            : boolValueFalse;
 
     const [{ isHover }, ingredientsContainer] = useDrop({
         accept: 'ingredient',
-        drop(elementId) {
+        drop(elementId: IIngredient) {
             onDropHandler(elementId);
         },
         collect: monitor => ({
@@ -23,15 +32,17 @@ const BurgerConstructor = ({ onDropHandler }) => {
         })
     });
 
-    const shiftElement = useCallback((dragIndex, hoverIndex) => {
-        const elementTypeBun = currentIngredients.filter(element => element.type === 'bun');
-        const elementNonBun = currentIngredients.filter(element => element.type !== 'bun');
+    const shiftElement = useCallback((dragIndex: number, hoverIndex: number) => {
+        const elementTypeBun = currentIngredients.filter(({ type }: TIngredientTypes) => type === 'bun');
+        const elementNonBun = currentIngredients.filter(({ type }: TIngredientTypes) => type !== 'bun');
         const sortedBase = update(elementNonBun, {
             $splice: [
                 [dragIndex, 1],
                 [hoverIndex, 0, elementNonBun[dragIndex]],
             ],
-        }, [elementNonBun]);
+        },
+
+        );
         const sortedElementsBun = [...elementTypeBun, ...sortedBase];
         dispatch(sortIngredients([...sortedElementsBun]));
     }, [currentIngredients, dispatch]);
@@ -47,13 +58,13 @@ const BurgerConstructor = ({ onDropHandler }) => {
                             type="top"
                             isLocked={true}
                             text={bunHighlighter(currentIngredients, '(верх)', 'Переместите сюда', 'name')}
-                            price={bunHighlighter(currentIngredients, '', '0', 'price')}
+                            price={+bunHighlighter(currentIngredients, '', '0', 'price')}
                             thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
                         />
                         : <p>Переместите сюда</p>
                 }
                 <ul className={BurgerConstructorStyle.order__list}>
-                    {currentIngredients.map((item, itemIndex) =>
+                    {currentIngredients.map((item: IIngredient, itemIndex: number) =>
                     (item.type !== 'bun'
                         && <CurrentIngredient
                             key={item.pseudoUuid}
@@ -68,7 +79,7 @@ const BurgerConstructor = ({ onDropHandler }) => {
                         type="bottom"
                         isLocked={true}
                         text={bunHighlighter(currentIngredients, '(низ)', 'Переместите сюда', 'name')}
-                        price={bunHighlighter(currentIngredients, '', '0', 'price')}
+                        price={+bunHighlighter(currentIngredients, '', '0', 'price')}
                         thumbnail={bunHighlighter(currentIngredients, '', '', 'image')}
                     />
                 }
