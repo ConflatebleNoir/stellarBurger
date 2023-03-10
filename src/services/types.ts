@@ -1,11 +1,11 @@
 export interface ITakeCoordinates {
     top: number,
-}
+};
 
 export interface ICheckCoordinates {
     name: string,
     value: number,
-}
+};
 
 export interface IIngredient {
     _id: string,
@@ -34,15 +34,26 @@ export interface ICurrentIngredientProps {
     id: string,
     index: number,
     shiftElement: (dragIndex: number, hoverIndex: number) => void,
-}
+};
 
 export interface IIngredientProps {
     _id: IIngredient['_id'],
     name: IIngredient['name'],
     price: IIngredient['price'],
     image: IIngredient['image'],
-}
+};
 
 export interface IIngredientDetailsProps {
     heading?: string,
+};
+
+export interface IModalProps {
+    children: React.ReactChild | React.ReactNode,
+    handleModalClose: () => void,
+    title?: string,
+};
+
+export interface IModalOverlayProp {
+    children: React.ReactChild | React.ReactNode,
+    handleModalClose: () => void,
 }
