@@ -12,3 +12,7 @@ declare module "*.svg" {
     const src: string;
     export default src;
 }
+
+// declare global {
+//     interface Window { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any; }
+// }

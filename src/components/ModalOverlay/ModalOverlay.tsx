@@ -1,8 +1,8 @@
 import ModarOverlayStyles from './ModalOverlay.module.css'
-import { FC } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { IModalOverlayProp } from '../../services/types'
 
-const ModalOverlay: FC<IModalOverlayProp> = ({ children, handleModalClose }) => {
+const ModalOverlay: FC<PropsWithChildren<IModalOverlayProp>> = ({ children, handleModalClose }) => {
 
     return (
         <div onClick={handleModalClose} className={ModarOverlayStyles.overlay}>
