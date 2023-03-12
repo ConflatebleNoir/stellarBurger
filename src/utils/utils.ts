@@ -19,7 +19,7 @@ const checkSuccess = (res: {
 export const request = (endpoint: string, options?: {
     method?: string,
     headers: HeadersInit,
-    body: any,
+    body?: BodyInit,
 }) => {
     return fetch(`${config.url}${endpoint}`, options)
         .then(checkResponse)

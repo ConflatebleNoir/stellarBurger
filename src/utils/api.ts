@@ -80,11 +80,11 @@ export const postRefreshToken = (refreshToken: string) => request('auth/token', 
 });
 
 export const getUserData = (token: string) => request('auth/user', {
-    body: undefined,
     headers: {
         "Content-Type": "application/json;charset=utf-8",
         "authorization": token,
     },
+    body: undefined,
 });
 
 export const patchUserInfo = (name: string, email: string, password: string, token: string) => request('auth/user', {
