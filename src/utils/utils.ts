@@ -1,7 +1,6 @@
-import { config } from "./config.js";
+import { config } from "./config";
 
 const checkResponse = (res: Response) => {
-    console.log(res)
     if (res.ok) {
         return res.json();
     }
@@ -11,7 +10,6 @@ const checkResponse = (res: Response) => {
 const checkSuccess = (res: {
     success: boolean,
 }) => {
-    console.log(res)
     if (res && res.success) {
         return res;
     }

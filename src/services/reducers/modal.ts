@@ -3,7 +3,12 @@ import {
     SWITCH_INGREDIENTS_MODAL_STATE,
 } from '../actions/modal';
 
-const defaultState = {
+interface IModal {
+    isOrderModalOpen: boolean,
+    isIngredientModalOpen: boolean,
+}
+
+const defaultState: IModal = {
     isOrderModalOpen: false,
     isIngredientModalOpen: false,
 }

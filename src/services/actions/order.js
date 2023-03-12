@@ -27,7 +27,6 @@ export const removeOrder = () => ({
 export function getOrder(itemId) {
     return function (dispatch) {
         dispatch(getOrderData());
-        console.log(postOrder(itemId));
         postOrder(itemId)
             .then(data => {
                 dispatch(getOrderDataSuccess(data))

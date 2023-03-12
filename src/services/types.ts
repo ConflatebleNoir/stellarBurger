@@ -59,6 +59,6 @@ export interface IModalOverlayProp {
 }
 
 export interface IProtectedRouteProps {
-    children: React.ReactElement | React.ReactNode,
-    anonymous: boolean,
+    children: React.ReactElement,
+    anonymous?: boolean,
 }

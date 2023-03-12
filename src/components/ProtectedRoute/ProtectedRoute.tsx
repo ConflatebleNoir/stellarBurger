@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useLocation, Navigate, RouteProps } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { FC } from 'react'
 import { IProtectedRouteProps } from "../../services/types";
 

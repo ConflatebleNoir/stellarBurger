@@ -5,7 +5,13 @@ import {
     REMOVE_ORDER_DATA,
 } from '../actions/order';
 
-const defaultState = {
+interface IOrder {
+    orderRequestSuccess: boolean,
+    orderRequestFailed: boolean,
+    orderDetails: Array<object> | null,
+}
+
+const defaultState: IOrder = {
     orderRequestSuccess: false,
     orderRequestFailed: false,
     orderDetails: null,
