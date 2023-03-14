@@ -1,23 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useRef } from 'react';
+import { useState, useRef, FC, FormEvent } from 'react';
 import { forgotPassword, setForgotPasswordState } from "../../services/actions/user";
 import ForgotPasswordStyles from './ForgotPassword.module.css';
 import { useDispatch } from "react-redux";
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const ForgotPassword = () => {
+const ForgotPassword: FC = () => {
     const [emailValue, setEmailValue] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const inputRef = useRef(null);
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
 
         if (!emailValue) {
             return
         }
-
+        //@ts-ignore
         dispatch(forgotPassword(emailValue));
         dispatch(setForgotPasswordState(true));
         setEmailValue('');

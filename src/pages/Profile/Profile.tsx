@@ -4,16 +4,18 @@ import ProfileStyles from './Profile.module.css';
 import { logout } from "../../services/actions/user";
 import OrderHistory from "../../components/OrderHistory/OrderHistory";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
+import { FC } from 'react'
 
-const Profile = () => {
+const Profile: FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const onLogout = (evt) => {
+    const onLogout = () => {
         const updateToken = localStorage.getItem('refreshToken');
         localStorage.removeItem('email');
         localStorage.removeItem('password');
         dispatch(logout(updateToken)
+            //@ts-ignore
             .then(() => {
                 navigate("/login", { replace: true });
             }));
@@ -49,7 +51,7 @@ const Profile = () => {
                 </p>
             </div>
             <Routes>
-                <Route exact path='' element={<ProfileForm />}
+                <Route path='' element={<ProfileForm />}
                 />
                 <Route path='orders' element={<OrderHistory />} />
             </Routes>

@@ -5,13 +5,19 @@ import {
     REMOVE_ORDER_DATA,
 } from '../actions/order';
 
-const defaultState = {
+interface IOrder {
+    orderRequestSuccess: boolean,
+    orderRequestFailed: boolean,
+    orderDetails: Array<object> | null,
+}
+
+const defaultState: IOrder = {
     orderRequestSuccess: false,
     orderRequestFailed: false,
     orderDetails: null,
 };
 
-export const orderReducer = (state = defaultState, action) => {
+export const orderReducer = (state = defaultState, action: any) => {
     switch (action.type) {
         case GET_ORDER_DATA_SUCCESS: {
             return {

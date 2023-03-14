@@ -4,8 +4,8 @@ import { compose, applyMiddleware } from 'redux';
 import { legacy_createStore as createStore } from 'redux'
 
 const composeEnhancers =
-    typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
         : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(thunk));

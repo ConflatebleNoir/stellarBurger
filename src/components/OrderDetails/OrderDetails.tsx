@@ -1,11 +1,11 @@
-import React from 'react'
 import OrderDetailsStyles from './OrderDetails.module.css'
-import { Typography } from '@ya.praktikum/react-developer-burger-ui-components'
 import doneIcon from '../../images/done.svg'
 import { useSelector } from 'react-redux';
+import { FC } from 'react'
 
-const OrderDetails = () => {
-    const orderData = useSelector(state => state.orderData.orderDetails);
+
+const OrderDetails: FC = () => {
+    const orderData = useSelector((state: Array<object> | any) => state.orderData.orderDetails);
 
     return (
         <div className={OrderDetailsStyles.container + ' ' + 'pb-15'}>

@@ -9,4 +9,4 @@ export const rootReducer = combineReducers({
     orderData: orderReducer,
     modalData: modalReducer,
     userData: userReducer,
-})
+});

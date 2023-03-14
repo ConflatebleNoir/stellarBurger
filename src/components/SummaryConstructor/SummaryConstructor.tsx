@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, FC } from 'react'
 import SummaryConstructorStyle from './SummaryConstructor.module.css'
 import {
     CurrencyIcon,
@@ -8,18 +8,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions/order'
 import { switchOrderModalState } from '../../services/actions/modal'
 import { useNavigate } from 'react-router-dom'
+import { IIngredient } from '../../services/types'
 
-const SummaryConstructor = () => {
+const SummaryConstructor: FC = () => {
     const dispatch = useDispatch();
-    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
-    const userData = useSelector(state => state.userData.userData);
+    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
+    const userData = useSelector((state: string | any) => state.userData.userData);
     const navigate = useNavigate();
 
-    const summaryPrice = useMemo(() => currentIngredients.reduce((acc, cur) => cur.type === 'bun' ? acc + (cur.price * 2) : acc + cur.price, 0), [currentIngredients]);
+    const summaryPrice = useMemo(() => currentIngredients.reduce((acc: number, cur: IIngredient) => cur.type === 'bun' ? acc + (cur.price * 2) : acc + cur.price, 0), [currentIngredients]);
 
     const handleOrderByClick = () => {
-        const elemId = currentIngredients.map(element => element._id);
+        const elemId = currentIngredients.map((element: IIngredient) => element._id);
         if (userData) {
+            //@ts-ignore
             dispatch(getOrder(elemId));
             dispatch(switchOrderModalState(true));
         } else {

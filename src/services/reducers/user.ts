@@ -26,7 +26,29 @@ import {
     PATCH_USER_DATA_FAILED,
 } from '../actions/user'
 
-const defaultState = {
+interface IUser {
+    userData: Array<object> | null,
+    accessToken: string | null,
+    loginRequest: boolean,
+    loginRequestFailed: boolean,
+    registrationRequest: boolean,
+    registrationRequestFailed: boolean,
+    forgotPasswordRequest: boolean,
+    forgotPasswordRequestFailed: boolean,
+    isPassForgot: boolean,
+    resetPasswordRequest: boolean,
+    resetPasswordRequestFailed: boolean,
+    logoutRequest: boolean,
+    logoutRequestFailed: boolean,
+    refreshTokenRequest: boolean,
+    refreshTokenRequestFailed: boolean,
+    getUserDataRequest: boolean,
+    getUserDataRequestFailed: boolean,
+    patchUserDataRequest: boolean,
+    patchUserDataRequestFailed: boolean,
+}
+
+const defaultState: IUser = {
     userData: null,
     accessToken: null,
     loginRequest: false,
@@ -48,7 +70,7 @@ const defaultState = {
     patchUserDataRequestFailed: false,
 }
 
-export const userReducer = (state = defaultState, action) => {
+export const userReducer = (state = defaultState, action: any) => {
     switch (action.type) {
         case USER_LOGIN: {
             return {
