@@ -27,7 +27,7 @@ const defaultState: IGeneralOrdersState = {
     orderData: null,
 };
 
-export const generalOrders = (state = defaultState, action: AnyAction): IGeneralOrdersState => {
+export const generalOrdersReducer = (state = defaultState, action: AnyAction): IGeneralOrdersState => {
     switch (action.type) {
         case WS_CONNECTION_SUCCESS: {
             return {
