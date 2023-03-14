@@ -1,5 +1,3 @@
-import { Action, ActionCreator } from "redux";
-import { store } from "../store";
 import { ThunkAction } from "redux-thunk";
 import {
     IAddIngredient,
@@ -49,7 +47,9 @@ import {
 import {
     IWSOrdersConnectionStart,
     IWSUserOrdersConnectionStart
-} from "../actions/ordersWebSockets";
+} from "../actions/generalOrders";
+import { store } from "../store";
+import { Action, ActionCreator } from "redux"
 
 export interface ITakeCoordinates {
     top: number,
@@ -134,9 +134,64 @@ export interface IWSActions {
     onClose: string,
     onError: string,
     onMessage: string,
-}
+};
 
-export type RootState = ReturnType<typeof store.getState>;
+export interface ISummaryCount {
+    ingredientsRequest: boolean,
+    ingredientsFailed: boolean,
+    ingredientsList: Array<object>,
+    modalIngredient: object | null,
+    currentIngredients: Array<object>,
+};
+
+export interface IModal {
+    isOrderModalOpen: boolean,
+    isIngredientModalOpen: boolean,
+};
+
+export interface IOrderState {
+    orderRequestSuccess: boolean,
+    orderRequestFailed: boolean,
+    orderDetails: Array<object> | null,
+};
+
+export interface IUserState {
+    userData: Array<object> | null,
+    accessToken: string | null,
+    loginRequest: boolean,
+    loginRequestFailed: boolean,
+    registrationRequest: boolean,
+    registrationRequestFailed: boolean,
+    forgotPasswordRequest: boolean,
+    forgotPasswordRequestFailed: boolean,
+    isPassForgot: boolean,
+    resetPasswordRequest: boolean,
+    resetPasswordRequestFailed: boolean,
+    logoutRequest: boolean,
+    logoutRequestFailed: boolean,
+    refreshTokenRequest: boolean,
+    refreshTokenRequestFailed: boolean,
+    getUserDataRequest: boolean,
+    getUserDataRequestFailed: boolean,
+    patchUserDataRequest: boolean,
+    patchUserDataRequestFailed: boolean,
+};
+
+export interface IGeneralOrdersState {
+    wsGeneralOrders: boolean,
+    wsUserOrders: boolean,
+    orders: IOrder[],
+    userOrders: IOrder[],
+    generalOrdersError?: Event,
+    userOrdersError?: Event,
+    total: number,
+    totalToday: number,
+    orderDataRequestSuccess: boolean,
+    orderDataRequestFailed: boolean,
+    orderData: IOrder | null,
+};
+
+export type RootState = ReturnType<typeof store.dispatch>;
 export type TAvailableActions =
     | IAddIngredient
     | IRemoveIngredient
@@ -177,6 +232,7 @@ export type TAvailableActions =
     | IForgotPasswordState
     | IWSOrdersConnectionStart
     | IWSUserOrdersConnectionStart;
+
 
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TAvailableActions>>

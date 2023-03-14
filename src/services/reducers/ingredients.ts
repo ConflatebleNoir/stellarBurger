@@ -9,14 +9,8 @@ import {
     SORT_INGREDIENTS,
     REMOVE_ORDER_LIST,
 } from '../actions/ingredients';
-
-interface ISummaryCount {
-    ingredientsRequest: boolean,
-    ingredientsFailed: boolean,
-    ingredientsList: Array<object>,
-    modalIngredient: object | null,
-    currentIngredients: Array<object>,
-}
+import { AnyAction } from 'redux';
+import { ISummaryCount } from '../types/types';
 
 const defaultState: ISummaryCount = {
     ingredientsRequest: false,
@@ -26,7 +20,7 @@ const defaultState: ISummaryCount = {
     currentIngredients: [],
 }
 
-export const ingredientsReducer = (state = defaultState, action: any): ISummaryCount => {
+export const ingredientsReducer = (state = defaultState, action: AnyAction): ISummaryCount => {
     switch (action.type) {
         case GET_INGREDIENTS_SUCCESS: {
             return {

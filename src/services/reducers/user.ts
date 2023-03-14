@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux';
 import {
     USER_LOGIN,
     USER_LOGIN_SUCCESS,
@@ -25,30 +26,9 @@ import {
     PATCH_USER_DATA_SUCCESS,
     PATCH_USER_DATA_FAILED,
 } from '../actions/user'
+import { IUserState } from '../types/types';
 
-interface IUser {
-    userData: Array<object> | null,
-    accessToken: string | null,
-    loginRequest: boolean,
-    loginRequestFailed: boolean,
-    registrationRequest: boolean,
-    registrationRequestFailed: boolean,
-    forgotPasswordRequest: boolean,
-    forgotPasswordRequestFailed: boolean,
-    isPassForgot: boolean,
-    resetPasswordRequest: boolean,
-    resetPasswordRequestFailed: boolean,
-    logoutRequest: boolean,
-    logoutRequestFailed: boolean,
-    refreshTokenRequest: boolean,
-    refreshTokenRequestFailed: boolean,
-    getUserDataRequest: boolean,
-    getUserDataRequestFailed: boolean,
-    patchUserDataRequest: boolean,
-    patchUserDataRequestFailed: boolean,
-}
-
-const defaultState: IUser = {
+const defaultState: IUserState = {
     userData: null,
     accessToken: null,
     loginRequest: false,
@@ -70,7 +50,7 @@ const defaultState: IUser = {
     patchUserDataRequestFailed: false,
 }
 
-export const userReducer = (state = defaultState, action: any) => {
+export const userReducer = (state = defaultState, action: AnyAction) => {
     switch (action.type) {
         case USER_LOGIN: {
             return {

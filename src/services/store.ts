@@ -13,7 +13,7 @@ import {
     WS_USER_ORDERS_CONNECTION_ERROR,
     WS_USER_ORDERS_CONNECTION_START,
     WS_USER_ORDERS_CONNECTION_SUCCESS
-} from './actions/ordersWebSockets';
+} from './actions/generalOrders';
 import { socketMiddleware } from './customMiddleware/socketMiddleware';
 import { config } from '../utils/config';
 
