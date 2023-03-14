@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux"
 import { useLocation, Navigate } from "react-router-dom";
-import PropTypes from 'prop-types'
+import { FC } from 'react'
+import { IProtectedRouteProps } from "../../services/types";
 
-const ProtectedRoute = ({ children, anonymous = false }) => {
-    const userData = useSelector(state => state.userData.userData);
+
+const ProtectedRoute: FC<IProtectedRouteProps> = ({ children, anonymous = false }) => {
+    const userData = useSelector((state: Array<object> | any) => state.userData.userData);
     const location = useLocation();
     const previousLocation = location.state?.from || '/';
 
@@ -17,8 +19,4 @@ const ProtectedRoute = ({ children, anonymous = false }) => {
     return children;
 }
 
-ProtectedRoute.propTypes = {
-    children: PropTypes.element.isRequired,
-}
-
-export default ProtectedRoute
+export default ProtectedRoute;

@@ -2,11 +2,11 @@ import { request } from "./utils";
 
 export const getIngredientsData = () => request('ingredients');
 
-export const postOrder = (ingredientsId) => {
+export const postOrder = (ingredientsId: Array<string>) => {
     const orderData = {
         'ingredients': ingredientsId
     }
-    request('orders', {
+    return request('orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -15,7 +15,7 @@ export const postOrder = (ingredientsId) => {
     })
 };
 
-export const postLogin = (email, password) => request('auth/login', {
+export const postLogin = (email: string, password: string) => request('auth/login', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const postLogin = (email, password) => request('auth/login', {
     }),
 });
 
-export const postRegister = (email, password, name) => request('auth/register', {
+export const postRegister = (email: string, password: string, name: string) => request('auth/register', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const postRegister = (email, password, name) => request('auth/register', 
     }),
 });
 
-export const findEmail = (email) => request('password-reset', {
+export const findEmail = (email: string) => request('password-reset', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const findEmail = (email) => request('password-reset', {
     }),
 });
 
-export const postNewPassword = (passValue, codeValue) => request('password-reset/reset', {
+export const postNewPassword = (passValue: string, codeValue: string) => request('password-reset/reset', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const postNewPassword = (passValue, codeValue) => request('password-reset
     }),
 });
 
-export const postLogout = (refreshToken) => request('auth/logout', {
+export const postLogout = (refreshToken: string) => request('auth/logout', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const postLogout = (refreshToken) => request('auth/logout', {
     }),
 });
 
-export const postRefreshToken = (refreshToken) => request('auth/token', {
+export const postRefreshToken = (refreshToken: string) => request('auth/token', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -79,14 +79,15 @@ export const postRefreshToken = (refreshToken) => request('auth/token', {
     }),
 });
 
-export const getUserData = (token) => request('auth/user', {
+export const getUserData = (token: string) => request('auth/user', {
     headers: {
         "Content-Type": "application/json;charset=utf-8",
         "authorization": token,
     },
+    body: undefined,
 });
 
-export const patchUserInfo = (name, email, password, token) => request('auth/user', {
+export const patchUserInfo = (name: string, email: string, password: string, token: string) => request('auth/user', {
     method: 'PATCH',
     headers: {
         "Content-Type": "application/json;charset=utf-8",

@@ -1,27 +1,27 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, FC, FormEvent, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ResetPasswordStyles from './ResetPassword.module.css';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword, setForgotPasswordState } from "../../services/actions/user";
 
-const ResetPassword = () => {
+const ResetPassword: FC = () => {
     const [passValue, setPassValue] = useState('');
     const [codeValue, setCodeValue] = useState('');
-    const userData = useSelector((state) => state.userData.userData);
-    const isPasswordForgot = useSelector((state) => state.userData.isPassForgot);
+    const userData = useSelector((state: Array<object> | any) => state.userData.userData);
+    const isPasswordForgot = useSelector((state: boolean | any) => state.userData.isPassForgot);
     const inputRef = useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const handleSubmitForm = (evt) => {
+    const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
 
         if (!passValue && !codeValue) {
             return;
         };
-
+        //@ts-ignore
         dispatch(resetPassword(passValue, codeValue));
         setPassValue('');
         setCodeValue('');
@@ -29,7 +29,7 @@ const ResetPassword = () => {
         navigate('/');
     }
 
-    const handlePassChange = (evt) => {
+    const handlePassChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setPassValue(evt.target.value);
     };
 

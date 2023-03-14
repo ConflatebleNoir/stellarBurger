@@ -1,0 +1,39 @@
+.loaderContainer {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.loaderGif {
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    border: 6px solid transparent;
+    border-top-color: white;
+    border-right-color: white;
+    border-bottom-color: white;
+    border-radius: 50%;
+    animation: loaderOut 1s linear infinite;
+}
+
+@keyframes loaderOut {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(-45deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    75% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}

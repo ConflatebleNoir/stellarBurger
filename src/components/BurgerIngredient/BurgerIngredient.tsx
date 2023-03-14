@@ -8,18 +8,19 @@ import {
 } from '../../services/actions/ingredients'
 import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
-import { numberType, stringType } from '../../utils/types'
 import { useLocation, Link } from 'react-router-dom'
+import { FC, MouseEvent } from 'react';
+import { IIngredientProps, IIngredient } from '../../services/types'
 
-const BurgerIngredient = ({
+const BurgerIngredient: FC<IIngredientProps> = ({
     _id,
     name,
     price,
     image,
 }) => {
     const dispatch = useDispatch();
-    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
-    const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
+    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
+    const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);
     const location = useLocation();
 
     const [{ isDrag }, dragRef] = useDrag({
@@ -30,10 +31,10 @@ const BurgerIngredient = ({
         })
     });
 
-    const handleSelectElement = (evt) => {
+    const handleSelectElement = (evt: MouseEvent<HTMLLIElement>) => {
         evt.preventDefault();
-        const currentItem = initIngredients.find(item => item._id === evt.currentTarget.getAttribute('id'));
-        const currentBun = currentIngredients.find(item => item.type === 'bun');
+        const currentItem = initIngredients.find((item: IIngredient) => item._id === evt.currentTarget.getAttribute('id'));
+        const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
         const indexOfBun = currentIngredients.indexOf(currentBun);
 
         if (currentItem.type === 'bun' && currentBun) {
@@ -47,16 +48,16 @@ const BurgerIngredient = ({
 
     let ingredientCounter = 0;
 
-    currentIngredients.forEach((item) => {
+    currentIngredients.forEach((item: IIngredient) => {
         item.name === name
             && (item.type === 'bun'
                 ? (ingredientCounter += 2)
                 : (ingredientCounter += 1))
     });
 
-    const handleModalIngredient = (evt) => {
+    const handleModalIngredient = (evt: MouseEvent<HTMLLIElement>) => {
         const id = evt.currentTarget.getAttribute('id');
-        const ingredinetSearch = initIngredients.find((element) => element._id === id);
+        const ingredinetSearch = initIngredients.find((element: IIngredient) => element._id === id);
         dispatch(modalIngredient(ingredinetSearch));
         dispatch(switchIngredientsModalState(true));
     }
@@ -84,13 +85,6 @@ const BurgerIngredient = ({
             </Link>
         </li>
     )
-}
-
-BurgerIngredient.propTypes = {
-    _id: stringType.isRequired,
-    name: stringType.isRequired,
-    price: numberType.isRequired,
-    image: stringType.isRequired,
 }
 
 export default BurgerIngredient

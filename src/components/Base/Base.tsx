@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { FC } from 'react'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import BaseStyles from './Base.module.css'
@@ -6,19 +6,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addIngredient, getIngredients } from '../../services/actions/ingredients.js'
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { IIngredient } from '../../services/types'
 
-const Base = () => {
+const Base: FC = () => {
     const dispatch = useDispatch();
-    const initIngredients = useSelector(state => state.ingredientsData.ingredientsList);
-    const currentIngredients = useSelector(state => state.ingredientsData.currentIngredients);
+    const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);
+    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
 
-    // useEffect(() => {
-    //     dispatch(getIngredients());
-    // }, [dispatch]);
-
-    const handleDrop = (itemId) => {
-        const currentItem = initIngredients.find(item => item._id === itemId._id);
-        const currentBun = currentIngredients.find(item => item.type === 'bun');
+    const handleDrop = (itemId: IIngredient) => {
+        const currentItem = initIngredients.find((item: IIngredient) => item._id === itemId._id);
+        const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
         const currentBunIndex = currentIngredients.indexOf(currentBun);
 
         if (currentItem.type === 'bun' && currentBun) {

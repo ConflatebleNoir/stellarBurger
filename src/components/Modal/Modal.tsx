@@ -1,19 +1,17 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, FC, PropsWithChildren } from "react";
 import { createPortal } from "react-dom";
 import ModalStyles from './Modal.module.css';
-import { CloseIcon, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
-import { elementType, funcType, stringType } from "../../utils/types";
+import { IModalProps } from "../../services/types";
 
-
-const modalRoot = document.getElementById("modals");
-
-const Modal = ({ children, handleModalClose, title = '' }) => {
+const Modal: FC<PropsWithChildren<IModalProps>> = ({ children, handleModalClose, title = '' }) => {
+    const modalRoot = document.getElementById("modals") as HTMLElement;
     const element = useMemo(() => document.createElement('div'), []);
 
     useEffect(() => {
         modalRoot.appendChild(element);
-        const handleEscapeKey = (evt) => {
+        const handleEscapeKey = (evt: { key: string }) => {
             if (evt.key === 'Escape') {
                 handleModalClose();
             };
@@ -42,12 +40,6 @@ const Modal = ({ children, handleModalClose, title = '' }) => {
         </ModalOverlay>
         , element
     );
-}
-
-Modal.propTypes = {
-    children: elementType.isRequired,
-    handleModalClose: funcType.isRequired,
-    title: stringType,
 }
 
 export default Modal;

@@ -1,4 +1,4 @@
-import { postOrder } from '../../utils/api';
+import { postOrder } from '../../utils/api.ts';
 import { removeOrderList } from './ingredients';
 
 export const GET_ORDER_DATA = 'GET_ORDER_DATA';
@@ -27,7 +27,6 @@ export const removeOrder = () => ({
 export function getOrder(itemId) {
     return function (dispatch) {
         dispatch(getOrderData());
-        console.log(postOrder(itemId));
         postOrder(itemId)
             .then(data => {
                 dispatch(getOrderDataSuccess(data))
