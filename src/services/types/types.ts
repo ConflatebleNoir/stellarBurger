@@ -15,7 +15,10 @@ import {
     IGetOrderDataSuccess,
     IRemoveOrderData,
 } from "../actions/order";
-import { ISwitchIngredientsModalState, ISwitchOrderModalState } from "../actions/modal";
+import {
+    ISwitchIngredientsModalState,
+    ISwitchOrderModalState
+} from "../actions/modal";
 import {
     IForgotPassword,
     IForgotPasswordFailed,
@@ -43,6 +46,10 @@ import {
     IUserRegistrationFailed,
     IUserRegistrationSuccess
 } from "../actions/user";
+import {
+    IWSOrdersConnectionStart,
+    IWSUserOrdersConnectionStart
+} from "../actions/ordersWebSockets";
 
 export interface ITakeCoordinates {
     top: number,
@@ -119,6 +126,14 @@ export interface IOrder {
 export interface IUser {
     email: string,
     name: string,
+};
+
+export interface IWSActions {
+    wsInitial: string,
+    onOpen: string,
+    onClose: string,
+    onError: string,
+    onMessage: string,
 }
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -159,7 +174,9 @@ export type TAvailableActions =
     | IPatchUserData
     | IPatchUserDataSuccess
     | IPatchUserDataFailed
-    | IForgotPasswordState;
+    | IForgotPasswordState
+    | IWSOrdersConnectionStart
+    | IWSUserOrdersConnectionStart;
 
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TAvailableActions>>

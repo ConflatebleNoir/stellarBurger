@@ -1,19 +1,19 @@
 import { getIngredientsData } from '../../utils/api';
 import { AppDispatch, AppThunk, IIngredient } from '../types/types';
 
-export const GET_INGREDIENTS = 'GET_INGREDIENTS';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
-export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
+export const GET_INGREDIENTS: 'GET_INGREDIENTS' = 'GET_INGREDIENTS';
+export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS';
+export const GET_INGREDIENTS_FAILED: 'GET_INGREDIENTS_FAILED' = 'GET_INGREDIENTS_FAILED';
 
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
+export const ADD_INGREDIENT: 'ADD_INGREDIENT' = 'ADD_INGREDIENT';
+export const REMOVE_INGREDIENT: 'REMOVE_INGREDIENT' = 'REMOVE_INGREDIENT';
 
-export const MODAL_INGREDIENT = 'MODAL_INGREDIENT';
-export const REMOVE_MODAL_INGREDIENT = 'REMOVE_MODAL_INGREDIENT';
+export const MODAL_INGREDIENT: 'MODAL_INGREDIENT' = 'MODAL_INGREDIENT';
+export const REMOVE_MODAL_INGREDIENT: 'REMOVE_MODAL_INGREDIENT' = 'REMOVE_MODAL_INGREDIENT';
 
-export const SORT_INGREDIENTS = 'SORT_INGREDIENTS';
+export const SORT_INGREDIENTS: 'SORT_INGREDIENTS' = 'SORT_INGREDIENTS';
 
-export const REMOVE_ORDER_LIST = 'REMOVE_ORDER_LIST';
+export const REMOVE_ORDER_LIST: 'REMOVE_ORDER_LIST' = 'REMOVE_ORDER_LIST';
 
 export interface IAddIngredient {
   readonly type: typeof ADD_INGREDIENT;
@@ -45,7 +45,7 @@ export interface IRemoveOrderList {
 export const removeOrderList = () => ({ type: REMOVE_ORDER_LIST });
 
 export const getIngredients: AppThunk = () => {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_INGREDIENTS,
     });
