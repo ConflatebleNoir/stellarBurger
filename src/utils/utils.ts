@@ -8,6 +8,7 @@ const checkResponse = (res: Response) => {
 };
 
 const checkSuccess = (res: {
+    data?: Array<object>;
     success: boolean,
 }) => {
     if (res && res.success) {

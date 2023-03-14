@@ -1,4 +1,4 @@
-import { ITakeCoordinates, ICheckCoordinates } from "../services/types";
+import { ITakeCoordinates, ICheckCoordinates } from "../services/types/types";
 
 const takeCoordinates = (element: HTMLElement | null) => {
     const container = element?.getBoundingClientRect();

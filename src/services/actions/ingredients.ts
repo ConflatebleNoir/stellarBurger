@@ -1,4 +1,5 @@
-import { getIngredientsData } from '../../utils/api.ts';
+import { getIngredientsData } from '../../utils/api';
+import { AppDispatch, AppThunk, IIngredient } from '../types/types';
 
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
@@ -14,9 +15,36 @@ export const SORT_INGREDIENTS = 'SORT_INGREDIENTS';
 
 export const REMOVE_ORDER_LIST = 'REMOVE_ORDER_LIST';
 
+export interface IAddIngredient {
+  readonly type: typeof ADD_INGREDIENT;
+  readonly payload: IIngredient[];
+};
+
+export interface IRemoveIngredient {
+  readonly type: typeof REMOVE_INGREDIENT;
+  readonly payload: IIngredient[];
+};
+
+export interface IModalIngredient {
+  readonly type: typeof MODAL_INGREDIENT;
+  readonly payload: IIngredient;
+};
+
+export interface IRemoveModalIngredient {
+  readonly type: typeof REMOVE_MODAL_INGREDIENT;
+};
+
+export interface ISortIngredients {
+  readonly type: typeof SORT_INGREDIENTS;
+};
+
+export interface IRemoveOrderList {
+  readonly type: typeof REMOVE_ORDER_LIST;
+};
+
 export const removeOrderList = () => ({ type: REMOVE_ORDER_LIST });
 
-export function getIngredients() {
+export const getIngredients: AppThunk = () => {
   return function (dispatch) {
     dispatch({
       type: GET_INGREDIENTS,
@@ -25,6 +53,7 @@ export function getIngredients() {
     getIngredientsData()
       .then((ingredientsData) => {
         if (ingredientsData) {
+          console.log(ingredientsData.data)
           dispatch({
             type: GET_INGREDIENTS_SUCCESS,
             payload: ingredientsData.data,
@@ -39,7 +68,7 @@ export function getIngredients() {
   }
 };
 
-export const addIngredient = (newArr) => {
+export const addIngredient = (newArr: IIngredient[]) => {
   function getRandom() {
     return Math.random();
   };
@@ -54,12 +83,12 @@ export const addIngredient = (newArr) => {
   };
 };
 
-export const removeIngredient = (newArr) => ({
+export const removeIngredient = (newArr: IIngredient[]) => ({
   type: REMOVE_INGREDIENT,
   payload: newArr,
 });
 
-export const modalIngredient = (selectedIngredient) => ({
+export const modalIngredient = (selectedIngredient: IIngredient) => ({
   type: MODAL_INGREDIENT,
   payload: selectedIngredient,
 });
@@ -68,7 +97,7 @@ export const removeModalIngredient = () => ({
   type: REMOVE_MODAL_INGREDIENT,
 });
 
-export const sortIngredients = (newArr) => ({
+export const sortIngredients = (newArr: IIngredient[]) => ({
   type: SORT_INGREDIENTS,
   payload: newArr,
 })

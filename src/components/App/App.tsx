@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import { useDispatch, useSelector } from 'react-redux'
-import { getIngredients, removeModalIngredient } from '../../services/actions/ingredients.js'
+import { getIngredients, removeModalIngredient } from '../../services/actions/ingredients'
 import { switchIngredientsModalState, switchOrderModalState } from '../../services/actions/modal'
 import { removeOrder } from '../../services/actions/order'
 import { useLocation, Routes, Route, useNavigate } from "react-router-dom";

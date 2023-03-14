@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrag, useDrop } from 'react-dnd'
 import { removeIngredient } from '../../services/actions/ingredients'
-import { ICurrentIngredientProps, IIngredient } from '../../services/types'
+import { ICurrentIngredientProps, IIngredient } from '../../services/types/types'
 
 const CurrentIngredient: FC<ICurrentIngredientProps> = ({ item, id, index, shiftElement }) => {
     const ref = useRef<HTMLLIElement>(null);

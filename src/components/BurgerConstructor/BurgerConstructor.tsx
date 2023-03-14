@@ -7,7 +7,7 @@ import { useDrop } from 'react-dnd'
 import { sortIngredients } from '../../services/actions/ingredients'
 import CurrentIngredient from '../CurrentIngredient/CurrentIngredient'
 import SummaryConstructor from '../SummaryConstructor/SummaryConstructor'
-import { IBurgerConstructorProps, IIngredient, TIngredientTypes } from '../../services/types';
+import { IBurgerConstructorProps, IIngredient, TIngredientTypes } from '../../services/types/types';
 
 const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onDropHandler }) => {
     const dispatch = useDispatch();

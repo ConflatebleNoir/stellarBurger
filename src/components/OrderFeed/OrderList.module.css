@@ -1,0 +1,6 @@
+.orders__wrapper {
+    max-width: 608px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

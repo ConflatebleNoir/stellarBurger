@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
 import { checkCoordinates } from '../../utils/checkCoordinates'
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient'
-import { IIngredient } from '../../services/types'
+import { IIngredient } from '../../services/types/types'
 
 const BurgerIngredients: FC = () => {
     const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);

@@ -10,7 +10,7 @@ import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
 import { useLocation, Link } from 'react-router-dom'
 import { FC, MouseEvent } from 'react';
-import { IIngredientProps, IIngredient } from '../../services/types'
+import { IIngredientProps, IIngredient } from '../../services/types/types'
 
 const BurgerIngredient: FC<IIngredientProps> = ({
     _id,

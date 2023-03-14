@@ -1,8 +1,9 @@
+import { TIngredientID } from "../services/types/types";
 import { request } from "./utils";
 
 export const getIngredientsData = () => request('ingredients');
 
-export const postOrder = (ingredientsId: Array<string>) => {
+export const postOrder = (ingredientsId: TIngredientID[], token: string) => {
     const orderData = {
         'ingredients': ingredientsId
     }
@@ -10,6 +11,7 @@ export const postOrder = (ingredientsId: Array<string>) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
+            'Authorization': token,
         },
         body: JSON.stringify(orderData),
     })

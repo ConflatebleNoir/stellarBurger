@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import ModalStyles from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
-import { IModalProps } from "../../services/types";
+import { IModalProps } from "../../services/types/types";
 
 const Modal: FC<PropsWithChildren<IModalProps>> = ({ children, handleModalClose, title = '' }) => {
     const modalRoot = document.getElementById("modals") as HTMLElement;

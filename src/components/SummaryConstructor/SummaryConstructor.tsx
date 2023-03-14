@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getOrder } from '../../services/actions/order'
 import { switchOrderModalState } from '../../services/actions/modal'
 import { useNavigate } from 'react-router-dom'
-import { IIngredient } from '../../services/types'
+import { IIngredient } from '../../services/types/types'
 
 const SummaryConstructor: FC = () => {
     const dispatch = useDispatch();

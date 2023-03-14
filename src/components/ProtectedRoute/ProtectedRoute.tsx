@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useLocation, Navigate } from "react-router-dom";
 import { FC } from 'react'
-import { IProtectedRouteProps } from "../../services/types";
+import { IProtectedRouteProps } from "../../services/types/types";
 
 
 const ProtectedRoute: FC<IProtectedRouteProps> = ({ children, anonymous = false }) => {

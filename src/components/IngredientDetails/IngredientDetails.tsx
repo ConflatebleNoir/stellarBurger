@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import IngredientDetailsStyles from './IngredientDetails.module.css'
 import { FC } from 'react';
-import { IIngredientDetailsProps, IIngredient } from '../../services/types';
+import { IIngredientDetailsProps, IIngredient } from '../../services/types/types';
 
 
 const IngredientDetails: FC<IIngredientDetailsProps> = ({ heading }) => {

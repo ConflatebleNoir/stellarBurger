@@ -3,10 +3,10 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import BaseStyles from './Base.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { addIngredient, getIngredients } from '../../services/actions/ingredients.js'
+import { addIngredient, getIngredients } from '../../services/actions/ingredients'
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { IIngredient } from '../../services/types'
+import { IIngredient } from '../../services/types/types'
 
 const Base: FC = () => {
     const dispatch = useDispatch();
