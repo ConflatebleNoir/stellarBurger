@@ -198,7 +198,7 @@ export interface IGeneralOrdersState {
     orderData: IOrder | null,
 };
 
-export type RootState = ReturnType<typeof store.dispatch>;
+export type RootState = ReturnType<typeof store.getState>;
 export type TAvailableActions =
     | IAddIngredient
     | IRemoveIngredient
