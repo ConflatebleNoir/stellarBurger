@@ -121,6 +121,8 @@ export interface IOrder {
     number: number,
     status: string,
     _id: string,
+    createdAt: string,
+    updatedAt: string,
 };
 
 export interface IUser {
@@ -148,6 +150,11 @@ export interface IModal {
     isOrderModalOpen: boolean,
     isIngredientModalOpen: boolean,
 };
+
+export interface IOrderPositionProps {
+    order: IOrder,
+    isNavigate: boolean,
+}
 
 export interface IOrderState {
     orderRequestSuccess: boolean,

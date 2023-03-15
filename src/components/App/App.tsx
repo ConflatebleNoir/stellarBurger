@@ -18,6 +18,7 @@ import Profile from '../../pages/Profile/Profile'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import NotFound from '../../pages/NotFound/NotFound'
 import Loader from '../Loader/Loader'
+import Feed from '../../pages/Feed/Feed'
 
 
 const App: FC = () => {
@@ -64,6 +65,7 @@ const App: FC = () => {
             } />
             <Route path='*' element={<NotFound />} />
             <Route path='/ingredients/:id' element={<IngredientDetails heading="Детали ингредиента" />} />
+            <Route path='/feed' element={<Feed />} />
           </Routes>
           {state?.background && (
             <Routes>

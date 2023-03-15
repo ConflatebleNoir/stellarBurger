@@ -12,15 +12,18 @@ const OrderList: FC = () => {
         <div className={OrderListStyles.orders__wrapper}>
             <h1 className={OrderListStyles.title}>Лента заказов</h1>
             <div className={OrderListStyles.list__container}>
-                {ordersList.length > 0 ? (
-                    <ul className={OrderListStyles.list}>
-                        {
-                            ordersList?.map((order: IOrder, index: number) => {
-                                <OrderPosition key={index} order={order} isNavigate={false} />
-                            })
-                        }
-                    </ul>
-                ) : (<Loader />)}
+                {ordersList.length > 0
+                    ? (
+                        <ul className={OrderListStyles.list}>
+                            {
+                                ordersList?.map((order: IOrder, index: number) => {
+                                    <OrderPosition key={index} order={order} isNavigate={false} />
+                                })
+                            }
+                        </ul>
+                    )
+                    : (<Loader />)
+                }
             </div>
         </div>
     )
