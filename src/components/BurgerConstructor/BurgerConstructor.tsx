@@ -2,16 +2,16 @@ import { useCallback, FC } from 'react'
 import update from 'immutability-helper';
 import BurgerConstructorStyle from './BurgerConstructor.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { sortIngredients } from '../../services/actions/ingredients'
 import CurrentIngredient from '../CurrentIngredient/CurrentIngredient'
 import SummaryConstructor from '../SummaryConstructor/SummaryConstructor'
 import { IBurgerConstructorProps, IIngredient, TIngredientTypes } from '../../services/types/types';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
 
 const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onDropHandler }) => {
     const dispatch = useDispatch();
-    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
+    const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
     const bunHighlighter = (
         currentIngredients: IIngredient[],
         boolValueTrue: string,

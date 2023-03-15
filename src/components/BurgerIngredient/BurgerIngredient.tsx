@@ -1,7 +1,6 @@
 
 import BurgerIngredientStyles from './BurgerIngredient.module.css'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import {
     addIngredient,
     modalIngredient,
@@ -11,6 +10,7 @@ import { useDrag } from 'react-dnd'
 import { useLocation, Link } from 'react-router-dom'
 import { FC, MouseEvent } from 'react';
 import { IIngredientProps, IIngredient } from '../../services/types/types'
+import { useDispatch, useSelector } from '../../services/hooks/hooks'
 
 const BurgerIngredient: FC<IIngredientProps> = ({
     _id,
@@ -19,8 +19,8 @@ const BurgerIngredient: FC<IIngredientProps> = ({
     image,
 }) => {
     const dispatch = useDispatch();
-    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
-    const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);
+    const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
+    const initIngredients = useSelector((state) => state.ingredientsData.ingredientsList);
     const location = useLocation();
 
     const [{ isDrag }, dragRef] = useDrag({

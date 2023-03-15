@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import IngredientDetailsStyles from './IngredientDetails.module.css'
 import { FC } from 'react';
 import { IIngredientDetailsProps, IIngredient } from '../../services/types/types';
+import { useSelector } from '../../services/hooks/hooks';
 
 
 const IngredientDetails: FC<IIngredientDetailsProps> = ({ heading }) => {
-    const ingredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList)
+    const ingredients = useSelector((state) => state.ingredientsData.ingredientsList)
     const { id } = useParams();
 
     const modalIngredient = ingredients.find((item: IIngredient) => item._id === id);

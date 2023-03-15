@@ -30,7 +30,7 @@ export const socketMiddleware = (wsUrl: string, wsAction: IWSActions): Middlewar
 
                 socket.onmessage = event => {
                     const { data } = event;
-                    const parsedData = JSON.stringify(data);
+                    const parsedData = JSON.parse(data);
                     const { success, ...restData } = parsedData;
 
                     dispatch({ type: onMessage, payload: restData });

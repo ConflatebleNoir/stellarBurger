@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, FC, FormEvent, ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ResetPasswordStyles from './ResetPassword.module.css';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword, setForgotPasswordState } from "../../services/actions/user";
+import { useDispatch, useSelector } from "../../services/hooks/hooks";
 
 const ResetPassword: FC = () => {
     const [passValue, setPassValue] = useState('');
@@ -21,7 +21,6 @@ const ResetPassword: FC = () => {
         if (!passValue && !codeValue) {
             return;
         };
-        //@ts-ignore
         dispatch(resetPassword(passValue, codeValue));
         setPassValue('');
         setCodeValue('');

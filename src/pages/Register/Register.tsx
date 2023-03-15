@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, FC, FormEvent, ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../services/actions/user";
 import RegisterStyles from './Register.module.css';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from "../../services/hooks/hooks";
 
 const Register: FC = () => {
     const [emailValue, setEmailValue] = useState('');
@@ -19,7 +19,6 @@ const Register: FC = () => {
         if (!nameValue || !passValue || !emailValue) {
             return;
         };
-        //@ts-ignore
         dispatch(signUp(emailValue, passValue, nameValue));
     }
 

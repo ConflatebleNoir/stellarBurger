@@ -1,13 +1,13 @@
 import { FC, useState, MouseEvent } from 'react'
 import BurgerIngredientsStyles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector } from 'react-redux'
 import { checkCoordinates } from '../../utils/checkCoordinates'
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient'
 import { IIngredient } from '../../services/types/types'
+import { useSelector } from '../../services/hooks/hooks'
 
 const BurgerIngredients: FC = () => {
-    const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);
+    const initIngredients = useSelector((state) => state.ingredientsData.ingredientsList);
     const [currentItem, setCurrentItem] = useState('bun');
 
     const handleTabClick = (currentItem: string) => {

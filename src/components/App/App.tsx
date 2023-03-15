@@ -4,7 +4,6 @@ import AppStyles from './App.module.css'
 import Modal from '../Modal/Modal'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import OrderDetails from '../OrderDetails/OrderDetails'
-import { useDispatch, useSelector } from 'react-redux'
 import { getIngredients, removeModalIngredient } from '../../services/actions/ingredients'
 import { switchIngredientsModalState, switchOrderModalState } from '../../services/actions/modal'
 import { removeOrder } from '../../services/actions/order'
@@ -19,13 +18,14 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import NotFound from '../../pages/NotFound/NotFound'
 import Loader from '../Loader/Loader'
 import Feed from '../../pages/Feed/Feed'
+import { useDispatch, useSelector } from '../../services/hooks/hooks'
 
 
 const App: FC = () => {
-  const dispatch = useDispatch();
-  const ingredientsReqest = useSelector((state: boolean | any) => state.ingredientsData.ingredientsReqest);
-  const orderData = useSelector((state: object | any) => state.orderData.orderDetails);
-  const isOrderModalOpen = useSelector((state: boolean | any) => state.modalData.isOrderModalOpen);
+  const dispatch = useDispatch;
+  const ingredientsReqest = useSelector((state) => state.ingredientsData.ingredientsReqest);
+  const orderData = useSelector((state) => state.orderData.orderDetails);
+  const isOrderModalOpen = useSelector((state) => state.modalData.isOrderModalOpen);
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
@@ -42,7 +42,6 @@ const App: FC = () => {
   }
 
   useEffect(() => {
-    //@ts-ignore
     dispatch(getIngredients());
   }, [dispatch]);
 
