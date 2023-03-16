@@ -50,7 +50,7 @@ const defaultState: IUserState = {
     patchUserDataRequestFailed: false,
 }
 
-export const userReducer = (state = defaultState, action: AnyAction) => {
+export const userReducer = (state = defaultState, action: AnyAction): IUserState => {
     switch (action.type) {
         case USER_LOGIN: {
             return {

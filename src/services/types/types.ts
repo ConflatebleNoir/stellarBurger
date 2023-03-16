@@ -72,8 +72,8 @@ export interface IIngredient {
     image: string,
     image_mobile: string,
     image_large: string,
-    __v: number,
     pseudoUuid: number,
+    __v: string,
 };
 
 export type TIngredientTypes = Pick<IIngredient, 'type'>;
@@ -138,32 +138,37 @@ export interface IWSActions {
     onMessage: string,
 };
 
-export interface ISummaryCount {
+export interface IIngredientsState {
     ingredientsRequest: boolean,
     ingredientsFailed: boolean,
-    ingredientsList: Array<object>,
-    modalIngredient: object | null,
-    currentIngredients: Array<object>,
+    ingredientsList: IIngredient[],
+    modalIngredient: IIngredient | null,
+    currentIngredients: IIngredient[],
 };
 
 export interface IModal {
     isOrderModalOpen: boolean,
     isIngredientModalOpen: boolean,
+    isOrderFeedModalOpen: boolean,
 };
 
 export interface IOrderPositionProps {
     order: IOrder,
     isNavigate: boolean,
+};
+
+export interface IOrderInfoFullProps {
+    isModal: boolean,
 }
 
 export interface IOrderState {
     orderRequestSuccess: boolean,
     orderRequestFailed: boolean,
-    orderDetails: Array<object> | null,
+    orderDetails: object | null,
 };
 
 export interface IUserState {
-    userData: Array<object> | null,
+    userData: object | null,
     accessToken: string | null,
     loginRequest: boolean,
     loginRequestFailed: boolean,
@@ -239,7 +244,6 @@ export type TAvailableActions =
     | IForgotPasswordState
     | IWSOrdersConnectionStart
     | IWSUserOrdersConnectionStart;
-
 
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TAvailableActions>>

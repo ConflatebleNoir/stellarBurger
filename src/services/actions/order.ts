@@ -23,7 +23,7 @@ export interface IGetOrderDataFailed {
 
 export interface IRemoveOrderData {
     readonly type: typeof REMOVE_ORDER_DATA;
-}
+};
 
 export const getOrderData = () => ({
     type: GET_ORDER_DATA,

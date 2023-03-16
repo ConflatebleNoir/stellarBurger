@@ -12,7 +12,7 @@ const Register: FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const inputRef = useRef(null);
-    const userData = useSelector((state: Array<object> | any) => state.userData.userData);
+    const userData = useSelector((state) => state.userData.userData);
 
     const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();

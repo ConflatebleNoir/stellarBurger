@@ -16,9 +16,9 @@ const OrderList: FC = () => {
                     ? (
                         <ul className={OrderListStyles.list}>
                             {
-                                ordersList?.map((order: IOrder, index: number) => {
+                                ordersList?.map((order: IOrder, index: number) => (
                                     <OrderPosition key={index} order={order} isNavigate={false} />
-                                })
+                                ))
                             }
                         </ul>
                     )

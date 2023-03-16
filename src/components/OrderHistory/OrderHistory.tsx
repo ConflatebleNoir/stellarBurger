@@ -1,8 +1,39 @@
+import { wsUserOrdersConnectionClosed, wsUserOrdersConnectionStart } from '../../services/actions/generalOrders';
+import { useDispatch, useSelector } from '../../services/hooks/hooks';
+import { IOrder } from '../../services/types/types';
+import Loader from '../Loader/Loader';
+import OrderPosition from '../OrderPosition/OrderPosition';
 import OrderHistoryStyles from './OrderHistory.module.css'
+import { FC, useEffect } from 'react';
 
-const OrderHistory = () => {
+const OrderHistory: FC = () => {
+    const userOrders = useSelector((state) => state.generalOrders.userOrders);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(wsUserOrdersConnectionStart());
+
+        return () => {
+            dispatch(wsUserOrdersConnectionClosed());
+        }
+    }, [dispatch]);
+
     return (
-        null
+        <ul className={OrderHistoryStyles.list}>
+            <li>
+                {
+                    userOrders.length > 0 ? (
+                        <>
+                            {
+                                userOrders.map((order: IOrder, index: number) => (
+                                    <OrderPosition key={index} isNavigate={true} order={order} />
+                                ))
+                            }
+                        </>
+                    ) : (<Loader />)
+                }
+            </li>
+        </ul>
     )
 }
 

@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "../../services/hooks/hooks";
 const ResetPassword: FC = () => {
     const [passValue, setPassValue] = useState('');
     const [codeValue, setCodeValue] = useState('');
-    const userData = useSelector((state: Array<object> | any) => state.userData.userData);
-    const isPasswordForgot = useSelector((state: boolean | any) => state.userData.isPassForgot);
+    const userData = useSelector((state) => state.userData.userData);
+    const isPasswordForgot = useSelector((state) => state.userData.isPassForgot);
     const inputRef = useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();

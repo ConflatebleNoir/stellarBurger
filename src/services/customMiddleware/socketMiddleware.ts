@@ -6,8 +6,8 @@ export const socketMiddleware = (wsUrl: string, wsAction: IWSActions): Middlewar
         let socket: WebSocket | null = null;
 
         return next => (action) => {
-            const { type } = action;
             const { dispatch, getState } = store;
+            const { type } = action;
             const { userData } = getState();
             const { wsInitial, onOpen, onClose, onError, onMessage } = wsAction;
 

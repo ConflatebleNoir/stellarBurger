@@ -2,7 +2,7 @@ import { FC } from 'react'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import BaseStyles from './Base.module.css'
-import { addIngredient, getIngredients } from '../../services/actions/ingredients'
+import { addIngredient } from '../../services/actions/ingredients'
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { IIngredient } from '../../services/types/types'
@@ -13,8 +13,8 @@ const Base: FC = () => {
     const initIngredients = useSelector((state) => state.ingredientsData.ingredientsList);
     const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
 
-    const handleDrop = (itemId: IIngredient) => {
-        const currentItem = initIngredients.find((item: IIngredient) => item._id === itemId._id);
+    const handleDrop = (elementId: IIngredient) => {
+        const currentItem = initIngredients.find((item: IIngredient) => item._id === elementId._id);
         const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
         const currentBunIndex = currentIngredients.indexOf(currentBun);
 

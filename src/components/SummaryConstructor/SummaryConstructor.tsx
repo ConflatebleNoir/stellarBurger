@@ -16,7 +16,12 @@ const SummaryConstructor: FC = () => {
     const userData = useSelector((state) => state.userData.userData);
     const navigate = useNavigate();
 
-    const summaryPrice = useMemo(() => currentIngredients.reduce((acc: number, cur: IIngredient) => cur.type === 'bun' ? acc + (cur.price * 2) : acc + cur.price, 0), [currentIngredients]);
+    const summaryPrice = useMemo(
+        () => currentIngredients.reduce(
+            (acc: number, cur: IIngredient) =>
+                cur.type === 'bun'
+                    ? acc + (cur.price * 2)
+                    : acc + cur.price, 0), [currentIngredients]);
 
     const handleOrderByClick = () => {
         const elemId = currentIngredients.map((element: IIngredient) => element._id);

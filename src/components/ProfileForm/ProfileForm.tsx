@@ -20,12 +20,18 @@ const ProfileForm: FC = () => {
 
     const onNameValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setNameValue(evt.target.value);
-        evt.target.value === userData.name ? setInInfoChanged(false) : setInInfoChanged(true);
+        //@ts-ignore
+        evt.target.value === userData.name
+            ? setInInfoChanged(false)
+            : setInInfoChanged(true);
     };
 
     const onEmailValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setEmailValue(evt.target.value);
-        evt.target.value === userData.email ? setInInfoChanged(false) : setInInfoChanged(true);
+        //@ts-ignore
+        evt.target.value === userData.email
+            ? setInInfoChanged(false)
+            : setInInfoChanged(true);
     };
 
     const onPasswordValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +40,9 @@ const ProfileForm: FC = () => {
     };
 
     const cancelEdit = () => {
+        //@ts-ignore
         setNameValue(userData.name);
+        //@ts-ignore
         setEmailValue(userData.email);
         setPassValue('');
     };
@@ -46,7 +54,9 @@ const ProfileForm: FC = () => {
 
     useEffect(() => {
         if (userData) {
+            //@ts-ignore
             setNameValue(userData.name);
+            //@ts-ignore
             setEmailValue(userData.email);
             setPassValue('');
         }

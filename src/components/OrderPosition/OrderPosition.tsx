@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { IIngredient, IOrderPositionProps } from '../../services/types/types';
 import { useSelector } from '../../services/hooks/hooks';
 
-const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate }) => {
+const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) => {
     const ingredientsList = useSelector(state => state.ingredientsData.ingredientsList);
     const location = useLocation();
     const { ingredients, status, name, number, createdAt } = order;
@@ -59,7 +59,7 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate }) => {
                     <ul className={OrderPositionStyles.order_ingredients}>
                         {
                             ingredients.map((item, index) => {
-                                // const extractedIngredient = extractIngredient(item, ingredientsList);
+                                const extractedIngredient = extractIngredient(item, ingredientsList);
                                 if (index < 5) {
                                     return (
                                         <li key={index} className={OrderPositionStyles.order_ingredients_item}>

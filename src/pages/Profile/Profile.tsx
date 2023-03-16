@@ -51,9 +51,9 @@ const Profile: FC = () => {
                 </p>
             </div>
             <Routes>
-                <Route path='' element={<ProfileForm />}
+                <Route path='/' element={<ProfileForm />}
                 />
-                <Route path='orders' element={<OrderHistory />} />
+                <Route path='/orders' element={<OrderHistory />} />
             </Routes>
         </section>
     )

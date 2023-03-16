@@ -55,6 +55,7 @@ export interface IUserLoginSuccess {
 
 export interface IUserLoginFailed {
     readonly type: typeof USER_LOGIN_FAILED;
+    payload: string;
 };
 
 export interface IUserRegistration {
@@ -68,7 +69,6 @@ export interface IUserRegistrationSuccess {
 
 export interface IUserRegistrationFailed {
     readonly type: typeof USER_REGISTRATION_FAILED;
-    payload: string;
 };
 
 export interface IForgotPassword {
@@ -113,6 +113,7 @@ export interface IRefreshToken {
 
 export interface IRefreshTokenSuccess {
     readonly type: typeof REFRESH_TOKEN_SUCCESS;
+    payload: string;
 };
 
 export interface IRefreshTokenFailed {
@@ -192,7 +193,7 @@ export const signIn: AppThunk = (email: string, pass: string) => {
             .then(res => {
                 //@ts-ignore
                 dispatch(setUserLoginLoadingSuccess(res))
-                //@ts-ignore
+                // @ts-ignore
                 localStorage.setItem('refreshToken', res.refreshToken)
             })
             .catch(error => {
@@ -296,6 +297,7 @@ export const reachUserData: AppThunk = (accessToken) => {
             .catch(error => {
                 dispatch(setGetUserDataFailedLoading());
                 if (error.status === '403' || error.status === '401') {
+                    //@ts-ignore
                     dispatch(refreshToken(localStorage.getItem('refreshToken'), 'reachUserData'))
                 }
                 console.log(`Ошибка: ${error}`);
@@ -309,12 +311,13 @@ export const updateUserData: AppThunk = (name: string, email: string, password: 
 
         patchUserInfo(name, email, password, accessToken)
             .then((res) => {
-                //@ts-ignore
+                // @ts-ignore
                 dispatch(setPatchUserDataSuccessLoading(res.user));
             })
             .catch(error => {
                 dispatch(setPatchUserDataFailedLoading());
                 if (error.status === '403' || error.status === '401') {
+                    //@ts-ignore
                     dispatch(refreshToken(localStorage.getItem('refreshToken')))
                 }
                 console.log(`Ошибка: ${error}`);

@@ -64,7 +64,7 @@ export const getOrderData: AppThunk = (orderNum: number) => {
 
         getOrderInfo(orderNum)
             .then(data => {
-                //@ts-ignore
+                // @ts-ignore
                 dispatch(setOrderDataSuccessLoading(data.orders[0]));
             })
             .catch(() => dispatch(setOrderDataFailedLoading()))

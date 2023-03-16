@@ -36,6 +36,7 @@ export interface IRemoveModalIngredient {
 
 export interface ISortIngredients {
   readonly type: typeof SORT_INGREDIENTS;
+  readonly payload: IIngredient[];
 };
 
 export interface IRemoveOrderList {

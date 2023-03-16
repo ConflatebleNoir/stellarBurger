@@ -14,7 +14,7 @@ const defaultState: IOrderState = {
     orderDetails: null,
 };
 
-export const orderReducer = (state = defaultState, action: AnyAction) => {
+export const orderReducer = (state = defaultState, action: AnyAction): IOrderState => {
     switch (action.type) {
         case GET_ORDER_DATA_SUCCESS: {
             return {
