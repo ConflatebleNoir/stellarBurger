@@ -57,7 +57,7 @@ export const OrdersInformation: FC = () => {
                                                 {
                                                     ordersList?.map((order: IOrder, index: number) => {
                                                         if (index < 10 && order.status === 'pending') {
-                                                            return (<li key={index} className='text text_type_digits-default pb-2'>
+                                                            return (<li key={index} className='text text_type_digits-default'>
                                                                 {order.number}
                                                             </li>)
                                                         }

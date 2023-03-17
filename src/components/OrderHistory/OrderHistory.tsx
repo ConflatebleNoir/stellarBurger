@@ -8,6 +8,7 @@ import { FC, useEffect } from 'react';
 
 const OrderHistory: FC = () => {
     const userOrders = useSelector((state) => state.generalOrders.userOrders);
+    console.log(userOrders)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,13 +23,13 @@ const OrderHistory: FC = () => {
         <ul className={OrderHistoryStyles.list}>
             {
                 userOrders.length > 0 ? (
-                    <li>
+                    <>
                         {
                             userOrders.map((order: IOrder, index: number) => (
                                 <OrderPosition key={index} isNavigate={true} order={order} />
                             ))
                         }
-                    </li>
+                    </>
                 ) : (<Loader />)
             }
         </ul>

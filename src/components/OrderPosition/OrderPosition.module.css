@@ -1,5 +1,4 @@
 .link {
-    max-width: 584px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -9,12 +8,12 @@
     border-radius: 40px;
     margin-right: 8px;
     padding: 24px;
-    transition: ease .2s;
+    transition: ease .3s;
     box-sizing: border-box;
 }
 
 .link:hover {
-    opacity: .8;
+    scale: .95;
 }
 
 .title {
@@ -38,22 +37,24 @@
 }
 
 .order_ingredients {
-    padding: 0;
+    list-style-type: none;
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
-    justify-content: center;
-    list-style: none;
+    justify-content: flex-start;
+    padding: 0 0 0 20px;
 }
 
 .order_ingredients_item {
-    border-radius: 50%;
+    position: relative;
     width: 64px;
     height: 64px;
-    background: linear-gradient(#1C1C21, #1C1C21) padding-box,
-        linear-gradient(45deg, #801AB2, #4C4CFF) border-box;
-    border: 2px solid transparent;
-    display: flex;
-    align-items: center;
+    margin-left: -20px;
+    background-color: #131316;
+    border-radius: 50%;
+    border: 3px solid #801ab2;
+    overflow: hidden;
+    z-index: 4;
 }
 
 .order_ingredients_item:not(:first-child) {

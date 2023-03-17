@@ -12,13 +12,8 @@ export const socketMiddleware = (wsUrl: string, wsAction: IWSActions): Middlewar
             const { wsInitial, onOpen, onClose, onError, onMessage } = wsAction;
 
             if (type === wsInitial && userData) {
-                console.log(wsInitial);
-                console.log(userData?.accessToken);
-                if (userData?.accessToken) {
-                    socket = new WebSocket(`${wsUrl}?token=${userData?.accessToken?.replace('Bearer ', '')}`);
-                } else {
-                    socket = new WebSocket(`${wsUrl}`);
-                }
+                socket = new WebSocket(`${wsUrl}?token=${userData?.accessToken?.replace('Bearer ', '')}`);
+                console.log(socket)
             };
 
             if (type === onClose) {
@@ -38,6 +33,7 @@ export const socketMiddleware = (wsUrl: string, wsAction: IWSActions): Middlewar
                 };
 
                 socket.onmessage = event => {
+                    console.log(event)
                     const { data } = event;
                     const parsedData = JSON.parse(data);
                     const { success, ...restData } = parsedData;

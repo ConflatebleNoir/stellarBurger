@@ -62,8 +62,6 @@ export const getOrderData: AppThunk = (orderNum: number) => {
     return function (dispatch: AppDispatch) {
         dispatch(setOrderDataLoading());
 
-        console.log(setOrderDataLoading())
-
         getOrderInfo(orderNum)
             .then(data => {
                 if (data) {

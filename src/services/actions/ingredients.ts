@@ -54,7 +54,6 @@ export const getIngredients: AppThunk = () => {
     getIngredientsData()
       .then((ingredientsData) => {
         if (ingredientsData) {
-          console.log(ingredientsData.data)
           dispatch({
             type: GET_INGREDIENTS_SUCCESS,
             payload: ingredientsData.data,
