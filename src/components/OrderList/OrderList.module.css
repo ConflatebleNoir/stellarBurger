@@ -8,7 +8,7 @@
 .list__container {
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: calc(100vh - 490px);
+    max-height: calc(100vh - 60px);
 }
 
 .list__container::-webkit-scrollbar {

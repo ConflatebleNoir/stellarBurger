@@ -10,7 +10,7 @@ export const OrdersInformation: FC = () => {
     const ordersList = useSelector((state) => state.generalOrders.orders);
 
     return (
-        <div className={OrdersInformationStyles.container}>
+        <div className={`${OrdersInformationStyles.container} mt-25`}>
             {
                 ordersList.length > 0
                     ? (
@@ -19,13 +19,13 @@ export const OrdersInformation: FC = () => {
                                 {
                                     ordersList?.some((order: IOrder) => order.status === 'done') && (
                                         <div className={OrdersInformationStyles.done}>
-                                            <p className='text text_type_main-medium pb-6'>Готовы:</p>
-                                            <div className={OrdersInformationStyles.statistics_container}>
+                                            <p className='text text_type_main-medium'>Готовы:</p>
+                                            <div className={`${OrdersInformationStyles.statistics_container} mt-6`}>
                                                 <ul className={OrdersInformationStyles.list_accent}>
                                                     {
                                                         ordersList?.map((order: IOrder, index: number) => {
                                                             if (index < 10 && order.status === 'done') {
-                                                                return (<li key={index} className='text text_type_digits-default pb-2'>
+                                                                return (<li key={index} className='text text_type_digits-default'>
                                                                     {order.number}
                                                                 </li>)
                                                             }
@@ -37,7 +37,7 @@ export const OrdersInformation: FC = () => {
                                                     {
                                                         ordersList?.map((order: IOrder, index: number) => {
                                                             if (index >= 10 && index < 20 && order.status === 'done') {
-                                                                return (<li key={index} className='text text_type_digits-default pb-2'>
+                                                                return (<li key={index} className='text text_type_digits-default'>
                                                                     {order.number}
                                                                 </li>)
                                                             }
