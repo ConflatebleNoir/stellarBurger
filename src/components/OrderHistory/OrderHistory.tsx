@@ -20,19 +20,17 @@ const OrderHistory: FC = () => {
 
     return (
         <ul className={OrderHistoryStyles.list}>
-            <li>
-                {
-                    userOrders.length > 0 ? (
-                        <>
-                            {
-                                userOrders.map((order: IOrder, index: number) => (
-                                    <OrderPosition key={index} isNavigate={true} order={order} />
-                                ))
-                            }
-                        </>
-                    ) : (<Loader />)
-                }
-            </li>
+            {
+                userOrders.length > 0 ? (
+                    <li>
+                        {
+                            userOrders.map((order: IOrder, index: number) => (
+                                <OrderPosition key={index} isNavigate={true} order={order} />
+                            ))
+                        }
+                    </li>
+                ) : (<Loader />)
+            }
         </ul>
     )
 }

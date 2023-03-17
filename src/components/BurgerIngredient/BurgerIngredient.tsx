@@ -35,14 +35,14 @@ const BurgerIngredient: FC<IIngredientProps> = ({
         evt.preventDefault();
         const currentItem = initIngredients.find((item: IIngredient) => item._id === evt.currentTarget.getAttribute('id'));
         const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
-        const indexOfBun = currentIngredients.indexOf(currentBun);
+        const indexOfBun = currentIngredients.indexOf(currentBun!);
 
-        if (currentItem.type === 'bun' && currentBun) {
+        if (currentItem!.type === 'bun' && currentBun) {
             const currentIngredientsCopy = currentIngredients.slice();
-            currentIngredientsCopy.splice(indexOfBun, 1, currentItem);
+            currentIngredientsCopy.splice(indexOfBun, 1, currentItem!);
             dispatch(addIngredient(currentIngredientsCopy));
         } else {
-            dispatch(addIngredient([...currentIngredients, currentItem]));
+            dispatch(addIngredient([...currentIngredients, currentItem!]));
         }
     };
 
@@ -58,7 +58,7 @@ const BurgerIngredient: FC<IIngredientProps> = ({
     const handleModalIngredient = (evt: MouseEvent<HTMLLIElement>) => {
         const id = evt.currentTarget.getAttribute('id');
         const ingredinetSearch = initIngredients.find((element: IIngredient) => element._id === id);
-        dispatch(modalIngredient(ingredinetSearch));
+        dispatch(modalIngredient(ingredinetSearch!));
         dispatch(switchIngredientsModalState(true));
     }
 

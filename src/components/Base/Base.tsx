@@ -16,14 +16,14 @@ const Base: FC = () => {
     const handleDrop = (elementId: IIngredient) => {
         const currentItem = initIngredients.find((item: IIngredient) => item._id === elementId._id);
         const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
-        const currentBunIndex = currentIngredients.indexOf(currentBun);
+        const currentBunIndex = currentIngredients.indexOf(currentBun!);
 
-        if (currentItem.type === 'bun' && currentBun) {
+        if (currentItem!.type === 'bun' && currentBun) {
             const currentItemCopy = currentIngredients.slice();
-            currentItemCopy.splice(currentBunIndex, 1, currentItem);
+            currentItemCopy.splice(currentBunIndex, 1, currentItem!);
             dispatch(addIngredient(currentItemCopy));
         } else {
-            dispatch(addIngredient([...currentIngredients, currentItem]));
+            dispatch(addIngredient([...currentIngredients, currentItem!]));
         }
     }
 

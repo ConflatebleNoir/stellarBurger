@@ -12,7 +12,7 @@ const Feed: FC = () => {
         dispatch(wsOrdersConnectionStart());
 
         return () => {
-            dispatch(wsOrdersConnectionClosed())
+            dispatch(wsOrdersConnectionClosed());
         };
 
     }, [dispatch])

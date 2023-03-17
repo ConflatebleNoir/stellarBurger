@@ -29,7 +29,8 @@ const AppHeader: FC = () => {
                         role='button'>
                         <NavLink
                             className={({ isActive }) => isActive ? `${AppHeaderStyles.active} text text_type_main-default` : 'text text_type_main-default text_color_inactive'}
-                            to={'/feed'}>
+                            to={'/feed'}
+                        >
                             <ListIcon type="secondary" />
                             <span>Лента заказов</span>
                         </NavLink>

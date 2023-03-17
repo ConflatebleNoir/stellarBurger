@@ -1,7 +1,4 @@
 import { rootReducer } from './reducers/rootReducer';
-import thunk from 'redux-thunk';
-import { compose, applyMiddleware } from 'redux';
-import { legacy_createStore as createStore } from 'redux'
 import {
     WS_CONNECTION_CLOSED,
     WS_CONNECTION_ERROR,
@@ -16,11 +13,7 @@ import {
 } from './actions/generalOrders';
 import { socketMiddleware } from './customMiddleware/socketMiddleware';
 import { config } from '../utils/config';
-
-const composeEnhancers =
-    typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-        : compose;
+import { configureStore } from '@reduxjs/toolkit';
 
 const unitedWSOrdersActions = {
     wsInitial: WS_CONNECTION_START,
@@ -38,15 +31,11 @@ const unitedWSUserActions = {
     onMessage: WS_GET_USER_ORDERS,
 }
 
-const enhancer = composeEnhancers(
-    applyMiddleware(thunk,
-        socketMiddleware(
-            config.ordersDataUrl, unitedWSOrdersActions
-        ),
-        socketMiddleware(
-            config.userOrdersDataUrl, unitedWSUserActions
-        )
-    )
-);
+const orderMiddleware = socketMiddleware(config.ordersDataUrl, unitedWSOrdersActions);
+const userOrderMiddleware = socketMiddleware(config.userOrdersDataUrl, unitedWSUserActions);
 
-export const store = createStore(rootReducer, enhancer);
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(orderMiddleware, userOrderMiddleware),
+});

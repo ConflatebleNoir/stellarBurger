@@ -21,6 +21,7 @@ import Feed from '../../pages/Feed/Feed'
 import { useDispatch, useSelector } from '../../services/hooks/hooks'
 import OrderInfoFull from '../OrderInfoFull/OrderInfoFull'
 import { setWipeOrderData } from '../../services/actions/generalOrders'
+import { reachUserData } from '../../services/actions/user'
 
 
 const App: FC = () => {
@@ -31,6 +32,7 @@ const App: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
+  const accessToken = useSelector((state) => state.userData.accessToken);
 
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));
@@ -51,7 +53,8 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
-  }, [dispatch]);
+    dispatch(reachUserData(accessToken));
+  }, [dispatch, accessToken]);
 
   return (
     <div className={AppStyles.container} >

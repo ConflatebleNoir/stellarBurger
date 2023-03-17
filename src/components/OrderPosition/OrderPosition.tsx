@@ -42,10 +42,9 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) =
         <li>
             <Link
                 className={OrderPositionStyles.link}
-                to={{
-                    pathname: `${location.pathname}/${number}`,
-                    state: { background: location },
-                }}>
+                to={`${location.pathname}/${number}`}
+                state={{ background: location }}
+            >
                 <div className={OrderPositionStyles.service_info}>
                     <p className='text text_type_digits-default'>{`#${number}`}</p>
                     <p className='text text_type_main-default text_color_inactive'>{localeDate(createdAt)}</p>

@@ -62,10 +62,16 @@ export const getOrderData: AppThunk = (orderNum: number) => {
     return function (dispatch: AppDispatch) {
         dispatch(setOrderDataLoading());
 
+        console.log(setOrderDataLoading())
+
         getOrderInfo(orderNum)
             .then(data => {
-                // @ts-ignore
-                dispatch(setOrderDataSuccessLoading(data.orders[0]));
+                if (data) {
+                    // @ts-ignore
+                    dispatch(setOrderDataSuccessLoading(data.orders[0]));
+                    // @ts-ignore
+                    console.log(setOrderDataSuccessLoading(data.orders[0]))
+                }
             })
             .catch(() => dispatch(setOrderDataFailedLoading()))
     };

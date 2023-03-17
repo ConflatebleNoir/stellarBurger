@@ -13,6 +13,7 @@ const Login = () => {
     const location = useLocation();
     const inputRef = useRef(null);
     const userData = useSelector((state) => state.userData.userData);
+    const accessToken = useSelector(state => state.userData.accessToken);
 
     const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
@@ -22,6 +23,9 @@ const Login = () => {
         dispatch(signIn(emailValue, passValue))
         localStorage.setItem('email', emailValue);
         localStorage.setItem('password', passValue);
+        if (accessToken !== null) {
+            localStorage.setItem('accessToken', accessToken);
+        }
     };
 
     const handlePassChange = (evt: ChangeEvent<HTMLInputElement>) => {
