@@ -1,0 +1,73 @@
+.link {
+    max-width: 584px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1C1C21;
+    border-radius: 40px;
+    margin-right: 8px;
+    padding: 24px;
+    transition: ease .2s;
+    box-sizing: border-box;
+}
+
+.link:hover {
+    opacity: .8;
+}
+
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.service_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order_summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.order_ingredients {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.order_ingredients_item {
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(#1C1C21, #1C1C21) padding-box,
+        linear-gradient(45deg, #801AB2, #4C4CFF) border-box;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+}
+
+.order_ingredients_item:not(:first-child) {
+    margin-left: -15px;
+}
+
+.order_list_item_image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+}
+
+.summary {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}

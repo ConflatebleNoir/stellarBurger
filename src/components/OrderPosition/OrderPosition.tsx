@@ -49,7 +49,7 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) =
                     <p className='text text_type_digits-default'>{`#${number}`}</p>
                     <p className='text text_type_main-default text_color_inactive'>{localeDate(createdAt)}</p>
                 </div>
-                <h2 className='text text_type_main-medium'>{name}</h2>
+                <h2 className={`${OrderPositionStyles.title} text text_type_main-medium`}>{name}</h2>
                 {
                     (status && isNavigate)
                     && <p className='text text_type_main-default'>{checkoutStatus(status)}</p>
@@ -63,6 +63,7 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) =
                                     return (
                                         <li key={index} className={OrderPositionStyles.order_ingredients_item}>
                                             <img
+                                                className={OrderPositionStyles.order_list_item_image}
                                                 src={extractIngredient(item, ingredientsList)?.image}
                                                 alt={extractIngredient(item, ingredientsList)?.name}
                                             />
