@@ -34,6 +34,14 @@ const OrderInfoFull: FC<IOrderInfoFullProps> = ({ isModal }) => {
         };
     };
 
+    const checkoutStyle = (status: string) => {
+        if (status === 'pending') {
+            return { color: '#00CCCC' }
+        } else {
+            return {}
+        }
+    }
+
     const localeDate = (loc: string) => {
         return new Date(loc).toLocaleString();
     };
@@ -46,55 +54,108 @@ const OrderInfoFull: FC<IOrderInfoFullProps> = ({ isModal }) => {
         <>
             {
                 orderData?.number ? (
-                    <div className={OrderInfoFullStyles.container} style={!isModal ? { marginTop: '120px' } : {}}>
-                        <div className={OrderInfoFullStyles.order_info}>
-                            <p className={`text text_type_digits-default pb-10 ${OrderInfoFullStyles.order_number}`}>
-                                #{orderData && orderData.number}
-                            </p>
-                            <h2 className='text text_type_main-medium pb-3'>
-                                {orderData && orderData.name}
-                            </h2>
-                            <p className={`text text_type_main-default pb-15 ${OrderInfoFullStyles.order_status}`}                            >
-                                {checkoutStatus(orderData?.status)}
-                            </p>
-                            <p className='text text_type_main-medium pb-6'>Состав:</p>
-                            <ul className={OrderInfoFullStyles.list}>
-                                {
-                                    Array.from(new Set(extractedIngredients))?.map((ingredient: IIngredient | undefined, index: number) => {
-                                        return (
-                                            <li key={index} className={OrderInfoFullStyles.list_item}>
-                                                <img className={OrderInfoFullStyles.image} src={ingredient?.image} alt={ingredient?.name} />
-                                                <h3 className={`text text_type_main-default ${OrderInfoFullStyles.title}`}>
-                                                    {ingredient?.name}
-                                                </h3>
-                                                <div className={`text text_type_digits-default ${OrderInfoFullStyles.item_currency}`}>
-                                                    <span>
-                                                        {extractedIngredients && extractedIngredients?.filter(item => item?._id === ingredient?._id).length}
-                                                    </span>
-                                                    x
-                                                    <div className={OrderInfoFullStyles.currency_wrapper}>
-                                                        <p>
-                                                            {ingredient?.price}
-                                                        </p>
-                                                        <CurrencyIcon type="primary" />
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                            <div className={OrderInfoFullStyles.order_footer}>
-                                <p className="text text_type_main-default text_color_inactive">{
-                                    localeDate(orderData?.createdAt)
-                                }</p>
-                                <div className={OrderInfoFullStyles.currency_wrapper}>
-                                    <span className='text text_type_digits-default'>{computeSum()}</span>
-                                    <CurrencyIcon type='primary' />
+                    <div className={OrderInfoFullStyles.container}>
+                        {
+                            isModal === true && (
+                                <div className={OrderInfoFullStyles.order_info_modal}>
+                                    <h2 className='text text_type_main-medium mt-10'>
+                                        {orderData && orderData.name}
+                                    </h2>
+                                    <p className={`text text_type_main-default mt-3`} style={checkoutStyle(orderData?.status)}>
+                                        {checkoutStatus(orderData?.status)}
+                                    </p>
+                                    <p className='text text_type_main-medium mt-15 mb-6'>Состав:</p>
+                                    <ul className={OrderInfoFullStyles.list}>
+                                        {
+                                            Array.from(new Set(extractedIngredients))?.map((ingredient: IIngredient | undefined, index: number) => {
+                                                return (
+                                                    <li key={index} className={OrderInfoFullStyles.list_item}>
+                                                        <img className={OrderInfoFullStyles.list_image} src={ingredient?.image} alt={ingredient?.name} />
+                                                        <h3 className={`text text_type_main-default ${OrderInfoFullStyles.title}`}>
+                                                            {ingredient?.name}
+                                                        </h3>
+                                                        <div className={`text text_type_digits-default ${OrderInfoFullStyles.item_currency}`}>
+                                                            <span>
+                                                                {extractedIngredients && extractedIngredients?.filter(item => item?._id === ingredient?._id).length}
+                                                            </span>
+                                                            x
+                                                            <div className={OrderInfoFullStyles.currency_wrapper}>
+                                                                <p>
+                                                                    {ingredient?.price}
+                                                                </p>
+                                                                <CurrencyIcon type="primary" />
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                    <div className={OrderInfoFullStyles.order_footer}>
+                                        <p className="text text_type_main-default text_color_inactive">{
+                                            localeDate(orderData?.createdAt)
+                                        }</p>
+                                        <div className={OrderInfoFullStyles.currency_wrapper}>
+                                            <span className='text text_type_digits-default'>{computeSum()}</span>
+                                            <CurrencyIcon type='primary' />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            )
+                        }
+                        {
+                            isModal === false && (
+                                <div className={OrderInfoFullStyles.order_info}>
+                                    <p
+                                        className={`text text_type_digits-default ${OrderInfoFullStyles.order_number}`}>#{
+                                            orderData && orderData.number
+                                        }</p>
+                                    <h2 className='text text_type_main-medium mt-10'>
+                                        {orderData && orderData.name}
+                                    </h2>
+                                    <p className={`text text_type_main-default mt-3`} style={checkoutStyle(orderData?.status)}>
+                                        {checkoutStatus(orderData?.status)}
+                                    </p>
+                                    <p className='text text_type_main-medium mt-15 mb-6'>Состав:</p>
+                                    <ul className={OrderInfoFullStyles.list}>
+                                        {
+                                            Array.from(new Set(extractedIngredients))?.map((ingredient: IIngredient | undefined, index: number) => {
+                                                return (
+                                                    <li key={index} className={OrderInfoFullStyles.list_item}>
+                                                        <img className={OrderInfoFullStyles.list_image} src={ingredient?.image} alt={ingredient?.name} />
+                                                        <h3 className={`text text_type_main-default ${OrderInfoFullStyles.title}`}>
+                                                            {ingredient?.name}
+                                                        </h3>
+                                                        <div className={`text text_type_digits-default ${OrderInfoFullStyles.item_currency}`}>
+                                                            <span>
+                                                                {extractedIngredients && extractedIngredients?.filter(item => item?._id === ingredient?._id).length}
+                                                            </span>
+                                                            x
+                                                            <div className={OrderInfoFullStyles.currency_wrapper}>
+                                                                <p>
+                                                                    {ingredient?.price}
+                                                                </p>
+                                                                <CurrencyIcon type="primary" />
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                    <div className={OrderInfoFullStyles.order_footer}>
+                                        <p className="text text_type_main-default text_color_inactive">{
+                                            localeDate(orderData?.createdAt)
+                                        }</p>
+                                        <div className={OrderInfoFullStyles.currency_wrapper}>
+                                            <span className='text text_type_digits-default'>{computeSum()}</span>
+                                            <CurrencyIcon type='primary' />
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div >
                 )
                     : (<Loader />)
             }

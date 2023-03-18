@@ -33,6 +33,7 @@ const App: FC = () => {
   const location = useLocation();
   const state = location.state;
   const accessToken = useSelector((state) => state.userData.accessToken);
+  const orderNumber = useSelector((state) => state.generalOrders.orderData?.number);
 
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));
@@ -95,6 +96,8 @@ const App: FC = () => {
             <Routes>
               <Route path='/feed/:orderNumber' element={
                 <Modal
+                  title={`#${orderNumber}`}
+                  number={true}
                   handleModalClose={handleOrderInfoModalClose}
                 >
                   <OrderInfoFull isModal={true} />
@@ -106,6 +109,8 @@ const App: FC = () => {
             <Routes>
               <Route path='/profile/orders/:orderNumber' element={
                 <Modal
+                  title={`#${orderNumber}`}
+                  number={true}
                   handleModalClose={handleOrderInfoModalClose}
                 >
                   <OrderInfoFull isModal={true} />

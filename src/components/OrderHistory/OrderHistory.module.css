@@ -5,6 +5,7 @@
     max-height: calc(100vh - 60px);
     max-width: 844px;
     width: 100%;
+    padding: 0;
 }
 
 .list::-webkit-scrollbar {

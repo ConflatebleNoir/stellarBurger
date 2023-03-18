@@ -102,4 +102,4 @@ export const patchUserInfo = (name: string, email: string, password: string, tok
     }),
 });
 
-export const getOrderInfo = (order_number: number) => request(`/orders/${order_number}`);
+export const getOrderInfo = (order_number: number) => request(`orders/${order_number}`);

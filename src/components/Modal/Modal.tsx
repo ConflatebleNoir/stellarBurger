@@ -5,7 +5,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
 import { IModalProps } from "../../services/types/types";
 
-const Modal: FC<PropsWithChildren<IModalProps>> = ({ children, handleModalClose, title = '' }) => {
+const Modal: FC<PropsWithChildren<IModalProps>> = ({ children, handleModalClose, number, title = '' }) => {
     const modalRoot = document.getElementById("modals") as HTMLElement;
     const element = useMemo(() => document.createElement('div'), []);
 
@@ -30,7 +30,7 @@ const Modal: FC<PropsWithChildren<IModalProps>> = ({ children, handleModalClose,
         >
             <div onClick={(evt) => evt.stopPropagation()} className={`${ModalStyles.container} pt-10 pr-10 pl-10 pb-15`}>
                 <header className={title ? ModalStyles.header__title : ModalStyles.header__empty}>
-                    {title ? <h2 className='text text_type_main-large'>{title}</h2> : null}
+                    {title ? <h2 className='text text_type_main-large' style={number ? { fontSize: '24px' } : {}}>{title}</h2> : null}
                     <button onClick={handleModalClose} className={ModalStyles.button}>
                         <CloseIcon type="primary" onClick={handleModalClose} />
                     </button>

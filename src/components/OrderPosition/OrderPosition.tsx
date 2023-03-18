@@ -16,8 +16,10 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) =
 
     const checkoutStatus = (status: string) => {
         if (status === 'done') {
-            return 'Создан'
-        };
+            return 'Создан';
+        } else if (status === 'pending') {
+            return 'Готовится';
+        }
         return null;
     };
 

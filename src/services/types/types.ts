@@ -104,6 +104,7 @@ export interface IIngredientDetailsProps {
 export interface IModalProps {
     handleModalClose: () => void,
     title?: string,
+    number?: boolean,
 };
 
 export interface IModalOverlayProp {
