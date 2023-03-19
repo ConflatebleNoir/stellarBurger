@@ -285,19 +285,18 @@ export const logout: AppThunk = (refreshToken: string) => {
     }
 };
 
-export const reachUserData: AppThunk = (accessToken) => {
+export const reachUserData: AppThunk = (accessToken: string) => {
     return function (dispatch: AppDispatch) {
         dispatch(setGetUserDataLoading())
 
         getUserData(accessToken)
             .then((res) => {
-                //@ts-ignore
+                // @ts-ignore
                 dispatch(setGetUserDataSuccessLoading(res.user))
             })
             .catch(error => {
                 dispatch(setGetUserDataFailedLoading());
                 if (error.status === '403' || error.status === '401') {
-                    //@ts-ignore
                     dispatch(refreshToken(localStorage.getItem('refreshToken'), 'reachUserData'))
                 }
                 console.log(`Ошибка: ${error}`);
@@ -317,7 +316,6 @@ export const updateUserData: AppThunk = (name: string, email: string, password: 
             .catch(error => {
                 dispatch(setPatchUserDataFailedLoading());
                 if (error.status === '403' || error.status === '401') {
-                    //@ts-ignore
                     dispatch(refreshToken(localStorage.getItem('refreshToken')))
                 }
                 console.log(`Ошибка: ${error}`);
