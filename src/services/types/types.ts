@@ -168,6 +168,13 @@ export interface IOrderState {
     orderDetails: object | null,
 };
 
+export interface IIngredientIcon {
+    order: IOrder,
+    index: number,
+    item: string,
+    count: number | boolean,
+}
+
 export interface IUserState {
     userData: object | null,
     accessToken: string | null,

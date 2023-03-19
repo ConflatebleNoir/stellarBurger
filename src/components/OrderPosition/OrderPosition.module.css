@@ -34,6 +34,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 24px;
+    min-height: 68px;
 }
 
 .order_ingredients {
@@ -43,6 +44,7 @@
     align-items: center;
     justify-content: flex-start;
     padding: 0 0 0 20px;
+    width: 3%;
 }
 
 .order_ingredients_item {

@@ -4,15 +4,13 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { FC } from 'react';
 import { IIngredient, IOrderPositionProps } from '../../services/types/types';
 import { useSelector } from '../../services/hooks/hooks';
+import IngredientIcon from '../IngredientIcon/IngredientIcon';
 
 const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) => {
     const ingredientsList = useSelector(state => state.ingredientsData.ingredientsList);
     const location = useLocation();
     const { ingredients, status, name, number, createdAt } = order;
 
-    const extractIngredient = (item: string, ingredients: IIngredient[]) => {
-        return ingredients.find((extractedItem: IIngredient) => extractedItem._id === item);
-    };
 
     const checkoutStatus = (status: string) => {
         if (status === 'done') {
@@ -60,19 +58,13 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) =
                     <ul className={OrderPositionStyles.order_ingredients}>
                         {
                             ingredients.map((item, index) => {
-                                const extractedIngredient = extractIngredient(item, ingredientsList);
-                                if (index < 5) {
-                                    return (
-                                        <li key={index} className={OrderPositionStyles.order_ingredients_item}>
-                                            <img
-                                                className={OrderPositionStyles.order_list_item_image}
-                                                src={extractIngredient(item, ingredientsList)?.image}
-                                                alt={extractIngredient(item, ingredientsList)?.name}
-                                            />
-                                        </li>
-                                    )
-                                }
-                                return null;
+                                if (index >= 6) return;
+
+                                return (
+                                    <li key={index}>
+                                        <IngredientIcon order={order} index={index} item={item} count={index === 5 && item.length - 6} />
+                                    </li>
+                                )
                             })
                         }
                     </ul>
