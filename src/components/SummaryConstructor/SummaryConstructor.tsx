@@ -15,6 +15,7 @@ const SummaryConstructor: FC = () => {
     const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
     const userData = useSelector((state) => state.userData.userData);
     const navigate = useNavigate();
+    const accessToken = useSelector(state => state.userData.accessToken)
 
     const summaryPrice = useMemo(
         () => currentIngredients.reduce(
@@ -26,7 +27,7 @@ const SummaryConstructor: FC = () => {
     const handleOrderByClick = () => {
         const elemId = currentIngredients.map((element) => element._id);
         if (userData) {
-            dispatch(getOrder(elemId));
+            dispatch(getOrder(elemId, accessToken));
             dispatch(switchOrderModalState(true));
         } else {
             navigate('/login')
