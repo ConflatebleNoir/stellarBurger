@@ -1,0 +1,76 @@
+.link {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1C1C21;
+    border-radius: 40px;
+    margin-right: 8px;
+    padding: 24px;
+    transition: ease .3s;
+    box-sizing: border-box;
+}
+
+.link:hover {
+    scale: .95;
+}
+
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.service_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order_summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    min-height: 68px;
+}
+
+.order_ingredients {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 0 0 20px;
+    width: 3%;
+}
+
+.order_ingredients_item {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-left: -20px;
+    background-color: #131316;
+    border-radius: 50%;
+    border: 3px solid #801ab2;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.order_ingredients_item:not(:first-child) {
+    margin-left: -15px;
+}
+
+.order_list_item_image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+}
+
+.summary {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}

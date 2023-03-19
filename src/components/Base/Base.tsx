@@ -2,28 +2,28 @@ import { FC } from 'react'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
 import BaseStyles from './Base.module.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { addIngredient, getIngredients } from '../../services/actions/ingredients.js'
+import { addIngredient } from '../../services/actions/ingredients'
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { IIngredient } from '../../services/types'
+import { IIngredient } from '../../services/types/types'
+import { useDispatch, useSelector } from '../../services/hooks/hooks'
 
 const Base: FC = () => {
     const dispatch = useDispatch();
-    const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);
-    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
+    const initIngredients = useSelector((state) => state.ingredientsData.ingredientsList);
+    const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
 
-    const handleDrop = (itemId: IIngredient) => {
-        const currentItem = initIngredients.find((item: IIngredient) => item._id === itemId._id);
-        const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
-        const currentBunIndex = currentIngredients.indexOf(currentBun);
+    const handleDrop = (elementId: IIngredient) => {
+        const currentItem = initIngredients.find((item) => item._id === elementId._id);
+        const currentBun = currentIngredients.find((item) => item.type === 'bun');
+        const currentBunIndex = currentIngredients.indexOf(currentBun!);
 
-        if (currentItem.type === 'bun' && currentBun) {
+        if (currentItem!.type === 'bun' && currentBun) {
             const currentItemCopy = currentIngredients.slice();
-            currentItemCopy.splice(currentBunIndex, 1, currentItem);
+            currentItemCopy.splice(currentBunIndex, 1, currentItem!);
             dispatch(addIngredient(currentItemCopy));
         } else {
-            dispatch(addIngredient([...currentIngredients, currentItem]));
+            dispatch(addIngredient([...currentIngredients, currentItem!]));
         }
     }
 

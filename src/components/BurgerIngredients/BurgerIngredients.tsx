@@ -1,13 +1,13 @@
 import { FC, useState, MouseEvent } from 'react'
 import BurgerIngredientsStyles from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector } from 'react-redux'
 import { checkCoordinates } from '../../utils/checkCoordinates'
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient'
-import { IIngredient } from '../../services/types'
+import { IIngredient } from '../../services/types/types'
+import { useSelector } from '../../services/hooks/hooks'
 
 const BurgerIngredients: FC = () => {
-    const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);
+    const initIngredients = useSelector((state) => state.ingredientsData.ingredientsList);
     const [currentItem, setCurrentItem] = useState('bun');
 
     const handleTabClick = (currentItem: string) => {
@@ -38,15 +38,15 @@ const BurgerIngredients: FC = () => {
             <div onScroll={handleScroll} className={BurgerIngredientsStyles.ingredient__container}>
                 <h2 id='bun' className="text text_type_main-medium mt-10">Булки</h2>
                 <ul className={BurgerIngredientsStyles.list + ' ' + 'mt-6 pl-4 pr-4'}>
-                    {initIngredients.map((data: IIngredient) => (data.type === 'bun' && <BurgerIngredient key={data._id} {...data} />))}
+                    {initIngredients.map((data) => (data.type === 'bun' && <BurgerIngredient key={data._id} {...data} />))}
                 </ul>
                 <h2 id='sauce' className="text text_type_main-medium mt-10">Соусы</h2>
                 <ul className={BurgerIngredientsStyles.list + ' ' + 'mt-6 pl-4 pr-4'}>
-                    {initIngredients.map((data: IIngredient) => (data.type === 'sauce' && <BurgerIngredient key={data._id} {...data} />))}
+                    {initIngredients.map((data) => (data.type === 'sauce' && <BurgerIngredient key={data._id} {...data} />))}
                 </ul>
                 <h2 id='main' className="text text_type_main-medium mt-10">Начинки</h2>
                 <ul className={BurgerIngredientsStyles.list + ' ' + 'mt-6 pl-4 pr-4'}>
-                    {initIngredients.map((data: IIngredient) => (data.type === 'main' && <BurgerIngredient key={data._id} {...data} />))}
+                    {initIngredients.map((data) => (data.type === 'main' && <BurgerIngredient key={data._id} {...data} />))}
                 </ul>
             </div>
         </section>

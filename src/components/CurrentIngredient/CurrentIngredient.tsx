@@ -4,15 +4,15 @@ import {
     ConstructorElement,
     DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import { useDrag, useDrop } from 'react-dnd'
 import { removeIngredient } from '../../services/actions/ingredients'
-import { ICurrentIngredientProps, IIngredient } from '../../services/types'
+import { ICurrentIngredientProps, IIngredient } from '../../services/types/types'
+import { useDispatch, useSelector } from '../../services/hooks/hooks'
 
 const CurrentIngredient: FC<ICurrentIngredientProps> = ({ item, id, index, shiftElement }) => {
     const ref = useRef<HTMLLIElement>(null);
     const dispatch = useDispatch();
-    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
+    const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
     const { image, price, name } = item;
 
     const [{ isDrag }, drag] = useDrag({

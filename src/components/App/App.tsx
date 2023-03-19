@@ -4,9 +4,8 @@ import AppStyles from './App.module.css'
 import Modal from '../Modal/Modal'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
 import OrderDetails from '../OrderDetails/OrderDetails'
-import { useDispatch, useSelector } from 'react-redux'
-import { getIngredients, removeModalIngredient } from '../../services/actions/ingredients.js'
-import { switchIngredientsModalState, switchOrderModalState } from '../../services/actions/modal'
+import { getIngredients, removeModalIngredient } from '../../services/actions/ingredients'
+import { switchIngredientsModalState, switchOrderFeedModalState, switchOrderModalState } from '../../services/actions/modal'
 import { removeOrder } from '../../services/actions/order'
 import { useLocation, Routes, Route, useNavigate } from "react-router-dom";
 import Login from '../../pages/Login/Login'
@@ -18,16 +17,23 @@ import Profile from '../../pages/Profile/Profile'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import NotFound from '../../pages/NotFound/NotFound'
 import Loader from '../Loader/Loader'
+import Feed from '../../pages/Feed/Feed'
+import { useDispatch, useSelector } from '../../services/hooks/hooks'
+import OrderInfoFull from '../OrderInfoFull/OrderInfoFull'
+import { setWipeOrderData } from '../../services/actions/generalOrders'
+import { reachUserData } from '../../services/actions/user'
 
 
 const App: FC = () => {
   const dispatch = useDispatch();
-  const ingredientsReqest = useSelector((state: boolean | any) => state.ingredientsData.ingredientsReqest);
-  const orderData = useSelector((state: object | any) => state.orderData.orderDetails);
-  const isOrderModalOpen = useSelector((state: boolean | any) => state.modalData.isOrderModalOpen);
+  const ingredientsReqest = useSelector((state) => state.ingredientsData.ingredientsRequest);
+  const orderData = useSelector((state) => state.orderData.orderDetails);
+  const isOrderModalOpen = useSelector((state) => state.modalData.isOrderModalOpen);
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
+  const accessToken = useSelector((state) => state.userData.accessToken);
+  const orderNumber = useSelector((state) => state.generalOrders.orderData?.number);
 
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));
@@ -40,10 +46,16 @@ const App: FC = () => {
     dispatch(removeOrder());
   }
 
+  const handleOrderInfoModalClose = () => {
+    dispatch(switchOrderFeedModalState(false));
+    state && navigate(-1);
+    dispatch(setWipeOrderData());
+  }
+
   useEffect(() => {
-    //@ts-ignore
     dispatch(getIngredients());
-  }, [dispatch]);
+    dispatch(reachUserData(accessToken));
+  }, [dispatch, accessToken]);
 
   return (
     <div className={AppStyles.container} >
@@ -64,6 +76,9 @@ const App: FC = () => {
             } />
             <Route path='*' element={<NotFound />} />
             <Route path='/ingredients/:id' element={<IngredientDetails heading="Детали ингредиента" />} />
+            <Route path='/feed' element={<Feed />} />
+            <Route path='/feed/:orderNumber' element={<OrderInfoFull isModal={false} />} />
+            <Route path='/profile/orders/:orderNumber' element={<OrderInfoFull isModal={false} />} />
           </Routes>
           {state?.background && (
             <Routes>
@@ -73,6 +88,32 @@ const App: FC = () => {
                   handleModalClose={handleIngredientModalClose}
                 >
                   <IngredientDetails />
+                </Modal>
+              } />
+            </Routes>
+          )}
+          {state?.background && (
+            <Routes>
+              <Route path='/feed/:orderNumber' element={
+                <Modal
+                  title={`#${orderNumber}`}
+                  number={true}
+                  handleModalClose={handleOrderInfoModalClose}
+                >
+                  <OrderInfoFull isModal={true} />
+                </Modal>
+              } />
+            </Routes>
+          )}
+          {state?.background && (
+            <Routes>
+              <Route path='/profile/orders/:orderNumber' element={
+                <Modal
+                  title={`#${orderNumber}`}
+                  number={true}
+                  handleModalClose={handleOrderInfoModalClose}
+                >
+                  <OrderInfoFull isModal={true} />
                 </Modal>
               } />
             </Routes>

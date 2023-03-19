@@ -2,8 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, FC, FormEvent } from 'react';
 import { forgotPassword, setForgotPasswordState } from "../../services/actions/user";
 import ForgotPasswordStyles from './ForgotPassword.module.css';
-import { useDispatch } from "react-redux";
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch } from "../../services/hooks/hooks";
 
 const ForgotPassword: FC = () => {
     const [emailValue, setEmailValue] = useState('');
@@ -17,7 +17,6 @@ const ForgotPassword: FC = () => {
         if (!emailValue) {
             return
         }
-        //@ts-ignore
         dispatch(forgotPassword(emailValue));
         dispatch(setForgotPasswordState(true));
         setEmailValue('');

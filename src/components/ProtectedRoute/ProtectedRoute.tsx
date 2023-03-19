@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux"
 import { useLocation, Navigate } from "react-router-dom";
 import { FC } from 'react'
-import { IProtectedRouteProps } from "../../services/types";
+import { IProtectedRouteProps } from "../../services/types/types";
+import { useSelector } from "../../services/hooks/hooks";
 
 
 const ProtectedRoute: FC<IProtectedRouteProps> = ({ children, anonymous = false }) => {
-    const userData = useSelector((state: Array<object> | any) => state.userData.userData);
+    const userData = useSelector((state) => state.userData.userData);
     const location = useLocation();
     const previousLocation = location.state?.from || '/';
 

@@ -1,7 +1,6 @@
 
 import BurgerIngredientStyles from './BurgerIngredient.module.css'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import {
     addIngredient,
     modalIngredient,
@@ -10,7 +9,8 @@ import { switchIngredientsModalState } from '../../services/actions/modal'
 import { useDrag } from 'react-dnd'
 import { useLocation, Link } from 'react-router-dom'
 import { FC, MouseEvent } from 'react';
-import { IIngredientProps, IIngredient } from '../../services/types'
+import { IIngredientProps, IIngredient } from '../../services/types/types'
+import { useDispatch, useSelector } from '../../services/hooks/hooks'
 
 const BurgerIngredient: FC<IIngredientProps> = ({
     _id,
@@ -19,8 +19,8 @@ const BurgerIngredient: FC<IIngredientProps> = ({
     image,
 }) => {
     const dispatch = useDispatch();
-    const currentIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.currentIngredients);
-    const initIngredients = useSelector((state: Array<object> | any) => state.ingredientsData.ingredientsList);
+    const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
+    const initIngredients = useSelector((state) => state.ingredientsData.ingredientsList);
     const location = useLocation();
 
     const [{ isDrag }, dragRef] = useDrag({
@@ -33,16 +33,16 @@ const BurgerIngredient: FC<IIngredientProps> = ({
 
     const handleSelectElement = (evt: MouseEvent<HTMLLIElement>) => {
         evt.preventDefault();
-        const currentItem = initIngredients.find((item: IIngredient) => item._id === evt.currentTarget.getAttribute('id'));
-        const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
-        const indexOfBun = currentIngredients.indexOf(currentBun);
+        const currentItem = initIngredients.find((item) => item._id === evt.currentTarget.getAttribute('id'));
+        const currentBun = currentIngredients.find((item) => item.type === 'bun');
+        const indexOfBun = currentIngredients.indexOf(currentBun!);
 
-        if (currentItem.type === 'bun' && currentBun) {
+        if (currentItem!.type === 'bun' && currentBun) {
             const currentIngredientsCopy = currentIngredients.slice();
-            currentIngredientsCopy.splice(indexOfBun, 1, currentItem);
+            currentIngredientsCopy.splice(indexOfBun, 1, currentItem!);
             dispatch(addIngredient(currentIngredientsCopy));
         } else {
-            dispatch(addIngredient([...currentIngredients, currentItem]));
+            dispatch(addIngredient([...currentIngredients, currentItem!]));
         }
     };
 
@@ -57,8 +57,8 @@ const BurgerIngredient: FC<IIngredientProps> = ({
 
     const handleModalIngredient = (evt: MouseEvent<HTMLLIElement>) => {
         const id = evt.currentTarget.getAttribute('id');
-        const ingredinetSearch = initIngredients.find((element: IIngredient) => element._id === id);
-        dispatch(modalIngredient(ingredinetSearch));
+        const ingredinetSearch = initIngredients.find((element) => element._id === id);
+        dispatch(modalIngredient(ingredinetSearch!));
         dispatch(switchIngredientsModalState(true));
     }
 

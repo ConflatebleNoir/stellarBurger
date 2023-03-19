@@ -1,10 +1,10 @@
 import { NavLink, Routes, Route, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
 import ProfileStyles from './Profile.module.css';
 import { logout } from "../../services/actions/user";
 import OrderHistory from "../../components/OrderHistory/OrderHistory";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import { FC } from 'react'
+import { useDispatch } from "../../services/hooks/hooks";
 
 const Profile: FC = () => {
     const dispatch = useDispatch();
@@ -51,9 +51,9 @@ const Profile: FC = () => {
                 </p>
             </div>
             <Routes>
-                <Route path='' element={<ProfileForm />}
+                <Route path='/' element={<ProfileForm />}
                 />
-                <Route path='orders' element={<OrderHistory />} />
+                <Route path='/orders' element={<OrderHistory />} />
             </Routes>
         </section>
     )

@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useRef, useState, FC, ChangeEvent, FormEvent } from "react";
 import { updateUserData } from "../../services/actions/user";
 import ProfileFormStyles from './ProfileForm.module.css'
+import { useDispatch, useSelector } from "../../services/hooks/hooks";
 
 const ProfileForm: FC = () => {
     const dispatch = useDispatch();
@@ -11,8 +11,8 @@ const ProfileForm: FC = () => {
     const [passValue, setPassValue] = useState('');
     const nameRef = useRef<HTMLInputElement | null>(null);
     const emailRef = useRef<HTMLInputElement | null>(null);
-    const userData = useSelector((state: Array<object> | any) => state.userData.userData);
-    const accessToken = useSelector((state: string | any) => state.userData.accessToken);
+    const userData = useSelector((state) => state.userData.userData);
+    const accessToken = useSelector((state) => state.userData.accessToken);
     const [isInfoChanged, setInInfoChanged] = useState(false);
 
     const onNameInputClick = () => null !== nameRef.current && nameRef.current.focus();
@@ -20,12 +20,18 @@ const ProfileForm: FC = () => {
 
     const onNameValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setNameValue(evt.target.value);
-        evt.target.value === userData.name ? setInInfoChanged(false) : setInInfoChanged(true);
+        // @ts-ignore
+        evt.target.value === userData.name
+            ? setInInfoChanged(false)
+            : setInInfoChanged(true);
     };
 
     const onEmailValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setEmailValue(evt.target.value);
-        evt.target.value === userData.email ? setInInfoChanged(false) : setInInfoChanged(true);
+        //@ts-ignore
+        evt.target.value === userData.email
+            ? setInInfoChanged(false)
+            : setInInfoChanged(true);
     };
 
     const onPasswordValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -34,20 +40,23 @@ const ProfileForm: FC = () => {
     };
 
     const cancelEdit = () => {
+        //@ts-ignore
         setNameValue(userData.name);
+        // @ts-ignore
         setEmailValue(userData.email);
         setPassValue('');
     };
 
     const onSubmitEdit = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        //@ts-ignore
         dispatch(updateUserData(nameValue, emailValue, passValue, accessToken))
     };
 
     useEffect(() => {
         if (userData) {
+            //@ts-ignore
             setNameValue(userData.name);
+            //@ts-ignore
             setEmailValue(userData.email);
             setPassValue('');
         }

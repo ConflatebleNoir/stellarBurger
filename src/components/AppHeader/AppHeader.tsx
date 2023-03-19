@@ -7,8 +7,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import AppHeaderStyles from './AppHeader.module.css'
 import { NavLink } from 'react-router-dom';
+import { FC } from 'react';
 
-function AppHeader() {
+const AppHeader: FC = () => {
     return (
         <header className={AppHeaderStyles.header + ' ' + 'pt-4 pb-4'}>
             <nav className={AppHeaderStyles.container}>
@@ -28,7 +29,8 @@ function AppHeader() {
                         role='button'>
                         <NavLink
                             className={({ isActive }) => isActive ? `${AppHeaderStyles.active} text text_type_main-default` : 'text text_type_main-default text_color_inactive'}
-                            to={'*'}>
+                            to={'/feed'}
+                        >
                             <ListIcon type="secondary" />
                             <span>Лента заказов</span>
                         </NavLink>
