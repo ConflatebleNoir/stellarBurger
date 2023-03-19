@@ -204,7 +204,7 @@ export const signIn: AppThunk = (email: string, pass: string) => {
 };
 
 export const signUp: AppThunk = (email: string, pass: string, name: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setUserRegistrationLoading())
 
         postRegister(email, pass, name)
@@ -222,7 +222,7 @@ export const signUp: AppThunk = (email: string, pass: string, name: string) => {
 };
 
 export const forgotPassword: AppThunk = (email: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setForgotPasswordLoading());
 
         findEmail(email)
@@ -237,7 +237,7 @@ export const forgotPassword: AppThunk = (email: string) => {
 }
 
 export const resetPassword: AppThunk = (passValue: string, codeValue: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setResetPasswordLoading());
 
         postNewPassword(passValue, codeValue)
@@ -252,7 +252,7 @@ export const resetPassword: AppThunk = (passValue: string, codeValue: string) =>
 }
 
 const refreshToken: AppThunk = (refreshToken: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setRefreshTokenLoading())
 
         postRefreshToken(refreshToken)
@@ -270,7 +270,7 @@ const refreshToken: AppThunk = (refreshToken: string) => {
 };
 
 export const logout: AppThunk = (refreshToken: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setLogoutLoading())
 
         postLogout(refreshToken)
@@ -286,7 +286,7 @@ export const logout: AppThunk = (refreshToken: string) => {
 };
 
 export const reachUserData: AppThunk = (accessToken: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setGetUserDataLoading())
 
         getUserData(accessToken)
@@ -306,7 +306,7 @@ export const reachUserData: AppThunk = (accessToken: string) => {
 };
 
 export const updateUserData: AppThunk = (name: string, email: string, password: string, accessToken: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setPatchUserDataLoading())
 
         patchUserInfo(name, email, password, accessToken)

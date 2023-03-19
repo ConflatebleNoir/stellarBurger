@@ -59,7 +59,7 @@ export const setOrderDataFailedLoading = () => ({ type: GET_ORDER_DATA_FAILED })
 export const setWipeOrderData = () => ({ type: WIPE_ORDER_DATA });
 
 export const getOrderData: AppThunk = (orderNum: number) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setOrderDataLoading());
 
         getOrderInfo(orderNum)
