@@ -33,8 +33,8 @@ const BurgerIngredient: FC<IIngredientProps> = ({
 
     const handleSelectElement = (evt: MouseEvent<HTMLLIElement>) => {
         evt.preventDefault();
-        const currentItem = initIngredients.find((item: IIngredient) => item._id === evt.currentTarget.getAttribute('id'));
-        const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
+        const currentItem = initIngredients.find((item) => item._id === evt.currentTarget.getAttribute('id'));
+        const currentBun = currentIngredients.find((item) => item.type === 'bun');
         const indexOfBun = currentIngredients.indexOf(currentBun!);
 
         if (currentItem!.type === 'bun' && currentBun) {
@@ -57,7 +57,7 @@ const BurgerIngredient: FC<IIngredientProps> = ({
 
     const handleModalIngredient = (evt: MouseEvent<HTMLLIElement>) => {
         const id = evt.currentTarget.getAttribute('id');
-        const ingredinetSearch = initIngredients.find((element: IIngredient) => element._id === id);
+        const ingredinetSearch = initIngredients.find((element) => element._id === id);
         dispatch(modalIngredient(ingredinetSearch!));
         dispatch(switchIngredientsModalState(true));
     }

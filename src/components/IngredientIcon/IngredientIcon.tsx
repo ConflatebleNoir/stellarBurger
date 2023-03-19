@@ -15,7 +15,7 @@ const IngredientIcon: FC<IIngredientIcon> = ({ order, index, item, count }) => {
     const computeCount = () => {
         let count = 0;
         if (ingredients) {
-            count += ingredients.length;
+            count += ingredients.length - 5;
         };
 
         return count;

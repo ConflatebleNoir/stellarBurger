@@ -67,7 +67,7 @@ const OrderInfoFull: FC<IOrderInfoFullProps> = ({ isModal }) => {
                                     <p className='text text_type_main-medium mt-15 mb-6'>Состав:</p>
                                     <ul className={OrderInfoFullStyles.list}>
                                         {
-                                            Array.from(new Set(extractedIngredients))?.map((ingredient: IIngredient | undefined, index: number) => {
+                                            Array.from(new Set(extractedIngredients))?.map((ingredient, index) => {
                                                 return (
                                                     <li key={index} className={OrderInfoFullStyles.list_item}>
                                                         <img className={OrderInfoFullStyles.list_image} src={ingredient?.image} alt={ingredient?.name} />

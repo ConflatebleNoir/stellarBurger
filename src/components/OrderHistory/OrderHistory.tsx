@@ -25,7 +25,7 @@ const OrderHistory: FC = () => {
                 userOrders.length > 0 ? (
                     <>
                         {
-                            userOrders.map((order: IOrder, index: number) => (
+                            userOrders.map((order, index) => (
                                 <OrderPosition key={index} isNavigate={true} order={order} />
                             ))
                         }

@@ -43,11 +43,11 @@ export const removeOrder = () => ({
 })
 
 export const getOrder: AppThunk = (itemId: TIngredientID[], token: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(getOrderData());
         postOrder(itemId, token)
             .then((data) => {
-                //@ts-ignore
+                // @ts-ignore
                 dispatch(getOrderDataSuccess(data));
             })
             .then(() => {

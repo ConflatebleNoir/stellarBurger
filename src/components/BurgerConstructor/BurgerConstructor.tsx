@@ -19,7 +19,7 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onDropHandler }) => {
         prop: string,
     ) => currentIngredients.find((item: IIngredient) => item.type === 'bun')
             // @ts-ignore
-            ? `${(currentIngredients.find((item: IIngredient) => item.type === 'bun'))[prop]} ${boolValueTrue}`
+            ? `${(currentIngredients.find((item) => item.type === 'bun'))[prop]} ${boolValueTrue}`
             : boolValueFalse;
 
     const [{ isHover }, ingredientsContainer] = useDrop({
@@ -33,8 +33,8 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onDropHandler }) => {
     });
 
     const shiftElement = useCallback((dragIndex: number, hoverIndex: number) => {
-        const elementTypeBun = currentIngredients.filter(({ type }: TIngredientTypes) => type === 'bun');
-        const elementNonBun = currentIngredients.filter(({ type }: TIngredientTypes) => type !== 'bun');
+        const elementTypeBun = currentIngredients.filter(({ type }) => type === 'bun');
+        const elementNonBun = currentIngredients.filter(({ type }) => type !== 'bun');
         const sortedBase = update(elementNonBun, {
             $splice: [
                 [dragIndex, 1],
@@ -64,7 +64,7 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onDropHandler }) => {
                         : <p>Переместите сюда</p>
                 }
                 <ul className={BurgerConstructorStyle.order__list}>
-                    {currentIngredients.map((item: IIngredient, itemIndex: number) =>
+                    {currentIngredients.map((item, itemIndex) =>
                     (item.type !== 'bun'
                         && <CurrentIngredient
                             key={item.pseudoUuid}

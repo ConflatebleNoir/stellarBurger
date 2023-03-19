@@ -9,7 +9,7 @@ const IngredientDetails: FC<IIngredientDetailsProps> = ({ heading }) => {
     const ingredients = useSelector((state) => state.ingredientsData.ingredientsList)
     const { id } = useParams();
 
-    const modalIngredient = ingredients.find((item: IIngredient) => item._id === id);
+    const modalIngredient = ingredients.find((item) => item._id === id);
 
     const content = modalIngredient && (
         <>

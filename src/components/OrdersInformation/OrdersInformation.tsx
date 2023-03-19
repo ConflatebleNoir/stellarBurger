@@ -17,13 +17,13 @@ export const OrdersInformation: FC = () => {
                         <>
                             <div className={OrdersInformationStyles.order_statistics}>
                                 {
-                                    ordersList?.some((order: IOrder) => order.status === 'done') && (
+                                    ordersList?.some((order) => order.status === 'done') && (
                                         <div className={OrdersInformationStyles.done}>
                                             <p className='text text_type_main-medium'>Готовы:</p>
                                             <div className={`${OrdersInformationStyles.statistics_container} mt-6`}>
                                                 <ul className={OrdersInformationStyles.list_accent}>
                                                     {
-                                                        ordersList?.map((order: IOrder, index: number) => {
+                                                        ordersList?.map((order, index) => {
                                                             if (index < 10 && order.status === 'done') {
                                                                 return (<li key={index} className='text text_type_digits-default'>
                                                                     {order.number}
@@ -35,7 +35,7 @@ export const OrdersInformation: FC = () => {
                                                 </ul>
                                                 <ul className={OrdersInformationStyles.list_accent}>
                                                     {
-                                                        ordersList?.map((order: IOrder, index: number) => {
+                                                        ordersList?.map((order, index) => {
                                                             if (index >= 10 && index < 20 && order.status === 'done') {
                                                                 return (<li key={index} className='text text_type_digits-default'>
                                                                     {order.number}
@@ -55,7 +55,7 @@ export const OrdersInformation: FC = () => {
                                             <p className='text text_type_main-medium pb-6'>В работе:</p>
                                             <ul className={OrdersInformationStyles.list}>
                                                 {
-                                                    ordersList?.map((order: IOrder, index: number) => {
+                                                    ordersList?.map((order, index) => {
                                                         if (index < 10 && order.status === 'pending') {
                                                             return (<li key={index} className='text text_type_digits-default'>
                                                                 {order.number}

@@ -20,7 +20,7 @@ const ProfileForm: FC = () => {
 
     const onNameValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setNameValue(evt.target.value);
-        //@ts-ignore
+        // @ts-ignore
         evt.target.value === userData.name
             ? setInInfoChanged(false)
             : setInInfoChanged(true);
@@ -42,7 +42,7 @@ const ProfileForm: FC = () => {
     const cancelEdit = () => {
         //@ts-ignore
         setNameValue(userData.name);
-        //@ts-ignore
+        // @ts-ignore
         setEmailValue(userData.email);
         setPassValue('');
     };

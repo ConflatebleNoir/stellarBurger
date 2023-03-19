@@ -18,13 +18,13 @@ const SummaryConstructor: FC = () => {
 
     const summaryPrice = useMemo(
         () => currentIngredients.reduce(
-            (acc: number, cur: IIngredient) =>
+            (acc, cur) =>
                 cur.type === 'bun'
                     ? acc + (cur.price * 2)
                     : acc + cur.price, 0), [currentIngredients]);
 
     const handleOrderByClick = () => {
-        const elemId = currentIngredients.map((element: IIngredient) => element._id);
+        const elemId = currentIngredients.map((element) => element._id);
         if (userData) {
             dispatch(getOrder(elemId));
             dispatch(switchOrderModalState(true));

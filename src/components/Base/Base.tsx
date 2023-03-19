@@ -14,8 +14,8 @@ const Base: FC = () => {
     const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
 
     const handleDrop = (elementId: IIngredient) => {
-        const currentItem = initIngredients.find((item: IIngredient) => item._id === elementId._id);
-        const currentBun = currentIngredients.find((item: IIngredient) => item.type === 'bun');
+        const currentItem = initIngredients.find((item) => item._id === elementId._id);
+        const currentBun = currentIngredients.find((item) => item.type === 'bun');
         const currentBunIndex = currentIngredients.indexOf(currentBun!);
 
         if (currentItem!.type === 'bun' && currentBun) {
