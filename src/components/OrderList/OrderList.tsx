@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader';
 
 const OrderList: FC = () => {
     const ordersList = useSelector((state) => state.generalOrders.orders);
-    console.log(ordersList);
+
     return (
         <div className={OrderListStyles.orders__wrapper}>
             <h1 className='mt-10 mb-5 text text_type_main-large'>Лента заказов</h1>
@@ -15,8 +15,8 @@ const OrderList: FC = () => {
                     ? (
                         <ul className={OrderListStyles.list}>
                             {
-                                ordersList?.map((order, index) => (
-                                    <OrderPosition key={index} order={order} isNavigate={false} />
+                                ordersList?.map((order) => (
+                                    <OrderPosition key={order._id} order={order} isNavigate={false} />
                                 ))
                             }
                         </ul>

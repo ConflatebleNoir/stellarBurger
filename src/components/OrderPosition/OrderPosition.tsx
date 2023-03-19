@@ -11,7 +11,6 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) =
     const location = useLocation();
     const { ingredients, status, name, number, createdAt } = order;
 
-
     const checkoutStatus = (status: string) => {
         if (status === 'done') {
             return 'Создан';
@@ -28,8 +27,8 @@ const OrderPosition: FC<IOrderPositionProps> = ({ order, isNavigate = false }) =
     const computeSum = () => {
         let sum = 0;
 
-        ingredients.forEach((item: string) => {
-            const detectedIngredient = ingredientsList.find((ingredient: IIngredient) => ingredient._id === item);
+        ingredients.forEach((item) => {
+            const detectedIngredient = ingredientsList.find((ingredient) => ingredient._id === item);
 
             if (detectedIngredient?.price) {
                 sum += detectedIngredient.price;
