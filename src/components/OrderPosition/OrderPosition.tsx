@@ -2,7 +2,7 @@ import OrderPositionStyles from './OrderPosition.module.css'
 import { Link, useLocation } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { FC } from 'react';
-import { IIngredient, IOrderPositionProps } from '../../services/types/types';
+import { IOrderPositionProps } from '../../services/types/types';
 import { useSelector } from '../../services/hooks/hooks';
 import IngredientIcon from '../IngredientIcon/IngredientIcon';
 

@@ -1,5 +1,5 @@
 import { getOrderInfo } from "../../utils/api";
-import { AppDispatch, AppThunk, IOrder } from "../types/types";
+import { AppThunk, IOrder } from "../types/types";
 
 
 export const WS_CONNECTION_START: 'WS_CONNECTION_START' = 'WS_CONNECTION_START';

@@ -92,7 +92,7 @@ export const userReducer = (state = defaultState, action: AnyAction): IUserState
             return {
                 ...state,
                 registrationRequest: false,
-                registrationRequestFailed: false
+                registrationRequestFailed: true,
             };
         }
         case FORGOT_PASSWORD: {

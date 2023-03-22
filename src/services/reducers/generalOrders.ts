@@ -103,7 +103,7 @@ export const generalOrdersReducer = (state = defaultState, action: AnyAction): I
         case GET_ORDER_DATA_SUCCESS: {
             return {
                 ...state,
-                orderDataRequestSuccess: true,
+                orderDataRequestSuccess: false,
                 orderData: action.payload,
             };
         }
