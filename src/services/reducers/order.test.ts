@@ -44,7 +44,7 @@ describe('order_reducer', () => {
         expect(orderReducer(prevState, action))
             .toEqual({
                 ...prevState,
-                orderRequestSuccess: true,
+                orderRequestSuccess: false,
                 orderDetails: action.payload,
             })
     })

@@ -54,7 +54,7 @@ describe('modal_reducer', () => {
         expect(modalReducer(defaultState, action))
             .toEqual({
                 ...defaultState,
-                isIngredientModalOpen: action.payload,
+                isOrderFeedModalOpen: action.payload,
             })
     })
 })

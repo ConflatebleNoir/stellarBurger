@@ -211,12 +211,13 @@ describe('user_reducer', () => {
     it('have to handle FORGOT_PASSWORD_STATE', () => {
         const action = {
             type: FORGOT_PASSWORD_STATE,
+            payload: true
         }
 
         expect(userReducer(defaultState, action))
             .toEqual({
                 ...defaultState,
-                isPassForgot: true,
+                isPassForgot: action.payload,
             })
     })
 

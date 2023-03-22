@@ -67,15 +67,15 @@ describe('general_orders_reducer', () => {
         }
 
         const action = {
-            type: WS_USER_ORDERS_CONNECTION_ERROR,
+            type: WS_CONNECTION_ERROR,
             payload: 'Error',
         }
 
         expect(generalOrdersReducer(prevState, action))
             .toEqual({
                 ...prevState,
-                wsGeneralOrders: false,
                 generalOrdersError: action.payload,
+                wsGeneralOrders: false,
             })
     })
 
@@ -93,8 +93,8 @@ describe('general_orders_reducer', () => {
         expect(generalOrdersReducer(prevState, action))
             .toEqual({
                 ...prevState,
-                wsUserOrders: false,
                 userOrdersError: action.payload,
+                wsUserOrders: false,
             })
     })
 
@@ -114,7 +114,8 @@ describe('general_orders_reducer', () => {
         expect(generalOrdersReducer(prevState, action))
             .toEqual({
                 ...prevState,
-                wsGeneralOrders: undefined,
+                generalOrdersError: undefined,
+                wsGeneralOrders: false,
                 orders: [],
                 total: 0,
                 totalToday: 0,
