@@ -2,6 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.16.5",
@@ -60,6 +61,5 @@
     "jest": "^27.5.1",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4"
-  },
-  "homepage": "./"
+  }
 }
