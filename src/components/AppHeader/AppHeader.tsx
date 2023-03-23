@@ -36,7 +36,7 @@ const AppHeader: FC = () => {
                         </NavLink>
                     </li>
                 </ul>
-                <NavLink className={AppHeaderStyles.logo__wrapper} to={'/login'}>
+                <NavLink className={AppHeaderStyles.logo__wrapper} to={'/'}>
                     <Logo />
                 </NavLink>
                 <li className={AppHeaderStyles.menu__item
