@@ -1,4 +1,4 @@
-# [Stellar Burgers] (https://conflateblenoir.github.io/stellarBurger/)
+# [Stellar Burgers](https://conflateblenoir.github.io/stellarBurger/)
 
 Проект создан для учебных целей.
 Stack: TypeScript, JavaScript, CSS, React, Redux, Jest, Cypress.
