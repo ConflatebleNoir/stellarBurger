@@ -1,7 +1,7 @@
 # [Stellar Burgers](https://conflateblenoir.github.io/stellarBurger/)
 
-Проект создан для учебных целей.
-Stack: TypeScript, JavaScript, CSS, React, Redux, Jest, Cypress.
+### Проект создан для учебных целей.
+#### Stack: TypeScript, JavaScript, CSS, React, Redux, Jest, Cypress.
 
 Для запуска проекта необходимо проделать следующие шаги:
 1. Склонируйте проект. `git clone`;
