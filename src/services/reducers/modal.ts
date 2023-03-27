@@ -6,7 +6,7 @@ import {
 } from '../actions/modal';
 import { IModal } from '../types/types';
 
-const defaultState: IModal = {
+export const defaultState: IModal = {
     isOrderModalOpen: false,
     isIngredientModalOpen: false,
     isOrderFeedModalOpen: false,

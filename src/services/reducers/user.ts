@@ -28,7 +28,7 @@ import {
 } from '../actions/user'
 import { IUserState } from '../types/types';
 
-const defaultState: IUserState = {
+export const defaultState: IUserState = {
     userData: null,
     accessToken: null,
     loginRequest: false,

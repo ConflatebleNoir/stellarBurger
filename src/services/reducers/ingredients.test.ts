@@ -9,17 +9,10 @@ import {
     SORT_INGREDIENTS,
     REMOVE_ORDER_LIST,
 } from '../actions/ingredients';
-import { IIngredientsState } from '../types/types';
 import { ingredientsReducer } from './ingredients';
+import { defaultState } from './ingredients';
 
 describe('ingredients_reducer', () => {
-    const defaultState: IIngredientsState = {
-        ingredientsRequest: false,
-        ingredientsFailed: false,
-        ingredientsList: [],
-        modalIngredient: null,
-        currentIngredients: [],
-    }
 
     it('have to return default state', () => {
         //@ts-ignore

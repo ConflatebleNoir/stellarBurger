@@ -1,18 +1,13 @@
-import { IModal } from "../types/types"
 import { modalReducer } from "./modal"
 import {
     SWITCH_ORDER_MODAL_STATE,
     SWITCH_INGREDIENTS_MODAL_STATE,
     SWITCH_ORDER_FEED_MODAL_STATE,
 } from '../actions/modal';
+import { defaultState } from "./modal";
 
 
 describe('modal_reducer', () => {
-    const defaultState: IModal = {
-        isOrderModalOpen: false,
-        isIngredientModalOpen: false,
-        isOrderFeedModalOpen: false,
-    }
 
     it('have to return default state', () => {
         //@ts-ignore

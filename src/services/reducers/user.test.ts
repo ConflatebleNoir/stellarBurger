@@ -25,32 +25,10 @@ import {
     PATCH_USER_DATA_SUCCESS,
     PATCH_USER_DATA_FAILED,
 } from '../actions/user'
-import { IUserState } from '../types/types'
 import { userReducer } from './user'
+import { defaultState } from './user'
 
 describe('user_reducer', () => {
-    const defaultState: IUserState = {
-        userData: null,
-        accessToken: null,
-        loginRequest: false,
-        loginRequestFailed: false,
-        registrationRequest: false,
-        registrationRequestFailed: false,
-        forgotPasswordRequest: false,
-        forgotPasswordRequestFailed: false,
-        isPassForgot: false,
-        resetPasswordRequest: false,
-        resetPasswordRequestFailed: false,
-        logoutRequest: false,
-        logoutRequestFailed: false,
-        refreshTokenRequest: false,
-        refreshTokenRequestFailed: false,
-        getUserDataRequest: false,
-        getUserDataRequestFailed: false,
-        patchUserDataRequest: false,
-        patchUserDataRequestFailed: false,
-    }
-
     it('have to return default state', () => {
         //@ts-ignore
         expect(userReducer(undefined, {})).toEqual(defaultState)

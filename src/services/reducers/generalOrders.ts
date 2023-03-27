@@ -15,7 +15,7 @@ import {
 } from '../actions/generalOrders'
 import { IGeneralOrdersState } from '../types/types'
 
-const defaultState: IGeneralOrdersState = {
+export const defaultState: IGeneralOrdersState = {
     wsGeneralOrders: false,
     wsUserOrders: false,
     orders: [],

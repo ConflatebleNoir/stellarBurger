@@ -12,7 +12,7 @@ import {
 import { AnyAction } from 'redux';
 import { IIngredientsState } from '../types/types';
 
-const defaultState: IIngredientsState = {
+export const defaultState: IIngredientsState = {
     ingredientsRequest: false,
     ingredientsFailed: false,
     ingredientsList: [],

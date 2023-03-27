@@ -5,14 +5,9 @@ import {
     GET_ORDER_DATA_FAILED,
     REMOVE_ORDER_DATA,
 } from '../actions/order';
-import { IOrderState } from "../types/types";
+import { defaultState } from './order'
 
 describe('order_reducer', () => {
-    const defaultState: IOrderState = {
-        orderRequestSuccess: false,
-        orderRequestFailed: false,
-        orderDetails: null,
-    }
     it('have to return default state', () => {
         //@ts-ignore
         expect(orderReducer(undefined, {})).toEqual(defaultState)

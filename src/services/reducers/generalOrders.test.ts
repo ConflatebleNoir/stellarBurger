@@ -12,21 +12,10 @@ import {
     GET_ORDER_DATA_FAILED,
     WIPE_ORDER_DATA,
 } from '../actions/generalOrders'
-import { IGeneralOrdersState } from "../types/types";
 import { generalOrdersReducer } from "./generalOrders";
+import { defaultState } from './generalOrders';
 
 describe('general_orders_reducer', () => {
-    const defaultState: IGeneralOrdersState = {
-        wsGeneralOrders: false,
-        wsUserOrders: false,
-        orders: [],
-        userOrders: [],
-        total: 0,
-        totalToday: 0,
-        orderDataRequestSuccess: false,
-        orderDataRequestFailed: false,
-        orderData: null,
-    }
 
     it('have to return default state', () => {
         //@ts-ignore
