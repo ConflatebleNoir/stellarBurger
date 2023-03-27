@@ -1,3 +1,5 @@
+import { testBunSelector } from "../../utils";
+
 describe('modal open', () => {
     before(() => {
         cy.visit('');
@@ -10,7 +12,7 @@ describe('modal open', () => {
     it('have to open and close modal by click', () => {
         cy.visit('');
         cy.wait(1000);
-        cy.get('li').contains('Флюоресцентная булка R2-D3').click();
+        cy.get('li').contains(testBunSelector).click();
         cy.contains('Детали ингредиента');
         cy.get('header').find('button').click();
         cy.wait(500);

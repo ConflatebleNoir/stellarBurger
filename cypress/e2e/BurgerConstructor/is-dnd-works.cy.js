@@ -1,3 +1,5 @@
+import { testBunSelector, testMainSelector } from "../../utils";
+
 describe('dnd test', () => {
     before(() => {
         cy.visit('');
@@ -8,15 +10,15 @@ describe('dnd test', () => {
             fixture: "ingredients",
         });
         cy.contains('Соберите бургер');
-        cy.get('li').contains('Флюоресцентная булка R2-D3').trigger('dragstart');
+        cy.get('li').contains(testBunSelector).trigger('dragstart');
         cy.get('div').contains('Переместите сюда').trigger('drop');
-        cy.get('li').contains('Филе Люминесцентного тетраодонтимформа').trigger('dragstart');
+        cy.get('li').contains(testMainSelector).trigger('dragstart');
         cy.get('div').contains('верх').trigger('drop');
-        cy.get('li').contains('Филе Люминесцентного тетраодонтимформа').trigger('dragstart');
+        cy.get('li').contains(testMainSelector).trigger('dragstart');
         cy.get('div').contains('верх').trigger('drop');
-        cy.get('li').contains('Филе Люминесцентного тетраодонтимформа').trigger('dragstart');
+        cy.get('li').contains(testMainSelector).trigger('dragstart');
         cy.get('div').contains('верх').trigger('drop');
-        cy.get('li').contains('Филе Люминесцентного тетраодонтимформа').trigger('dragstart');
+        cy.get('li').contains(testMainSelector).trigger('dragstart');
         cy.get('div').contains('верх').trigger('drop');
     });
 });

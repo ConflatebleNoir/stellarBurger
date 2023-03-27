@@ -1,3 +1,5 @@
+import { testBunSelector, testMainSelector } from "../../utils";
+
 describe('create order', () => {
     before(() => {
         cy.visit('');
@@ -12,10 +14,10 @@ describe('create order', () => {
         cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
             fixture: "ingredients",
         });
-        cy.get('li').contains('Флюоресцентная булка R2-D3').rightclick();
-        cy.get('li').contains('Филе Люминесцентного тетраодонтимформа').rightclick();
-        cy.get('li').contains('Филе Люминесцентного тетраодонтимформа').rightclick();
-        cy.get('li').contains('Филе Люминесцентного тетраодонтимформа').rightclick();
+        cy.get('li').contains(testBunSelector).rightclick();
+        cy.get('li').contains(testMainSelector).rightclick();
+        cy.get('li').contains(testMainSelector).rightclick();
+        cy.get('li').contains(testMainSelector).rightclick();
         cy.get('button').contains('Оформить заказ').click();
         cy.contains('Вход');
         cy.get('form').within(() => {
