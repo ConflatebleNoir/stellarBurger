@@ -1,4 +1,5 @@
 import { testBunSelector, testMainSelector } from "../../utils";
+import { config } from '../../../src/utils/config'
 
 describe('dnd test', () => {
     before(() => {
@@ -6,7 +7,7 @@ describe('dnd test', () => {
     });
 
     it('have to drag element to drop container', () => {
-        cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
+        cy.intercept("GET", `${config.url}ingredients`, {
             fixture: "ingredients",
         });
         cy.contains('Соберите бургер');

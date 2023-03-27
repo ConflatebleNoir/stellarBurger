@@ -1,4 +1,5 @@
 import { testBunSelector, testMainSelector } from "../../utils";
+import { config } from '../../../src/utils/config'
 
 describe('create order', () => {
     before(() => {
@@ -11,7 +12,7 @@ describe('create order', () => {
 
     it('have to make an order, trigger a login route, pass through auth and get an order ID', () => {
         cy.visit('');
-        cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
+        cy.intercept("GET", `${config.url}ingredients`, {
             fixture: "ingredients",
         });
         cy.get('li').contains(testBunSelector).rightclick();
