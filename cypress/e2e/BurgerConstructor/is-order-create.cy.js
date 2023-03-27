@@ -1,6 +1,6 @@
 describe('create order', () => {
     before(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('have to open burger constructor page by default', () => {
@@ -8,7 +8,7 @@ describe('create order', () => {
     });
 
     it('have to make an order, trigger a login route, pass through auth and get an order ID', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
         cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
             fixture: "ingredients",
         });

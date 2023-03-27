@@ -1,10 +1,10 @@
 describe('reach profile page', () => {
     before(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('click profile link, reroute to login page', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
         cy.contains('Соберите бургер');
         cy.get('li').contains('Личный кабинет').click();
         cy.contains('Вход');
@@ -17,7 +17,7 @@ describe('reach profile page', () => {
     });
 
     it('overview user orders', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
         cy.contains('Соберите бургер');
         cy.get('li').contains('Личный кабинет').click();
         cy.contains('Вход');

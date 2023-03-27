@@ -1,6 +1,6 @@
 describe('overview modal open', () => {
     before(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('have to open feed page, get feed and open modal', () => {

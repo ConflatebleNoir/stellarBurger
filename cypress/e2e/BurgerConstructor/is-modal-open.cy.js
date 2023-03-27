@@ -1,6 +1,6 @@
 describe('modal open', () => {
     before(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('have to open burger constructor page by default', () => {
@@ -8,7 +8,7 @@ describe('modal open', () => {
     });
 
     it('have to open and close modal by click', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
         cy.wait(1000);
         cy.get('li').contains('Флюоресцентная булка R2-D3').click();
         cy.contains('Детали ингредиента');

@@ -1,6 +1,6 @@
 describe('scroll is available', () => {
     before(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('have to scroll to position', () => {

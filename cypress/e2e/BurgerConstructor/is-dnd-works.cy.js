@@ -1,6 +1,6 @@
 describe('dnd test', () => {
     before(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('have to drag element to drop container', () => {
