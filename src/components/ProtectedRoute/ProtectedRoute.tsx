@@ -7,10 +7,13 @@ import { useSelector } from "../../services/hooks/hooks";
 const ProtectedRoute: FC<IProtectedRouteProps> = ({ children, anonymous = false }) => {
     const userData = useSelector((state) => state.userData.userData);
     const location = useLocation();
-    const previousLocation = location.state?.from || '/';
+    const previousLocation = location.state?.background || '/';
+    // console.log(previousLocation);
+    console.log(location)
+    console.log(location.state?.background)
 
     if (anonymous && userData) {
-        return <Navigate to={previousLocation} />
+        return <Navigate to={previousLocation} replace />
     }
 
     if (!userData) {

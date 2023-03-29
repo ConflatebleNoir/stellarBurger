@@ -2,7 +2,7 @@ import type { Middleware, MiddlewareAPI, } from "redux"
 import { AppDispatch, RootState, IWSActions } from "../types/types"
 
 export const socketMiddleware = (wsUrl: string, wsAction: IWSActions): Middleware => {
-    return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
+    return ((store: MiddlewareAPI) => {
         let socket: WebSocket | null = null;
 
         return next => (action) => {
@@ -10,7 +10,6 @@ export const socketMiddleware = (wsUrl: string, wsAction: IWSActions): Middlewar
             const { type } = action;
             const { userData } = getState();
             const { wsInitial, onOpen, onClose, onError, onMessage } = wsAction;
-            // let token = localStorage.getItem('refreshToken');
 
             if (type === wsInitial && userData) {
                 socket = new WebSocket(`${wsUrl}?token=${userData?.accessToken?.replace('Bearer ', '')}`);

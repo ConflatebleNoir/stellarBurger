@@ -4,7 +4,7 @@ import {
     ConstructorElement,
     DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDrag, useDrop } from 'react-dnd'
+import { XYCoord, useDrag, useDrop } from 'react-dnd'
 import { removeIngredient } from '../../services/actions/ingredients'
 import { ICurrentIngredientProps, IIngredient } from '../../services/types/types'
 import { useDispatch, useSelector } from '../../services/hooks/hooks'
@@ -32,11 +32,10 @@ const CurrentIngredient: FC<ICurrentIngredientProps> = ({ item, id, index, shift
                 handlerId: monitor.getHandlerId(),
             };
         },
-        drop(item, monitor) {
+        drop(item: any, monitor) {
             if (!ref.current) {
                 return;
             }
-            // @ts-ignore
             const dragItemIndex = item.index;
             const hoverIndex = index;
 
@@ -46,8 +45,7 @@ const CurrentIngredient: FC<ICurrentIngredientProps> = ({ item, id, index, shift
 
             const hoverBoundering = ref.current.getBoundingClientRect();
             const hoverCenterY = (hoverBoundering.bottom - hoverBoundering.top) / 2;
-            const clientOffset = monitor.getClientOffset();
-            // @ts-ignore
+            const clientOffset: any = monitor.getClientOffset();
             const hoverClientY = clientOffset.y - clientOffset.top;
 
             if (dragItemIndex < hoverIndex && hoverClientY < hoverCenterY) {
@@ -59,7 +57,6 @@ const CurrentIngredient: FC<ICurrentIngredientProps> = ({ item, id, index, shift
             }
 
             shiftElement(dragItemIndex - 1, hoverIndex - 1);
-            // @ts-ignore
             item.index = hoverIndex;
         },
     });

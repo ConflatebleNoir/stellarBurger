@@ -29,7 +29,7 @@ describe('ingredients_reducer', () => {
             type: GET_INGREDIENTS_SUCCESS,
             payload: [{}],
         }
-
+        //@ts-ignore
         expect(ingredientsReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -47,7 +47,7 @@ describe('ingredients_reducer', () => {
         const action = {
             type: GET_INGREDIENTS_FAILED,
         }
-
+        //@ts-ignore
         expect(ingredientsReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -60,7 +60,7 @@ describe('ingredients_reducer', () => {
         const action = {
             type: GET_INGREDIENTS,
         }
-
+        //@ts-ignore
         expect(ingredientsReducer(defaultState, action))
             .toEqual({
                 ...defaultState,
@@ -74,7 +74,7 @@ describe('ingredients_reducer', () => {
             type: ADD_INGREDIENT,
             payload: [{}],
         }
-
+        //@ts-ignore
         expect(ingredientsReducer(defaultState, action))
             .toEqual({
                 ...defaultState,
@@ -141,6 +141,7 @@ describe('ingredients_reducer', () => {
             payload: {},
         }
 
+        //@ts-ignore
         expect(ingredientsReducer(defaultState, action))
             .toEqual({
                 ...defaultState,

@@ -38,7 +38,7 @@ const App: FC = () => {
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));
     dispatch(removeModalIngredient());
-    state && navigate(-1);
+    navigate(state?.background.pathname);
   }
 
   const handleOrderDetailsClose = () => {
@@ -48,8 +48,9 @@ const App: FC = () => {
 
   const handleOrderInfoModalClose = () => {
     dispatch(switchOrderFeedModalState(false));
-    state && navigate(-1);
+    navigate(state?.background.pathname);
     dispatch(setWipeOrderData());
+    console.log(state?.background);
   }
 
   useEffect(() => {
@@ -57,6 +58,7 @@ const App: FC = () => {
     dispatch(reachUserData(accessToken));
   }, [dispatch, accessToken]);
 
+  console.log(state?.background)
   return (
     <div className={AppStyles.container} >
       {ingredientsReqest

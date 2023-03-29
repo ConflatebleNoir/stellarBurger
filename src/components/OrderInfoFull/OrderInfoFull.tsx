@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/hooks/hooks'
 import OrderInfoFullStyles from './OrderInfoFull.module.css'
 import { FC, useEffect } from 'react'

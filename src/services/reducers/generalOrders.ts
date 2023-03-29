@@ -1,4 +1,3 @@
-import { AnyAction } from 'redux';
 import {
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
@@ -13,7 +12,7 @@ import {
     GET_ORDER_DATA_FAILED,
     WIPE_ORDER_DATA,
 } from '../actions/generalOrders'
-import { IGeneralOrdersState } from '../types/types'
+import { IGeneralOrdersState, TAvailableActions } from '../types/types'
 
 export const defaultState: IGeneralOrdersState = {
     wsGeneralOrders: false,
@@ -27,7 +26,7 @@ export const defaultState: IGeneralOrdersState = {
     orderData: null,
 };
 
-export const generalOrdersReducer = (state = defaultState, action: AnyAction): IGeneralOrdersState => {
+export const generalOrdersReducer = (state = defaultState, action: TAvailableActions): IGeneralOrdersState => {
     switch (action.type) {
         case WS_CONNECTION_SUCCESS: {
             return {

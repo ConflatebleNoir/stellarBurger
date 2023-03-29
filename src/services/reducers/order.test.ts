@@ -36,6 +36,7 @@ describe('order_reducer', () => {
             payload: [],
         }
 
+        //@ts-ignore
         expect(orderReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -71,7 +72,7 @@ describe('order_reducer', () => {
         const action = {
             type: REMOVE_ORDER_DATA,
         }
-
+        //@ts-ignore
         expect(orderReducer(prevState, action))
             .toEqual({
                 ...prevState,

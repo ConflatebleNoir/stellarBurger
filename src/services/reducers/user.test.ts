@@ -61,6 +61,7 @@ describe('user_reducer', () => {
             }
         }
 
+        //@ts-ignore
         expect(userReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -269,7 +270,7 @@ describe('user_reducer', () => {
         const action = {
             type: LOGOUT_SUCCESS,
         }
-
+        //@ts-ignore
         expect(userReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -370,7 +371,7 @@ describe('user_reducer', () => {
             type: GET_USER_DATA_SUCCESS,
             payload: {},
         }
-
+        //@ts-ignore
         expect(userReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -421,6 +422,7 @@ describe('user_reducer', () => {
             payload: {},
         }
 
+        //@ts-ignore
         expect(userReducer(prevState, action))
             .toEqual({
                 ...prevState,

@@ -7,7 +7,6 @@ import { FC, useEffect } from 'react';
 
 const OrderHistory: FC = () => {
     const userOrders = useSelector((state) => state.generalOrders.userOrders);
-    console.log(userOrders)
     const dispatch = useDispatch();
 
     useEffect(() => {

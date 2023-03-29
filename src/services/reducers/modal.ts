@@ -1,10 +1,9 @@
-import { AnyAction } from 'redux';
 import {
     SWITCH_ORDER_MODAL_STATE,
     SWITCH_INGREDIENTS_MODAL_STATE,
     SWITCH_ORDER_FEED_MODAL_STATE,
 } from '../actions/modal';
-import { IModal } from '../types/types';
+import { IModal, TAvailableActions } from '../types/types';
 
 export const defaultState: IModal = {
     isOrderModalOpen: false,
@@ -12,7 +11,7 @@ export const defaultState: IModal = {
     isOrderFeedModalOpen: false,
 }
 
-export const modalReducer = (state = defaultState, action: AnyAction): IModal => {
+export const modalReducer = (state = defaultState, action: TAvailableActions): IModal => {
     switch (action.type) {
         case SWITCH_ORDER_MODAL_STATE: {
             return {

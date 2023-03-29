@@ -8,7 +8,7 @@ import {
     getUserData,
     patchUserInfo,
 } from "../../utils/api";
-import { AppDispatch, AppThunk, IUser } from "../types/types";
+import { AppThunk, IUser } from "../types/types";
 
 export const USER_LOGIN: 'USER_LOGIN' = 'USER_LOGIN';
 export const USER_LOGIN_SUCCESS: 'USER_LOGIN_SUCCESS' = 'USER_LOGIN_SUCCESS';
@@ -50,12 +50,11 @@ export interface IUserLogin {
 
 export interface IUserLoginSuccess {
     readonly type: typeof USER_LOGIN_SUCCESS;
-    payload: string;
+    payload: object;
 };
 
 export interface IUserLoginFailed {
     readonly type: typeof USER_LOGIN_FAILED;
-    payload: string;
 };
 
 export interface IUserRegistration {
@@ -186,11 +185,12 @@ export const setPatchUserDataSuccessLoading = (userData: IUser) => ({ type: PATC
 export const setPatchUserDataFailedLoading = () => ({ type: PATCH_USER_DATA_FAILED });
 
 export const signIn: AppThunk = (email: string, pass: string) => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch) {
         dispatch(setUserLoginLoading())
 
         postLogin(email, pass)
             .then(res => {
+                console.log(res)
                 //@ts-ignore
                 dispatch(setUserLoginLoadingSuccess(res))
                 // @ts-ignore

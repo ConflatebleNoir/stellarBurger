@@ -1,11 +1,10 @@
-import { AnyAction } from 'redux';
 import {
     GET_ORDER_DATA,
     GET_ORDER_DATA_SUCCESS,
     GET_ORDER_DATA_FAILED,
     REMOVE_ORDER_DATA,
 } from '../actions/order';
-import { IOrderState } from '../types/types';
+import { IOrderState, TAvailableActions } from '../types/types';
 
 
 export const defaultState: IOrderState = {
@@ -14,7 +13,7 @@ export const defaultState: IOrderState = {
     orderDetails: null,
 };
 
-export const orderReducer = (state = defaultState, action: AnyAction): IOrderState => {
+export const orderReducer = (state = defaultState, action: TAvailableActions): IOrderState => {
     switch (action.type) {
         case GET_ORDER_DATA_SUCCESS: {
             return {

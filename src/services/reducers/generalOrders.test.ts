@@ -60,6 +60,7 @@ describe('general_orders_reducer', () => {
             payload: 'Error',
         }
 
+        //@ts-ignore
         expect(generalOrdersReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -79,6 +80,7 @@ describe('general_orders_reducer', () => {
             payload: 'Error'
         }
 
+        //@ts-ignore
         expect(generalOrdersReducer(prevState, action))
             .toEqual({
                 ...prevState,
@@ -144,6 +146,7 @@ describe('general_orders_reducer', () => {
             }
         }
 
+        //@ts-ignore
         expect(generalOrdersReducer(defaultState, action))
             .toEqual({
                 ...defaultState,
@@ -164,6 +167,7 @@ describe('general_orders_reducer', () => {
             }
         }
 
+        //@ts-ignore
         expect(generalOrdersReducer(defaultState, action))
             .toEqual({
                 ...defaultState,
@@ -196,6 +200,7 @@ describe('general_orders_reducer', () => {
             payload: [{}],
         }
 
+        //@ts-ignore
         expect(generalOrdersReducer(prevState, action))
             .toEqual({
                 ...prevState,

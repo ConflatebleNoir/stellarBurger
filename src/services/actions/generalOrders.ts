@@ -1,5 +1,5 @@
 import { getOrderInfo } from "../../utils/api";
-import { AppThunk, IOrder } from "../types/types";
+import { AppThunk, IGeneralOrdersState, IOrder } from "../types/types";
 
 
 export const WS_CONNECTION_START: 'WS_CONNECTION_START' = 'WS_CONNECTION_START';
@@ -21,6 +21,32 @@ export const GET_ORDER_DATA_SUCCESS: 'GET_ORDER_DATA_SUCCESS' = 'GET_ORDER_DATA_
 export const GET_ORDER_DATA_FAILED: 'GET_ORDER_DATA_FAILED' = 'GET_ORDER_DATA_FAILED';
 export const WIPE_ORDER_DATA: 'WIPE_ORDER_DATA' = 'WIPE_ORDER_DATA';
 
+
+export interface IWSConnectionSuccess {
+    readonly type: typeof WS_CONNECTION_SUCCESS;
+}
+
+export interface IWSConnectionError {
+    readonly type: typeof WS_CONNECTION_ERROR;
+    readonly payload: Event;
+}
+
+export interface IWSConnectionClosed {
+    readonly type: typeof WS_CONNECTION_CLOSED;
+}
+
+export interface IWSUserOrdersConnectionSuccess {
+    readonly type: typeof WS_USER_ORDERS_CONNECTION_SUCCESS;
+}
+
+export interface IWSUserOrdersConnectionError {
+    readonly type: typeof WS_USER_ORDERS_CONNECTION_ERROR;
+    readonly payload: Event;
+}
+export interface IWSUserOrdersConnectionClosed {
+    readonly type: typeof WS_USER_ORDERS_CONNECTION_CLOSED;
+}
+
 export interface IWSOrdersConnectionStart {
     readonly type: typeof WS_CONNECTION_START;
 };
@@ -28,6 +54,20 @@ export interface IWSOrdersConnectionStart {
 export interface IWSUserOrdersConnectionStart {
     readonly type: typeof WS_USER_ORDERS_CONNECTION_START;
 };
+
+export interface IWSGetOrders {
+    readonly type: typeof WS_GET_ORDERS;
+    readonly payload: IGeneralOrdersState;
+}
+
+export interface IWSGetUserOrders {
+    readonly type: typeof WS_GET_USER_ORDERS;
+    readonly payload: IGeneralOrdersState;
+}
+
+export interface IWSWipeOrderData {
+    readonly type: typeof WIPE_ORDER_DATA;
+}
 
 export const wsOrdersConnectionStart = () => {
     return {
@@ -53,6 +93,7 @@ export const wsUserOrdersConnectionClosed = () => {
     };
 };
 
+
 export const setOrderDataLoading = () => ({ type: GET_ORDER_DATA });
 export const setOrderDataSuccessLoading = (data: IOrder) => ({ type: GET_ORDER_DATA_SUCCESS, payload: data });
 export const setOrderDataFailedLoading = () => ({ type: GET_ORDER_DATA_FAILED });
@@ -67,8 +108,6 @@ export const getOrderData: AppThunk = (orderNum: number) => {
                 if (data) {
                     // @ts-ignore
                     dispatch(setOrderDataSuccessLoading(data.orders[0]));
-                    // @ts-ignore
-                    console.log(setOrderDataSuccessLoading(data.orders[0]))
                 }
             })
             .catch(() => dispatch(setOrderDataFailedLoading()))

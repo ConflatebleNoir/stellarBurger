@@ -1,6 +1,9 @@
 import { ThunkAction } from "redux-thunk";
 import {
     IAddIngredient,
+    IGetIngredients,
+    IGetIngredientsFailed,
+    IGetIngredientsSuccess,
     IModalIngredient,
     IRemoveIngredient,
     IRemoveModalIngredient,
@@ -15,6 +18,7 @@ import {
 } from "../actions/order";
 import {
     ISwitchIngredientsModalState,
+    ISwitchOrderFeedModalState,
     ISwitchOrderModalState
 } from "../actions/modal";
 import {
@@ -45,8 +49,17 @@ import {
     IUserRegistrationSuccess
 } from "../actions/user";
 import {
+    IWSConnectionClosed,
+    IWSConnectionError,
+    IWSConnectionSuccess,
+    IWSGetOrders,
+    IWSGetUserOrders,
     IWSOrdersConnectionStart,
-    IWSUserOrdersConnectionStart
+    IWSUserOrdersConnectionClosed,
+    IWSUserOrdersConnectionError,
+    IWSUserOrdersConnectionStart,
+    IWSUserOrdersConnectionSuccess,
+    IWSWipeOrderData
 } from "../actions/generalOrders";
 import { store } from "../store";
 import { Action, ActionCreator } from "redux"
@@ -127,8 +140,11 @@ export interface IOrder {
 };
 
 export interface IUser {
-    email: string,
-    name: string,
+    user: {
+        email: string,
+        name: string,
+    },
+    accessToken: string,
 };
 
 export interface IWSActions {
@@ -213,6 +229,9 @@ export interface IGeneralOrdersState {
 
 export type RootState = ReturnType<typeof store.getState>;
 export type TAvailableActions =
+    | IGetIngredients
+    | IGetIngredientsSuccess
+    | IGetIngredientsFailed
     | IAddIngredient
     | IRemoveIngredient
     | IModalIngredient
@@ -225,6 +244,7 @@ export type TAvailableActions =
     | IRemoveOrderData
     | ISwitchOrderModalState
     | ISwitchIngredientsModalState
+    | ISwitchOrderFeedModalState
     | IUserLogin
     | IUserLoginSuccess
     | IUserLoginFailed
@@ -250,8 +270,25 @@ export type TAvailableActions =
     | IPatchUserDataSuccess
     | IPatchUserDataFailed
     | IForgotPasswordState
+    | IWSConnectionSuccess
+    | IWSConnectionError
+    | IWSConnectionClosed
     | IWSOrdersConnectionStart
-    | IWSUserOrdersConnectionStart;
+    | IWSGetOrders
+    | IWSGetUserOrders
+    | IWSWipeOrderData
+    | IWSUserOrdersConnectionStart
+    | IWSUserOrdersConnectionSuccess
+    | IWSUserOrdersConnectionError
+    | IWSUserOrdersConnectionClosed
+    ;
 
 export type AppDispatch = typeof store.dispatch;
-export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TAvailableActions>>
+export type AppThunk<TReturn = void> = ActionCreator<
+    ThunkAction<
+        TReturn,
+        Action,
+        RootState,
+        TAvailableActions
+    >
+>

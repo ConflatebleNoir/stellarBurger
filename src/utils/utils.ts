@@ -1,3 +1,4 @@
+import { IIngredient, IOrder, IUser } from "../services/types/types";
 import { config } from "./config";
 
 const checkResponse = (res: Response) => {
@@ -8,7 +9,7 @@ const checkResponse = (res: Response) => {
 };
 
 const checkSuccess = (res: {
-    data?: Array<object>;
+    data: IIngredient[] & IOrder & IUser;
     success: boolean,
 }) => {
     if (res && res.success) {

@@ -18,8 +18,7 @@ const BurgerConstructor: FC<IBurgerConstructorProps> = ({ onDropHandler }) => {
         boolValueFalse: string,
         prop: string,
     ) => currentIngredients.find((item: IIngredient) => item.type === 'bun')
-            // @ts-ignore
-            ? `${(currentIngredients.find((item) => item.type === 'bun'))[prop]} ${boolValueTrue}`
+            ? `${(currentIngredients.find((item) => item.type === 'bun'))![prop as keyof IIngredient]} ${boolValueTrue}`
             : boolValueFalse;
 
     const [{ isHover }, ingredientsContainer] = useDrop({

@@ -7,7 +7,6 @@ import {
 import { getOrder } from '../../services/actions/order'
 import { switchOrderModalState } from '../../services/actions/modal'
 import { useNavigate } from 'react-router-dom'
-import { IIngredient } from '../../services/types/types'
 import { useDispatch, useSelector } from '../../services/hooks/hooks'
 
 const SummaryConstructor: FC = () => {

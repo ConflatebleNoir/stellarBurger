@@ -26,7 +26,7 @@ import {
     PATCH_USER_DATA_SUCCESS,
     PATCH_USER_DATA_FAILED,
 } from '../actions/user'
-import { IUserState } from '../types/types';
+import { IUserState, TAvailableActions } from '../types/types';
 
 export const defaultState: IUserState = {
     userData: null,
@@ -50,7 +50,7 @@ export const defaultState: IUserState = {
     patchUserDataRequestFailed: false,
 }
 
-export const userReducer = (state = defaultState, action: AnyAction): IUserState => {
+export const userReducer = (state = defaultState, action: TAvailableActions): IUserState => {
     switch (action.type) {
         case USER_LOGIN: {
             return {
@@ -63,7 +63,9 @@ export const userReducer = (state = defaultState, action: AnyAction): IUserState
             return {
                 ...state,
                 loginRequest: false,
+                //@ts-ignore
                 accessToken: action.payload.accessToken,
+                //@ts-ignore
                 userData: action.payload.user
             }
         }
