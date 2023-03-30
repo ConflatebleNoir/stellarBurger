@@ -16,10 +16,10 @@ export const WS_USER_ORDERS_CONNECTION_CLOSED: 'WS_USER_ORDERS_CONNECTION_CLOSED
 
 export const WS_GET_USER_ORDERS: 'WS_GET_USER_ORDERS' = 'WS_GET_USER_ORDERS';
 
-export const GET_ORDER_DATA: 'GET_ORDER_DATA' = 'GET_ORDER_DATA';
-export const GET_ORDER_DATA_SUCCESS: 'GET_ORDER_DATA_SUCCESS' = 'GET_ORDER_DATA_SUCCESS';
-export const GET_ORDER_DATA_FAILED: 'GET_ORDER_DATA_FAILED' = 'GET_ORDER_DATA_FAILED';
-export const WIPE_ORDER_DATA: 'WIPE_ORDER_DATA' = 'WIPE_ORDER_DATA';
+export const GET_ORDER_INFO: 'GET_ORDER_INFO' = 'GET_ORDER_INFO';
+export const GET_ORDER_INFO_SUCCESS: 'GET_ORDER_INFO_SUCCESS' = 'GET_ORDER_INFO_SUCCESS';
+export const GET_ORDER_INFO_FAILED: 'GET_ORDER_INFO_FAILED' = 'GET_ORDER_INFO_FAILED';
+export const WIPE_ORDER_INFO: 'WIPE_ORDER_INFO' = 'WIPE_ORDER_INFO';
 
 
 export interface IWSConnectionSuccess {
@@ -65,8 +65,21 @@ export interface IWSGetUserOrders {
     readonly payload: IGeneralOrdersState;
 }
 
+export interface IGetOrderInfo {
+    readonly type: typeof GET_ORDER_INFO;
+}
+
+export interface IGetOrderInfoSuccess {
+    readonly type: typeof GET_ORDER_INFO_SUCCESS;
+    readonly payload: IOrder;
+}
+
+export interface IGetOrderInfoFailed {
+    readonly type: typeof GET_ORDER_INFO_FAILED;
+}
+
 export interface IWSWipeOrderData {
-    readonly type: typeof WIPE_ORDER_DATA;
+    readonly type: typeof WIPE_ORDER_INFO;
 }
 
 export const wsOrdersConnectionStart = () => {
@@ -94,22 +107,22 @@ export const wsUserOrdersConnectionClosed = () => {
 };
 
 
-export const setOrderDataLoading = () => ({ type: GET_ORDER_DATA });
-export const setOrderDataSuccessLoading = (data: IOrder) => ({ type: GET_ORDER_DATA_SUCCESS, payload: data });
-export const setOrderDataFailedLoading = () => ({ type: GET_ORDER_DATA_FAILED });
-export const setWipeOrderData = () => ({ type: WIPE_ORDER_DATA });
+export const setOrderInfoLoading = () => ({ type: GET_ORDER_INFO });
+export const setOrderInfoSuccessLoading = (data: IOrder) => ({ type: GET_ORDER_INFO_SUCCESS, payload: data });
+export const setOrderInfoFailedLoading = () => ({ type: GET_ORDER_INFO_FAILED });
+export const setWipeOrderInfo = () => ({ type: WIPE_ORDER_INFO });
 
 export const getOrderData: AppThunk = (orderNum: number) => {
     return function (dispatch) {
-        dispatch(setOrderDataLoading());
+        dispatch(setOrderInfoLoading());
 
         getOrderInfo(orderNum)
             .then(data => {
                 if (data) {
                     // @ts-ignore
-                    dispatch(setOrderDataSuccessLoading(data.orders[0]));
+                    dispatch(setOrderInfoSuccessLoading(data.orders[0]));
                 }
             })
-            .catch(() => dispatch(setOrderDataFailedLoading()))
+            .catch(() => dispatch(setOrderInfoFailedLoading()))
     };
 };

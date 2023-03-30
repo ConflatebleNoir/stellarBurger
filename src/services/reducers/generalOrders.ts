@@ -7,10 +7,10 @@ import {
     WS_USER_ORDERS_CONNECTION_ERROR,
     WS_USER_ORDERS_CONNECTION_CLOSED,
     WS_GET_USER_ORDERS,
-    GET_ORDER_DATA,
-    GET_ORDER_DATA_SUCCESS,
-    GET_ORDER_DATA_FAILED,
-    WIPE_ORDER_DATA,
+    GET_ORDER_INFO,
+    GET_ORDER_INFO_SUCCESS,
+    GET_ORDER_INFO_FAILED,
+    WIPE_ORDER_INFO,
 } from '../actions/generalOrders'
 import { IGeneralOrdersState, TAvailableActions } from '../types/types'
 
@@ -92,28 +92,28 @@ export const generalOrdersReducer = (state = defaultState, action: TAvailableAct
                 userOrders: action.payload.orders,
             };
         }
-        case GET_ORDER_DATA: {
+        case GET_ORDER_INFO: {
             return {
                 ...state,
                 orderDataRequestSuccess: true,
                 orderDataRequestFailed: false,
             };
         }
-        case GET_ORDER_DATA_SUCCESS: {
+        case GET_ORDER_INFO_SUCCESS: {
             return {
                 ...state,
                 orderDataRequestSuccess: false,
                 orderData: action.payload,
             };
         }
-        case GET_ORDER_DATA_FAILED: {
+        case GET_ORDER_INFO_FAILED: {
             return {
                 ...state,
                 orderDataRequestSuccess: false,
                 orderDataRequestFailed: true,
             };
         }
-        case WIPE_ORDER_DATA: {
+        case WIPE_ORDER_INFO: {
             return {
                 ...state,
                 orderDataRequestSuccess: false,

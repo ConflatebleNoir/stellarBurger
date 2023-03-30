@@ -4,10 +4,13 @@ import ModalStyles from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
 import { IModalProps } from "../../services/types/types";
+import { useLocation } from "react-router-dom";
 
 const Modal: FC<PropsWithChildren<IModalProps>> = ({ children, handleModalClose, number, title = '' }) => {
     const modalRoot = document.getElementById("modals") as HTMLElement;
     const element = useMemo(() => document.createElement('div'), []);
+    const location = useLocation();
+    console.log(location);
 
     useEffect(() => {
         modalRoot.appendChild(element);

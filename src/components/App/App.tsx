@@ -20,7 +20,7 @@ import Loader from '../Loader/Loader'
 import Feed from '../../pages/Feed/Feed'
 import { useDispatch, useSelector } from '../../services/hooks/hooks'
 import OrderInfoFull from '../OrderInfoFull/OrderInfoFull'
-import { setWipeOrderData } from '../../services/actions/generalOrders'
+import { setWipeOrderInfo } from '../../services/actions/generalOrders'
 import { reachUserData } from '../../services/actions/user'
 
 
@@ -49,14 +49,14 @@ const App: FC = () => {
   const handleOrderInfoModalClose = () => {
     dispatch(switchOrderFeedModalState(false));
     navigate(state?.background.pathname);
-    dispatch(setWipeOrderData());
+    dispatch(setWipeOrderInfo());
     console.log(state?.background);
   }
 
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(reachUserData(accessToken));
-  }, [dispatch, accessToken]);
+  }, []);
 
   console.log(state?.background)
   return (

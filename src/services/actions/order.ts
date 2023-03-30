@@ -49,6 +49,7 @@ export const getOrder: AppThunk = (itemId: TIngredientID[], token: string) => {
             .then((data) => {
                 // @ts-ignore
                 dispatch(getOrderDataSuccess(data));
+                console.log(data)
             })
             .then(() => {
                 dispatch(removeOrderList())

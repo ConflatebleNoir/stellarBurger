@@ -7,10 +7,10 @@ import {
     WS_USER_ORDERS_CONNECTION_ERROR,
     WS_USER_ORDERS_CONNECTION_CLOSED,
     WS_GET_USER_ORDERS,
-    GET_ORDER_DATA,
-    GET_ORDER_DATA_SUCCESS,
-    GET_ORDER_DATA_FAILED,
-    WIPE_ORDER_DATA,
+    GET_ORDER_INFO,
+    GET_ORDER_INFO_SUCCESS,
+    GET_ORDER_INFO_FAILED,
+    WIPE_ORDER_INFO,
 } from '../actions/generalOrders'
 import { generalOrdersReducer } from "./generalOrders";
 import { defaultState } from './generalOrders';
@@ -178,7 +178,7 @@ describe('general_orders_reducer', () => {
 
     it('have to handle GET_ORDER_DATA', () => {
         const action = {
-            type: GET_ORDER_DATA,
+            type: GET_ORDER_INFO,
         }
 
         expect(generalOrdersReducer(defaultState, action))
@@ -196,7 +196,7 @@ describe('general_orders_reducer', () => {
         }
 
         const action = {
-            type: GET_ORDER_DATA_SUCCESS,
+            type: GET_ORDER_INFO_SUCCESS,
             payload: [{}],
         }
 
@@ -216,7 +216,7 @@ describe('general_orders_reducer', () => {
         }
 
         const action = {
-            type: GET_ORDER_DATA_FAILED,
+            type: GET_ORDER_INFO_FAILED,
         }
 
         expect(generalOrdersReducer(prevState, action))
@@ -234,7 +234,7 @@ describe('general_orders_reducer', () => {
         }
 
         const action = {
-            type: WIPE_ORDER_DATA,
+            type: WIPE_ORDER_INFO,
         }
         //@ts-ignore
         expect(generalOrdersReducer(prevState, action))

@@ -49,6 +49,9 @@ import {
     IUserRegistrationSuccess
 } from "../actions/user";
 import {
+    IGetOrderInfo,
+    IGetOrderInfoFailed,
+    IGetOrderInfoSuccess,
     IWSConnectionClosed,
     IWSConnectionError,
     IWSConnectionSuccess,
@@ -125,7 +128,7 @@ export interface IModalOverlayProp {
 };
 
 export interface IProtectedRouteProps {
-    children: React.ReactElement,
+    children: JSX.Element,
     anonymous?: boolean,
 };
 
@@ -138,6 +141,21 @@ export interface IOrder {
     createdAt: string,
     updatedAt: string,
 };
+
+export interface IDefaultOrder {
+    name: string,
+    order: {
+        createdAt: string,
+        ingredients: IIngredient[],
+        name: string,
+        number: number,
+        price: number,
+        status: string,
+        updatedAt: string,
+        _id: string,
+    },
+    success: boolean,
+}
 
 export interface IUser {
     user: {
@@ -281,7 +299,9 @@ export type TAvailableActions =
     | IWSUserOrdersConnectionSuccess
     | IWSUserOrdersConnectionError
     | IWSUserOrdersConnectionClosed
-    ;
+    | IGetOrderInfo
+    | IGetOrderInfoSuccess
+    | IGetOrderInfoFailed;
 
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<TReturn = void> = ActionCreator<
