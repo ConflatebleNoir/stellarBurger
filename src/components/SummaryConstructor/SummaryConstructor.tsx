@@ -14,7 +14,7 @@ const SummaryConstructor: FC = () => {
     const currentIngredients = useSelector((state) => state.ingredientsData.currentIngredients);
     const userData = useSelector((state) => state.userData.userData);
     const navigate = useNavigate();
-    const accessToken = useSelector(state => state.userData.accessToken)
+    const accessToken = localStorage.getItem('accessToken')
 
     const summaryPrice = useMemo(
         () => currentIngredients.reduce(

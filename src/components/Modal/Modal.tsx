@@ -10,7 +10,6 @@ const Modal: FC<PropsWithChildren<IModalProps>> = ({ children, handleModalClose,
     const modalRoot = document.getElementById("modals") as HTMLElement;
     const element = useMemo(() => document.createElement('div'), []);
     const location = useLocation();
-    console.log(location);
 
     useEffect(() => {
         modalRoot.appendChild(element);

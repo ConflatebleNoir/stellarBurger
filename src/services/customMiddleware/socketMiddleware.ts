@@ -10,9 +10,10 @@ export const socketMiddleware = (wsUrl: string, wsAction: IWSActions): Middlewar
             const { type } = action;
             const { userData } = getState();
             const { wsInitial, onOpen, onClose, onError, onMessage } = wsAction;
+            const accessToken = localStorage.getItem('accessToken');
 
             if (type === wsInitial && userData) {
-                socket = new WebSocket(`${wsUrl}?token=${userData?.accessToken?.replace('Bearer ', '')}`);
+                socket = new WebSocket(`${wsUrl}?token=${accessToken?.replace('Bearer ', '')}`);
             };
 
             if (type === onClose) {

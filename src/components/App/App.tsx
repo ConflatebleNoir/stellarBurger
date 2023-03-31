@@ -32,8 +32,9 @@ const App: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
-  const accessToken = useSelector((state) => state.userData.accessToken);
   const orderNumber = useSelector((state) => state.generalOrders.orderData?.number);
+  const accessToken = localStorage.getItem('accessToken');
+  const userDataRequest = useSelector(state => state.userData.getUserDataRequest);
 
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));
@@ -50,18 +51,16 @@ const App: FC = () => {
     dispatch(switchOrderFeedModalState(false));
     navigate(state?.background.pathname);
     dispatch(setWipeOrderInfo());
-    console.log(state?.background);
   }
 
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(reachUserData(accessToken));
-  }, []);
+  }, [dispatch, accessToken]);
 
-  console.log(state?.background)
   return (
     <div className={AppStyles.container} >
-      {ingredientsReqest
+      {ingredientsReqest && userDataRequest
         ? <Loader />
         : <>
           <AppHeader />
@@ -92,10 +91,6 @@ const App: FC = () => {
                   <IngredientDetails />
                 </Modal>
               } />
-            </Routes>
-          )}
-          {state?.background && (
-            <Routes>
               <Route path='/feed/:orderNumber' element={
                 <Modal
                   title={`#${orderNumber}`}
@@ -105,10 +100,6 @@ const App: FC = () => {
                   <OrderInfoFull isModal={true} />
                 </Modal>
               } />
-            </Routes>
-          )}
-          {state?.background && (
-            <Routes>
               <Route path='/profile/orders/:orderNumber' element={
                 <Modal
                   title={`#${orderNumber}`}

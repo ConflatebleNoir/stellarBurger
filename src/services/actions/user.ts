@@ -195,6 +195,8 @@ export const signIn: AppThunk = (email: string, pass: string) => {
                 dispatch(setUserLoginLoadingSuccess(res))
                 // @ts-ignore
                 localStorage.setItem('refreshToken', res.refreshToken)
+                // @ts-ignore
+                localStorage.setItem('accessToken', res.accessToken)
             })
             .catch(error => {
                 dispatch(setUserLoginLoadingFailed())
@@ -259,6 +261,7 @@ const refreshToken: AppThunk = (refreshToken: string) => {
             .then((res) => {
                 //@ts-ignore
                 localStorage.setItem('refreshToken', res.refreshToken);
+                console.log(res);
                 //@ts-ignore
                 dispatch(setRefreshTokenSuccessLoading(res.accessToken));
             })
@@ -277,6 +280,7 @@ export const logout: AppThunk = (refreshToken: string) => {
             .then(() => {
                 dispatch(setLogoutSuccessLoading());
                 localStorage.removeItem('refreshToken');
+                localStorage.removeItem('accessToken');
             })
             .catch(error => {
                 dispatch(setLogoutFailedLoading());

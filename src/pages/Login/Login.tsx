@@ -13,19 +13,14 @@ const Login = () => {
     const location = useLocation();
     const inputRef = useRef(null);
     const userData = useSelector((state) => state.userData.userData);
-    const accessToken = useSelector(state => state.userData.accessToken);
+    const accessToken = localStorage.getItem('accessToken');
 
     const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         if (!emailValue || !passValue) {
             return;
         }
-        dispatch(signIn(emailValue, passValue))
-        localStorage.setItem('email', emailValue);
-        localStorage.setItem('password', passValue);
-        if (accessToken !== null) {
-            localStorage.setItem('accessToken', accessToken);
-        }
+        dispatch(signIn(emailValue, passValue));
     };
 
     const handlePassChange = (evt: ChangeEvent<HTMLInputElement>) => {

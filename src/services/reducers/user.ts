@@ -1,4 +1,3 @@
-import { AnyAction } from 'redux';
 import {
     USER_LOGIN,
     USER_LOGIN_SUCCESS,
@@ -186,13 +185,6 @@ export const userReducer = (state = defaultState, action: TAvailableActions): IU
                 refreshTokenRequestFailed: true,
             };
         }
-        case GET_USER_DATA: {
-            return {
-                ...state,
-                getUserDataRequest: true,
-                getUserDataRequestFailed: false,
-            };
-        }
         case GET_USER_DATA_SUCCESS: {
             return {
                 ...state,
@@ -206,6 +198,13 @@ export const userReducer = (state = defaultState, action: TAvailableActions): IU
                 getUserDataRequest: false,
                 getUserDataRequestFailed: true,
             }
+        }
+        case GET_USER_DATA: {
+            return {
+                ...state,
+                getUserDataRequest: true,
+                getUserDataRequestFailed: false,
+            };
         }
         case PATCH_USER_DATA: {
             return {
