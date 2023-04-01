@@ -1,5 +1,5 @@
 import { postOrder } from '../../utils/api';
-import { AppDispatch, AppThunk, IOrder, TIngredientID } from '../types/types';
+import { AppThunk, IOrder, TIngredientID } from '../types/types';
 import { removeOrderList } from './ingredients';
 
 export const GET_ORDER_DATA: 'GET_ORDER_DATA' = 'GET_ORDER_DATA';
@@ -49,6 +49,7 @@ export const getOrder: AppThunk = (itemId: TIngredientID[], token: string) => {
             .then((data) => {
                 // @ts-ignore
                 dispatch(getOrderDataSuccess(data));
+                console.log(data)
             })
             .then(() => {
                 dispatch(removeOrderList())

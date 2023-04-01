@@ -20,7 +20,7 @@ import Loader from '../Loader/Loader'
 import Feed from '../../pages/Feed/Feed'
 import { useDispatch, useSelector } from '../../services/hooks/hooks'
 import OrderInfoFull from '../OrderInfoFull/OrderInfoFull'
-import { setWipeOrderData } from '../../services/actions/generalOrders'
+import { setWipeOrderInfo } from '../../services/actions/generalOrders'
 import { reachUserData } from '../../services/actions/user'
 
 
@@ -32,13 +32,14 @@ const App: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
-  const accessToken = useSelector((state) => state.userData.accessToken);
   const orderNumber = useSelector((state) => state.generalOrders.orderData?.number);
+  const accessToken = localStorage.getItem('accessToken');
+  const userDataRequest = useSelector(state => state.userData.getUserDataRequest);
 
   const handleIngredientModalClose = () => {
     dispatch(switchIngredientsModalState(false));
     dispatch(removeModalIngredient());
-    state && navigate(-1);
+    navigate(state?.background.pathname);
   }
 
   const handleOrderDetailsClose = () => {
@@ -48,8 +49,8 @@ const App: FC = () => {
 
   const handleOrderInfoModalClose = () => {
     dispatch(switchOrderFeedModalState(false));
-    state && navigate(-1);
-    dispatch(setWipeOrderData());
+    navigate(state?.background.pathname);
+    dispatch(setWipeOrderInfo());
   }
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const App: FC = () => {
 
   return (
     <div className={AppStyles.container} >
-      {ingredientsReqest
+      {ingredientsReqest && userDataRequest
         ? <Loader />
         : <>
           <AppHeader />
@@ -90,10 +91,6 @@ const App: FC = () => {
                   <IngredientDetails />
                 </Modal>
               } />
-            </Routes>
-          )}
-          {state?.background && (
-            <Routes>
               <Route path='/feed/:orderNumber' element={
                 <Modal
                   title={`#${orderNumber}`}
@@ -103,10 +100,6 @@ const App: FC = () => {
                   <OrderInfoFull isModal={true} />
                 </Modal>
               } />
-            </Routes>
-          )}
-          {state?.background && (
-            <Routes>
               <Route path='/profile/orders/:orderNumber' element={
                 <Modal
                   title={`#${orderNumber}`}

@@ -1,13 +1,14 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import IngredientDetailsStyles from './IngredientDetails.module.css'
 import { FC } from 'react';
-import { IIngredientDetailsProps, IIngredient } from '../../services/types/types';
+import { IIngredientDetailsProps } from '../../services/types/types';
 import { useSelector } from '../../services/hooks/hooks';
 
 
 const IngredientDetails: FC<IIngredientDetailsProps> = ({ heading }) => {
     const ingredients = useSelector((state) => state.ingredientsData.ingredientsList)
     const { id } = useParams();
+    const location = useLocation();
 
     const modalIngredient = ingredients.find((item) => item._id === id);
 

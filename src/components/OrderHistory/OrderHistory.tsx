@@ -1,6 +1,5 @@
 import { wsUserOrdersConnectionClosed, wsUserOrdersConnectionStart } from '../../services/actions/generalOrders';
 import { useDispatch, useSelector } from '../../services/hooks/hooks';
-import { IOrder } from '../../services/types/types';
 import Loader from '../Loader/Loader';
 import OrderPosition from '../OrderPosition/OrderPosition';
 import OrderHistoryStyles from './OrderHistory.module.css'
@@ -8,7 +7,6 @@ import { FC, useEffect } from 'react';
 
 const OrderHistory: FC = () => {
     const userOrders = useSelector((state) => state.generalOrders.userOrders);
-    console.log(userOrders)
     const dispatch = useDispatch();
 
     useEffect(() => {

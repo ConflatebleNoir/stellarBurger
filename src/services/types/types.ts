@@ -1,6 +1,9 @@
 import { ThunkAction } from "redux-thunk";
 import {
     IAddIngredient,
+    IGetIngredients,
+    IGetIngredientsFailed,
+    IGetIngredientsSuccess,
     IModalIngredient,
     IRemoveIngredient,
     IRemoveModalIngredient,
@@ -15,6 +18,7 @@ import {
 } from "../actions/order";
 import {
     ISwitchIngredientsModalState,
+    ISwitchOrderFeedModalState,
     ISwitchOrderModalState
 } from "../actions/modal";
 import {
@@ -45,8 +49,20 @@ import {
     IUserRegistrationSuccess
 } from "../actions/user";
 import {
+    IGetOrderInfo,
+    IGetOrderInfoFailed,
+    IGetOrderInfoSuccess,
+    IWSConnectionClosed,
+    IWSConnectionError,
+    IWSConnectionSuccess,
+    IWSGetOrders,
+    IWSGetUserOrders,
     IWSOrdersConnectionStart,
-    IWSUserOrdersConnectionStart
+    IWSUserOrdersConnectionClosed,
+    IWSUserOrdersConnectionError,
+    IWSUserOrdersConnectionStart,
+    IWSUserOrdersConnectionSuccess,
+    IWSWipeOrderData
 } from "../actions/generalOrders";
 import { store } from "../store";
 import { Action, ActionCreator } from "redux"
@@ -112,7 +128,7 @@ export interface IModalOverlayProp {
 };
 
 export interface IProtectedRouteProps {
-    children: React.ReactElement,
+    children: JSX.Element,
     anonymous?: boolean,
 };
 
@@ -126,9 +142,27 @@ export interface IOrder {
     updatedAt: string,
 };
 
-export interface IUser {
-    email: string,
+export interface IDefaultOrder {
     name: string,
+    order: {
+        createdAt: string,
+        ingredients: IIngredient[],
+        name: string,
+        number: number,
+        price: number,
+        status: string,
+        updatedAt: string,
+        _id: string,
+    },
+    success: boolean,
+}
+
+export interface IUser {
+    user: {
+        email: string,
+        name: string,
+    },
+    accessToken: string,
 };
 
 export interface IWSActions {
@@ -213,6 +247,9 @@ export interface IGeneralOrdersState {
 
 export type RootState = ReturnType<typeof store.getState>;
 export type TAvailableActions =
+    | IGetIngredients
+    | IGetIngredientsSuccess
+    | IGetIngredientsFailed
     | IAddIngredient
     | IRemoveIngredient
     | IModalIngredient
@@ -225,6 +262,7 @@ export type TAvailableActions =
     | IRemoveOrderData
     | ISwitchOrderModalState
     | ISwitchIngredientsModalState
+    | ISwitchOrderFeedModalState
     | IUserLogin
     | IUserLoginSuccess
     | IUserLoginFailed
@@ -250,8 +288,27 @@ export type TAvailableActions =
     | IPatchUserDataSuccess
     | IPatchUserDataFailed
     | IForgotPasswordState
+    | IWSConnectionSuccess
+    | IWSConnectionError
+    | IWSConnectionClosed
     | IWSOrdersConnectionStart
-    | IWSUserOrdersConnectionStart;
+    | IWSGetOrders
+    | IWSGetUserOrders
+    | IWSWipeOrderData
+    | IWSUserOrdersConnectionStart
+    | IWSUserOrdersConnectionSuccess
+    | IWSUserOrdersConnectionError
+    | IWSUserOrdersConnectionClosed
+    | IGetOrderInfo
+    | IGetOrderInfoSuccess
+    | IGetOrderInfoFailed;
 
 export type AppDispatch = typeof store.dispatch;
-export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TAvailableActions>>
+export type AppThunk<TReturn = void> = ActionCreator<
+    ThunkAction<
+        TReturn,
+        Action,
+        RootState,
+        TAvailableActions
+    >
+>

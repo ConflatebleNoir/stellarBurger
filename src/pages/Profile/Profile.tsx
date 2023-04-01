@@ -14,11 +14,9 @@ const Profile: FC = () => {
         const updateToken = localStorage.getItem('refreshToken');
         localStorage.removeItem('email');
         localStorage.removeItem('password');
-        dispatch(logout(updateToken)
-            //@ts-ignore
-            .then(() => {
-                navigate("/login", { replace: true });
-            }));
+        localStorage.removeItem('accessToken');
+        dispatch(logout(updateToken));
+        navigate("/login", { replace: true });
     }
 
     return (

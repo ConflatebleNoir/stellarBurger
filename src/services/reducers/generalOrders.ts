@@ -1,4 +1,3 @@
-import { AnyAction } from 'redux';
 import {
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
@@ -8,14 +7,14 @@ import {
     WS_USER_ORDERS_CONNECTION_ERROR,
     WS_USER_ORDERS_CONNECTION_CLOSED,
     WS_GET_USER_ORDERS,
-    GET_ORDER_DATA,
-    GET_ORDER_DATA_SUCCESS,
-    GET_ORDER_DATA_FAILED,
-    WIPE_ORDER_DATA,
+    GET_ORDER_INFO,
+    GET_ORDER_INFO_SUCCESS,
+    GET_ORDER_INFO_FAILED,
+    WIPE_ORDER_INFO,
 } from '../actions/generalOrders'
-import { IGeneralOrdersState } from '../types/types'
+import { IGeneralOrdersState, TAvailableActions } from '../types/types'
 
-const defaultState: IGeneralOrdersState = {
+export const defaultState: IGeneralOrdersState = {
     wsGeneralOrders: false,
     wsUserOrders: false,
     orders: [],
@@ -27,7 +26,7 @@ const defaultState: IGeneralOrdersState = {
     orderData: null,
 };
 
-export const generalOrdersReducer = (state = defaultState, action: AnyAction): IGeneralOrdersState => {
+export const generalOrdersReducer = (state = defaultState, action: TAvailableActions): IGeneralOrdersState => {
     switch (action.type) {
         case WS_CONNECTION_SUCCESS: {
             return {
@@ -93,28 +92,28 @@ export const generalOrdersReducer = (state = defaultState, action: AnyAction): I
                 userOrders: action.payload.orders,
             };
         }
-        case GET_ORDER_DATA: {
+        case GET_ORDER_INFO: {
             return {
                 ...state,
                 orderDataRequestSuccess: true,
                 orderDataRequestFailed: false,
             };
         }
-        case GET_ORDER_DATA_SUCCESS: {
+        case GET_ORDER_INFO_SUCCESS: {
             return {
                 ...state,
-                orderDataRequestSuccess: true,
+                orderDataRequestSuccess: false,
                 orderData: action.payload,
             };
         }
-        case GET_ORDER_DATA_FAILED: {
+        case GET_ORDER_INFO_FAILED: {
             return {
                 ...state,
                 orderDataRequestSuccess: false,
                 orderDataRequestFailed: true,
             };
         }
-        case WIPE_ORDER_DATA: {
+        case WIPE_ORDER_INFO: {
             return {
                 ...state,
                 orderDataRequestSuccess: false,

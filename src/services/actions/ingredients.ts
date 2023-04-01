@@ -1,5 +1,5 @@
 import { getIngredientsData } from '../../utils/api';
-import { AppDispatch, AppThunk, IIngredient } from '../types/types';
+import { AppThunk, IIngredient } from '../types/types';
 
 export const GET_INGREDIENTS: 'GET_INGREDIENTS' = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS';
@@ -14,6 +14,19 @@ export const REMOVE_MODAL_INGREDIENT: 'REMOVE_MODAL_INGREDIENT' = 'REMOVE_MODAL_
 export const SORT_INGREDIENTS: 'SORT_INGREDIENTS' = 'SORT_INGREDIENTS';
 
 export const REMOVE_ORDER_LIST: 'REMOVE_ORDER_LIST' = 'REMOVE_ORDER_LIST';
+
+export interface IGetIngredients {
+  readonly type: typeof GET_INGREDIENTS;
+}
+
+export interface IGetIngredientsSuccess {
+  readonly type: typeof GET_INGREDIENTS_SUCCESS;
+  readonly payload: IIngredient[];
+}
+
+export interface IGetIngredientsFailed {
+  readonly type: typeof GET_INGREDIENTS_FAILED;
+}
 
 export interface IAddIngredient {
   readonly type: typeof ADD_INGREDIENT;
@@ -46,7 +59,7 @@ export interface IRemoveOrderList {
 export const removeOrderList = () => ({ type: REMOVE_ORDER_LIST });
 
 export const getIngredients: AppThunk = () => {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch) {
     dispatch({
       type: GET_INGREDIENTS,
     });

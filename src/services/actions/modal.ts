@@ -4,14 +4,17 @@ export const SWITCH_ORDER_FEED_MODAL_STATE: 'SWITCH_ORDER_FEED_MODAL_STATE' = 'S
 
 export interface ISwitchOrderModalState {
     readonly type: typeof SWITCH_ORDER_MODAL_STATE;
+    readonly payload: boolean;
 };
 
 export interface ISwitchIngredientsModalState {
     readonly type: typeof SWITCH_INGREDIENTS_MODAL_STATE;
+    readonly payload: boolean;
 };
 
 export interface ISwitchOrderFeedModalState {
     readonly type: typeof SWITCH_ORDER_FEED_MODAL_STATE;
+    readonly payload: boolean;
 };
 
 export const switchOrderModalState = (status: boolean) => ({

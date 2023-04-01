@@ -6,14 +6,15 @@ import { useSelector } from "../../services/hooks/hooks";
 
 const ProtectedRoute: FC<IProtectedRouteProps> = ({ children, anonymous = false }) => {
     const userData = useSelector((state) => state.userData.userData);
+    const accessToken = localStorage.getItem('accessToken');
     const location = useLocation();
-    const previousLocation = location.state?.from || '/';
+    const previousLocation = location.state?.previousLocation || '/';
 
-    if (anonymous && userData) {
-        return <Navigate to={previousLocation} />
+    if (anonymous && accessToken) {
+        return <Navigate to={previousLocation} replace />
     }
 
-    if (!userData) {
+    if (!anonymous && !accessToken) {
         return <Navigate to={'/login'} state={{ previousLocation: location }} />
     }
     return children;

@@ -1,4 +1,3 @@
-import { AnyAction } from 'redux';
 import {
     USER_LOGIN,
     USER_LOGIN_SUCCESS,
@@ -26,9 +25,9 @@ import {
     PATCH_USER_DATA_SUCCESS,
     PATCH_USER_DATA_FAILED,
 } from '../actions/user'
-import { IUserState } from '../types/types';
+import { IUserState, TAvailableActions } from '../types/types';
 
-const defaultState: IUserState = {
+export const defaultState: IUserState = {
     userData: null,
     accessToken: null,
     loginRequest: false,
@@ -50,7 +49,7 @@ const defaultState: IUserState = {
     patchUserDataRequestFailed: false,
 }
 
-export const userReducer = (state = defaultState, action: AnyAction): IUserState => {
+export const userReducer = (state = defaultState, action: TAvailableActions): IUserState => {
     switch (action.type) {
         case USER_LOGIN: {
             return {
@@ -63,7 +62,9 @@ export const userReducer = (state = defaultState, action: AnyAction): IUserState
             return {
                 ...state,
                 loginRequest: false,
+                //@ts-ignore
                 accessToken: action.payload.accessToken,
+                //@ts-ignore
                 userData: action.payload.user
             }
         }
@@ -92,7 +93,7 @@ export const userReducer = (state = defaultState, action: AnyAction): IUserState
             return {
                 ...state,
                 registrationRequest: false,
-                registrationRequestFailed: false
+                registrationRequestFailed: true,
             };
         }
         case FORGOT_PASSWORD: {
@@ -184,13 +185,6 @@ export const userReducer = (state = defaultState, action: AnyAction): IUserState
                 refreshTokenRequestFailed: true,
             };
         }
-        case GET_USER_DATA: {
-            return {
-                ...state,
-                getUserDataRequest: true,
-                getUserDataRequestFailed: false,
-            };
-        }
         case GET_USER_DATA_SUCCESS: {
             return {
                 ...state,
@@ -204,6 +198,13 @@ export const userReducer = (state = defaultState, action: AnyAction): IUserState
                 getUserDataRequest: false,
                 getUserDataRequestFailed: true,
             }
+        }
+        case GET_USER_DATA: {
+            return {
+                ...state,
+                getUserDataRequest: true,
+                getUserDataRequestFailed: false,
+            };
         }
         case PATCH_USER_DATA: {
             return {

@@ -9,10 +9,9 @@ import {
     SORT_INGREDIENTS,
     REMOVE_ORDER_LIST,
 } from '../actions/ingredients';
-import { AnyAction } from 'redux';
-import { IIngredientsState } from '../types/types';
+import { IIngredientsState, TAvailableActions } from '../types/types';
 
-const defaultState: IIngredientsState = {
+export const defaultState: IIngredientsState = {
     ingredientsRequest: false,
     ingredientsFailed: false,
     ingredientsList: [],
@@ -20,7 +19,7 @@ const defaultState: IIngredientsState = {
     currentIngredients: [],
 }
 
-export const ingredientsReducer = (state = defaultState, action: AnyAction): IIngredientsState => {
+export const ingredientsReducer = (state = defaultState, action: TAvailableActions): IIngredientsState => {
     switch (action.type) {
         case GET_INGREDIENTS_SUCCESS: {
             return {

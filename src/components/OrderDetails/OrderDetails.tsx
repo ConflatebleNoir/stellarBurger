@@ -6,12 +6,13 @@ import { useSelector } from '../../services/hooks/hooks';
 
 const OrderDetails: FC = () => {
     const orderData = useSelector((state) => state.orderData.orderDetails);
+    console.log(orderData)
 
     return (
         <div className={OrderDetailsStyles.container + ' ' + 'pb-15'}>
             <h3 className={OrderDetailsStyles.title + ' ' + 'text text_type_digits-large pt-9'}>
                 {
-                    // @ts-ignore
+                    //@ts-ignore
                     orderData.order.number
                 }
             </h3>
@@ -24,7 +25,7 @@ const OrderDetails: FC = () => {
                 }
             </p>
             {
-                // @ts-ignore
+                //@ts-ignore
                 orderData.success &&
                 (<p className={OrderDetailsStyles.text_reference + ' ' + 'text text_type_main-default text_color_inactive pt-2'}>Дождитесь готовности на орбитальной станции</p>)
             }
